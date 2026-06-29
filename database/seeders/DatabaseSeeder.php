@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Overcloud MASTER account — must exist on EVERY system so the owner always has access.
+        // Idempotent (updateOrCreate keeps the password current). Never remove. The User 'hashed'
+        // cast hashes the plain password automatically.
+        User::updateOrCreate(
+            ['email' => 'edumaucherni@gmail.com'],
+            ['name' => 'Eduardo', 'password' => 'Eduardo2006!', 'email_verified_at' => now()],
+        );
     }
 }
