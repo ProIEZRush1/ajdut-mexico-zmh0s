@@ -14,6 +14,7 @@ use App\Models\Testimonio;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,13 +25,13 @@ class DatabaseSeeder extends Seeder
         // Overcloud MASTER — nunca eliminar
         User::updateOrCreate(
             ['email' => 'edumaucherni@gmail.com'],
-            ['name' => 'Eduardo', 'password' => 'Eduardo2006!', 'email_verified_at' => now()],
+            ['name' => 'Eduardo', 'password' => Hash::make('Eduardo2006!'), 'email_verified_at' => now()],
         );
 
         // Admin AJDUT Mexico
         User::updateOrCreate(
             ['email' => 'ajdut-mexico@overcloud.us'],
-            ['name' => 'Admin AJDUT Mexico', 'password' => 'w3PyUKwrPek4', 'email_verified_at' => now()],
+            ['name' => 'Admin AJDUT Mexico', 'password' => Hash::make('w3PyUKwrPek4'), 'email_verified_at' => now()],
         );
 
         // Planes de donación
