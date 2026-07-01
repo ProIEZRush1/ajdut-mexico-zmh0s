@@ -25,7 +25,7 @@ return [
         ['label' => 'Mensajes',      'href' => '/admin/mensajes',      'icon' => '✉️'],
         ['label' => 'Testimonios',   'href' => '/admin/testimonios',   'icon' => '💬'],
         ['label' => 'Equipo',        'href' => '/admin/equipo',        'icon' => '🤝'],
-        ['label' => 'Roles',         'href' => '/roles',               'icon' => '🔐'],
+        ['label' => 'Portal Donador', 'href' => '/portal',              'icon' => '🌐'],
         ['label' => 'Configuración', 'href' => '/ajustes',             'icon' => '⚙️'],
     ],
 ];

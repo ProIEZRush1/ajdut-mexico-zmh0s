@@ -41,6 +41,8 @@ class DonarController extends Controller
             'frecuencia' => ['required', 'in:unica,mensual,anual'],
             'causa_id' => ['nullable', 'exists:causas,id'],
             'plan_id' => ['nullable', 'exists:planes_donacion,id'],
+            'firma_electronica' => ['nullable', 'string'],
+            'firma_fecha' => ['nullable', 'string'],
         ]);
 
         $donador = Donador::firstOrCreate(
@@ -62,6 +64,8 @@ class DonarController extends Controller
                 'estado' => 'completada',
                 'metodo_pago' => 'demo',
                 'fecha_pago' => now(),
+                'firma_electronica' => $data['firma_electronica'] ?? null,
+                'firma_fecha' => isset($data['firma_fecha']) ? now() : null,
             ]);
 
             if ($donacion->causa_id) {

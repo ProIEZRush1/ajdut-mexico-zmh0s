@@ -15,11 +15,13 @@ class Donacion extends Model
         'folio', 'donador_id', 'causa_id', 'plan_id', 'monto', 'moneda',
         'frecuencia', 'estado', 'metodo_pago', 'stripe_payment_intent_id',
         'stripe_subscription_id', 'fecha_pago', 'recibo_emitido', 'notas',
+        'firma_electronica', 'firma_fecha',
     ];
 
     protected $casts = [
         'monto' => 'decimal:2',
         'fecha_pago' => 'datetime',
+        'firma_fecha' => 'datetime',
         'recibo_emitido' => 'boolean',
     ];
 

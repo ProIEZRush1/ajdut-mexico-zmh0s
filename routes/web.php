@@ -12,10 +12,18 @@ use App\Http\Controllers\Admin\TransparenciaController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonarController;
+use App\Http\Controllers\Portal\DonadorPortalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicPagesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('dashboard'));
+// Public site
+Route::get('/', [PublicPagesController::class, 'home'])->name('home');
+Route::get('/quienes-somos', [PublicPagesController::class, 'quienesSomos'])->name('quienes-somos');
+Route::get('/causas-publicas', [PublicPagesController::class, 'causas'])->name('causas-publicas');
+Route::get('/planes-donacion', [PublicPagesController::class, 'planes'])->name('planes-donacion');
+Route::get('/transparencia-publica', [PublicPagesController::class, 'transparencia'])->name('transparencia-publica');
+Route::get('/noticias-blog', [PublicPagesController::class, 'noticias'])->name('noticias-blog');
 
 Route::get('/health', function () {
     try {
@@ -39,6 +47,10 @@ Route::get('/donar/exito', [DonarController::class, 'exito'])->name('donar.exito
 // Authenticated routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Portal del Donador
+    Route::get('/portal', [DonadorPortalController::class, 'index'])->name('portal.index');
+    Route::patch('/portal/perfil', [DonadorPortalController::class, 'updatePerfil'])->name('portal.perfil.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

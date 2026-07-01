@@ -1,151 +1,260 @@
 <script setup>
-import { ref } from 'vue'
-import { Head } from '@inertiajs/vue3'
+import { computed } from 'vue'
+import { Head, Link } from '@inertiajs/vue3'
+import PublicLayout from '@/Layouts/PublicLayout.vue'
+import { useI18n } from '@/composables/useI18n'
 
-const props = defineProps({ site: Object })
-const s = props.site
-const cart = ref(0)
-const subscribed = ref(false)
-const menuOpen = ref(false)
-const waLink = `https://wa.me/${s.built_by_whatsapp}`
+const props = defineProps({
+    causas: Array,
+    planes: Array,
+    testimonios: Array,
+    stats: Object,
+})
+
+const { t } = useI18n()
+
+const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n ?? 0)
+const pct = (r, m) => m > 0 ? Math.min(100, Math.round((r / m) * 100)) : 0
+
+const planColors = ['from-teal-500 to-emerald-500', 'from-amber-500 to-orange-500', 'from-violet-500 to-purple-600']
+const planIcons = ['🌱', '🌟', '💎']
+
+const statsDisplay = computed(() => [
+    { value: props.stats?.donadores ?? '0', label: t('home.stats.donors'), icon: '👥' },
+    { value: fmt(props.stats?.total_recaudado ?? 0), label: t('home.stats.raised'), icon: '💰' },
+    { value: props.stats?.causas_activas ?? '0', label: t('home.stats.causes'), icon: '❤️' },
+    { value: props.stats?.beneficiarios ?? '5,000+', label: t('home.stats.beneficiaries'), icon: '🤝' },
+])
+
+const staticTestimonios = [
+    { nombre: 'María González', texto: 'Donar a AJDUT México me cambió la perspectiva. Veo cómo mi aportación mensual ayuda a familias reales. Los reportes de transparencia me dan total confianza.', plan: 'Padrino' },
+    { nombre: 'Carlos Ramírez', texto: 'La plataforma es increíblemente fácil de usar. En minutos configuré mi donación mensual y recibo actualizaciones de impacto. ¡Muy recomendado!', plan: 'Amigo' },
+    { nombre: 'Ana Martínez', texto: 'Como empresa, queríamos hacer una diferencia real. AJDUT México nos dio transparencia total sobre el destino de nuestros recursos.', plan: 'Benefactor' },
+]
+
+const displayTestimonios = computed(() => props.testimonios?.length ? props.testimonios : staticTestimonios)
+
+const staticCausas = [
+    { id: null, titulo: 'Alimentación Infantil', descripcion_corta: 'Garantizamos tres comidas diarias a niños en situación de vulnerabilidad en comunidades rurales.', meta_recaudacion: 200000, recaudado: 142000, categoria: 'alimentación', beneficiarios: 850 },
+    { id: null, titulo: 'Educación para Todos', descripcion_corta: 'Becas, útiles y apoyo educativo para jóvenes de escasos recursos que sueñan con un mejor futuro.', meta_recaudacion: 350000, recaudado: 210000, categoria: 'educación', beneficiarios: 320 },
+    { id: null, titulo: 'Salud Comunitaria', descripcion_corta: 'Brigadas médicas y medicamentos gratuitos para comunidades sin acceso a servicios de salud.', meta_recaudacion: 500000, recaudado: 389000, categoria: 'salud', beneficiarios: 1200 },
+]
+
+const displayCausas = computed(() => props.causas?.length ? props.causas.slice(0, 3) : staticCausas)
+
+const staticPlanes = [
+    { id: null, nombre: 'Amigo', monto_sugerido: 150, frecuencia: 'mensual', descripcion: 'Apoya con una donación mensual simbólica y recibe actualizaciones de impacto.', beneficios: ['Newsletter mensual', 'Reporte de impacto trimestral', 'Certificado de donador'], destacado: false },
+    { id: null, nombre: 'Padrino', monto_sugerido: 500, frecuencia: 'mensual', descripcion: 'Tu aportación mensual patrocina directamente a una familia o proyecto específico.', beneficios: ['Todo lo del plan Amigo', 'Historia de impacto personalizada', 'Invitación a eventos anuales', 'Recibo fiscal deducible'], destacado: true },
+    { id: null, nombre: 'Benefactor', monto_sugerido: 2000, frecuencia: 'mensual', descripcion: 'Conviértete en pilar de nuestra institución y recibe reconocimiento especial.', beneficios: ['Todo lo del plan Padrino', 'Placa de reconocimiento', 'Reunión anual con directivos', 'Visita a proyectos apoyados'], destacado: false },
+]
+
+const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0, 3) : staticPlanes)
 </script>
 
 <template>
-  <Head :title="`${s.business} — ${s.tagline}`" />
-  <div class="page" :style="{ '--primary': s.theme.primary, '--accent': s.theme.accent }">
-    <header class="nav">
-      <div class="wrap nav__inner">
-        <a href="#top" class="brand">{{ s.business }}</a>
-        <nav class="nav__links" :class="{ open: menuOpen }">
-          <a v-for="n in s.nav" :key="n" href="#" @click="menuOpen=false">{{ n }}</a>
-        </nav>
-        <div class="nav__actions">
-          <button class="cart">🛍️ {{ cart }}</button>
-          <button class="burger" @click="menuOpen=!menuOpen">☰</button>
-        </div>
-      </div>
-    </header>
-
-    <section id="top" class="hero">
-      <div class="wrap hero__inner">
-        <div>
-          <p class="eyebrow">{{ s.hero.eyebrow }}</p>
-          <h1>{{ s.hero.title }}</h1>
-          <p class="lead">{{ s.hero.subtitle }}</p>
-          <a href="#prod" class="btn">{{ s.hero.cta }}</a>
-          <div class="stats">
-            <div v-for="st in s.stats" :key="st.label"><strong>{{ st.value }}</strong><span>{{ st.label }}</span></div>
-          </div>
-        </div>
-        <div class="hero__photo" :style="{ backgroundImage: `url(${s.hero.image})` }"></div>
-      </div>
-    </section>
-
-    <section class="strip"><div class="wrap strip__inner"><span v-for="t in s.strip" :key="t">{{ t }}</span></div></section>
-
-    <section id="prod" class="section">
-      <div class="wrap">
-        <h2 class="center">{{ s.products_title }}</h2>
-        <div class="grid">
-          <article v-for="p in s.products" :key="p.seed" class="card">
-            <div class="card__img" :style="{ backgroundImage: `url(https://picsum.photos/seed/${p.seed}/400/520)` }">
-              <span v-if="p.tag" class="tag">{{ p.tag }}</span>
+    <Head title="AJDUT México — Plataforma de Donaciones" />
+    <PublicLayout>
+        <!-- HERO -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-teal-700 via-teal-600 to-emerald-600 text-white">
+            <div class="pointer-events-none absolute inset-0">
+                <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-white/10 blur-3xl"></div>
+                <div class="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-emerald-300/20 blur-3xl"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-teal-500/10 blur-3xl"></div>
             </div>
-            <div class="card__body">
-              <h3>{{ p.name }}</h3>
-              <div class="price">{{ p.price }}</div>
-              <button class="add" @click="cart++">Agregar 🛍️</button>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold backdrop-blur mb-6">
+                            ❤️ {{ t('home.eyebrow') }}
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                            {{ t('home.hero.title') }}
+                        </h1>
+                        <p class="text-lg sm:text-xl text-white/85 mb-8 max-w-lg leading-relaxed">
+                            {{ t('home.hero.subtitle') }}
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <Link href="/donar"
+                                class="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-3.5 text-base font-bold text-teal-700 shadow-xl hover:bg-teal-50 transition">
+                                ❤️ {{ t('home.hero.cta') }}
+                            </Link>
+                            <Link href="/causas-publicas"
+                                class="inline-flex items-center gap-2 rounded-2xl border-2 border-white/40 px-7 py-3.5 text-base font-bold text-white hover:bg-white/10 transition">
+                                {{ t('home.hero.cta2') }} →
+                            </Link>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex justify-center">
+                        <div class="relative">
+                            <div class="h-72 w-72 xl:h-80 xl:w-80 rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shadow-2xl">
+                                <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-48 w-48 object-contain rounded-2xl" />
+                            </div>
+                            <div class="absolute -bottom-6 -left-6 rounded-2xl bg-white p-4 shadow-xl">
+                                <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Impacto Real</p>
+                                <p class="text-2xl font-extrabold text-teal-600">+5,000</p>
+                                <p class="text-xs text-slate-500">beneficiarios</p>
+                            </div>
+                            <div class="absolute -top-4 -right-4 rounded-2xl bg-amber-400 p-3 shadow-xl">
+                                <p class="text-2xl">🏆</p>
+                                <p class="text-xs font-bold text-amber-900">Confiables</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </article>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section class="section alt">
-      <div class="wrap about">
-        <div class="about__img" :style="{ backgroundImage: `url(${s.about.image})` }"></div>
-        <div>
-          <h2>{{ s.about.title }}</h2>
-          <p class="muted">{{ s.about.text }}</p>
-          <ul class="ticks"><li v-for="pt in s.about.points" :key="pt">{{ pt }}</li></ul>
-        </div>
-      </div>
-    </section>
+        <!-- STATS -->
+        <section class="bg-white border-b border-slate-100">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="s in statsDisplay" :key="s.label" class="text-center">
+                        <span class="text-3xl mb-2 block">{{ s.icon }}</span>
+                        <p class="text-2xl sm:text-3xl font-extrabold text-slate-800">{{ s.value }}</p>
+                        <p class="text-sm text-slate-500 mt-1">{{ s.label }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="news">
-      <div class="wrap">
-        <h2>{{ s.contact.title }}</h2>
-        <p>{{ s.contact.text }}</p>
-        <form v-if="!subscribed" @submit.prevent="subscribed=true" class="news__form">
-          <input type="email" placeholder="tu@correo.com" required>
-          <button class="btn light">Suscribirme</button>
-        </form>
-        <p v-else class="ok">¡Listo! Bienvenido al club. 🎉</p>
-      </div>
-    </section>
+        <!-- CAUSAS ACTIVAS -->
+        <section class="bg-slate-50 py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-sm font-bold text-teal-600 uppercase tracking-wider">Programas</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-800">{{ t('home.causes.title') }}</h2>
+                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">{{ t('home.causes.subtitle') }}</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <div v-for="causa in displayCausas" :key="causa.id ?? causa.titulo"
+                        class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition group">
+                        <div class="h-3 bg-gradient-to-r from-teal-500 to-emerald-500"></div>
+                        <div class="p-6">
+                            <span class="inline-block rounded-full bg-teal-50 text-teal-700 text-xs font-bold px-3 py-1 mb-3 capitalize">{{ causa.categoria }}</span>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2">{{ causa.titulo }}</h3>
+                            <p class="text-sm text-slate-500 mb-5 leading-relaxed">{{ causa.descripcion_corta }}</p>
+                            <!-- Progress bar -->
+                            <div class="mb-1 flex justify-between text-xs font-semibold">
+                                <span class="text-teal-600">{{ pct(causa.recaudado, causa.meta_recaudacion) }}%</span>
+                                <span class="text-slate-400">{{ t('home.causes.goal') }}: {{ fmt(causa.meta_recaudacion) }}</span>
+                            </div>
+                            <div class="h-2.5 rounded-full bg-slate-100 overflow-hidden mb-2">
+                                <div class="h-2.5 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 transition-all duration-700"
+                                    :style="{ width: pct(causa.recaudado, causa.meta_recaudacion) + '%' }"></div>
+                            </div>
+                            <p class="text-xs text-slate-400 mb-5">{{ fmt(causa.recaudado) }} {{ t('home.causes.raised') }}</p>
+                            <Link :href="causa.id ? `/donar?causa=${causa.id}` : '/donar'"
+                                class="flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 py-2.5 text-sm font-bold text-white hover:from-teal-700 transition">
+                                ❤️ {{ t('home.causes.donate') }}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <Link href="/causas-publicas"
+                        class="inline-flex items-center gap-2 rounded-xl border-2 border-teal-600 px-6 py-3 text-sm font-bold text-teal-600 hover:bg-teal-50 transition">
+                        {{ t('home.causes.viewall') }} →
+                    </Link>
+                </div>
+            </div>
+        </section>
 
-    <footer class="footer">
-      <div class="wrap">
-        <div class="brand light">{{ s.business }}</div>
-        <p>{{ s.tagline }} · Hecho en México 🇲🇽</p>
-        <p class="credit">
-          Desarrollado por <a :href="waLink" target="_blank" rel="noopener">Overcloud</a> · ¿Quieres tu sitio?
-          <a :href="waLink" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
-        </p>
-      </div>
-    </footer>
-  </div>
+        <!-- PLANES DE DONACIÓN -->
+        <section class="bg-white py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-sm font-bold text-teal-600 uppercase tracking-wider">Únete</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-800">{{ t('home.plans.title') }}</h2>
+                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">{{ t('home.plans.subtitle') }}</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div v-for="(plan, idx) in displayPlanes" :key="plan.id ?? plan.nombre"
+                        :class="plan.destacado ? 'ring-2 ring-teal-500 scale-105' : ''"
+                        class="relative rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm hover:shadow-xl transition">
+                        <div v-if="plan.destacado" class="bg-teal-600 text-white text-xs font-bold text-center py-1.5 uppercase tracking-wider">
+                            {{ t('plans.recommended') }}
+                        </div>
+                        <div :class="`bg-gradient-to-r ${planColors[idx % 3]}`" class="p-6 text-white">
+                            <span class="text-3xl block mb-2">{{ planIcons[idx % 3] }}</span>
+                            <h3 class="text-xl font-extrabold">{{ plan.nombre }}</h3>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="text-3xl font-extrabold">{{ fmt(plan.monto_sugerido) }}</span>
+                                <span class="text-white/80 text-sm">/{{ plan.frecuencia === 'mensual' ? 'mes' : plan.frecuencia === 'anual' ? 'año' : 'vez' }}</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-sm text-slate-500 mb-5 leading-relaxed">{{ plan.descripcion }}</p>
+                            <ul v-if="Array.isArray(plan.beneficios)" class="space-y-2 mb-6">
+                                <li v-for="b in plan.beneficios" :key="b" class="flex items-start gap-2 text-sm">
+                                    <span class="text-teal-500 mt-0.5 flex-shrink-0">✓</span>
+                                    <span class="text-slate-600">{{ b }}</span>
+                                </li>
+                            </ul>
+                            <Link :href="plan.id ? `/donar?plan=${plan.id}` : '/donar'"
+                                :class="plan.destacado ? 'bg-teal-600 text-white hover:bg-teal-700' : 'border border-teal-600 text-teal-600 hover:bg-teal-50'"
+                                class="block text-center rounded-xl py-2.5 text-sm font-bold transition">
+                                {{ t('home.plans.join') }}
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIOS -->
+        <section class="bg-slate-50 py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-800">{{ t('home.testimonials.title') }}</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div v-for="t_ in displayTestimonios" :key="t_.nombre"
+                        class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                        <p class="text-3xl mb-4">💬</p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5 italic">"{{ t_.texto ?? t_.contenido }}"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="h-10 w-10 rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                                {{ (t_.nombre ?? t_.nombre_donador ?? '?')[0] }}
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">{{ t_.nombre ?? t_.nombre_donador }}</p>
+                                <p class="text-xs text-teal-600 font-semibold">Plan {{ t_.plan ?? '' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIANZA INSTITUCIONAL -->
+        <section class="bg-white py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-800">{{ t('home.trust.title') }}</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="n in [1,2,3,4]" :key="n"
+                        class="text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-lg shadow-teal-500/20">
+                            {{ ['📊','🎯','🔒','📄'][n-1] }}
+                        </div>
+                        <h3 class="font-bold text-slate-800 mb-2">{{ t(`home.trust.${n}.title`) }}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">{{ t(`home.trust.${n}.text`) }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="bg-gradient-to-br from-teal-700 to-emerald-700 py-20">
+            <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center text-white">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">{{ t('home.cta.title') }}</h2>
+                <p class="text-white/80 text-lg mb-8">{{ t('home.cta.subtitle') }}</p>
+                <Link href="/donar"
+                    class="inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-base font-bold text-teal-700 shadow-xl hover:bg-teal-50 transition">
+                    ❤️ {{ t('home.cta.btn') }}
+                </Link>
+            </div>
+        </section>
+    </PublicLayout>
 </template>
-
-<style scoped>
-*{box-sizing:border-box}
-.page{font-family:'Poppins',system-ui,Avenir,Helvetica,Arial,sans-serif;color:#171327;line-height:1.55;--primary:#7c3aed;--accent:#db2777}
-.wrap{width:min(1140px,92%);margin:0 auto}
-h1,h2{font-family:Georgia,'Times New Roman',serif;line-height:1.1;margin:0}
-a{text-decoration:none;color:inherit}
-.center{text-align:center;margin-bottom:38px;font-size:34px}
-.btn{display:inline-block;background:var(--primary);color:#fff;padding:13px 28px;border-radius:999px;font-weight:600;border:none;cursor:pointer;transition:.2s}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
-.btn.light{background:#fff;color:var(--primary)}
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid #ece9f5}
-.nav__inner{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{font-family:Georgia,serif;font-weight:700;font-size:23px;background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.brand.light{-webkit-text-fill-color:#fff;background:none;color:#fff}
-.nav__links{display:flex;gap:28px}.nav__links a{font-weight:500;color:#3b3550}.nav__links a:hover{color:var(--primary)}
-.nav__actions{display:flex;align-items:center;gap:10px}
-.cart{background:#f6f4fb;border:none;border-radius:999px;padding:9px 15px;font-weight:600;cursor:pointer}
-.burger{display:none;background:none;border:none;font-size:22px;cursor:pointer}
-.hero{background:linear-gradient(180deg,#faf8ff,#fff)}
-.hero__inner{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;padding:60px 0}
-.eyebrow{color:var(--primary);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:13px}
-.hero h1{font-size:56px;margin:12px 0 16px}
-.lead{color:#6b7280;font-size:18px;max-width:440px;margin-bottom:24px}
-.stats{display:flex;gap:32px;margin-top:34px}.stats strong{display:block;font-size:23px;font-family:Georgia,serif}.stats span{color:#6b7280;font-size:13px}
-.hero__photo{height:430px;border-radius:24px;background-size:cover;background-position:center;box-shadow:0 30px 60px rgba(124,58,237,.25)}
-.strip{background:#171327;color:#fff}.strip__inner{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;padding:15px 0;font-size:14px;font-weight:500}
-.section{padding:70px 0}.section.alt{background:#f6f4fb}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.card{background:#fff;border:1px solid #ece9f5;border-radius:16px;overflow:hidden;transition:.25s}.card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(23,19,39,.1)}
-.card__img{aspect-ratio:4/5;background-size:cover;background-position:center;position:relative}
-.tag{position:absolute;top:12px;left:12px;background:#fff;color:var(--primary);font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
-.card__body{padding:15px}.card__body h3{font-size:15px;margin:0 0 4px}.price{color:var(--primary);font-weight:700}
-.add{margin-top:11px;width:100%;border:1px solid #ece9f5;background:#fff;padding:10px;border-radius:10px;font-weight:600;cursor:pointer;transition:.2s}.add:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-.about{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
-.about__img{height:370px;border-radius:24px;background-size:cover;background-position:center;box-shadow:0 24px 50px rgba(23,19,39,.14)}
-.about h2{font-size:32px;margin-bottom:14px}.muted{color:#6b7280;margin-bottom:16px}
-.ticks{list-style:none;padding:0;display:grid;gap:9px}.ticks li{padding-left:28px;position:relative;font-weight:500}.ticks li::before{content:'✓';position:absolute;left:0;width:19px;height:19px;border-radius:50%;background:var(--primary);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
-.news{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;text-align:center;padding:68px 0}
-.news h2{font-size:32px;margin-bottom:8px}.news p{opacity:.92;margin-bottom:22px}
-.news__form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.news__form input{padding:14px 18px;border-radius:999px;border:none;min-width:270px}
-.ok{font-weight:600;margin-top:14px}
-.footer{background:#171327;color:#cfc9e0;padding:46px 0 30px;text-align:center}
-.footer p{margin:8px 0;font-size:14px;opacity:.85}
-.footer .credit a{color:#fff;font-weight:600;text-decoration:underline}
-@media(max-width:860px){
-  .nav__links{position:fixed;inset:68px 0 auto 0;background:#fff;flex-direction:column;padding:16px 6%;gap:14px;border-bottom:1px solid #ece9f5;transform:translateY(-130%);transition:.3s}
-  .nav__links.open{transform:translateY(0)}.burger{display:block}
-  .hero__inner{grid-template-columns:1fr;text-align:center}.hero h1{font-size:42px}.lead,.stats{margin-inline:auto}.stats{justify-content:center}
-  .hero__photo{height:320px;max-width:380px;margin:0 auto}
-  .grid{grid-template-columns:repeat(2,1fr)}.about{grid-template-columns:1fr}
-}
-</style>
