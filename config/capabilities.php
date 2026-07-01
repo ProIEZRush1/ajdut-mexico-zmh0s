@@ -15,5 +15,17 @@ return [
     | (prop 'capabilities') y el layout las renderiza en la barra lateral.
     |
     */
-    'nav' => [],
+    'nav' => [
+        ['label' => 'Causas',        'href' => '/admin/causas',        'icon' => '❤️'],
+        ['label' => 'Planes',        'href' => '/admin/planes',        'icon' => '🎗️'],
+        ['label' => 'Donadores',     'href' => '/admin/donadores',     'icon' => '👥'],
+        ['label' => 'Donaciones',    'href' => '/admin/donaciones',    'icon' => '💳'],
+        ['label' => 'Noticias',      'href' => '/admin/noticias',      'icon' => '📰'],
+        ['label' => 'Transparencia', 'href' => '/admin/transparencia', 'icon' => '📊'],
+        ['label' => 'Mensajes',      'href' => '/admin/mensajes',      'icon' => '✉️'],
+        ['label' => 'Testimonios',   'href' => '/admin/testimonios',   'icon' => '💬'],
+        ['label' => 'Equipo',        'href' => '/admin/equipo',        'icon' => '🤝'],
+        ['label' => 'Roles',         'href' => '/roles',               'icon' => '🔐'],
+        ['label' => 'Configuración', 'href' => '/ajustes',             'icon' => '⚙️'],
+    ],
 ];

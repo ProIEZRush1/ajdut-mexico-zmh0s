@@ -1,174 +1,165 @@
 <script setup>
 import { computed } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
+
+const props = defineProps({
+    stats: Object,
+    causas_recientes: Array,
+    donaciones_recientes: Array,
+});
 
 const page = usePage();
-
-const businessName = computed(() => page.props.name ?? 'Mi Negocio');
+const businessName = computed(() => page.props.name ?? 'AJDUT Mexico');
 const userFirstName = computed(() => {
     const name = (page.props.auth?.user?.name ?? '').trim();
     return name ? name.split(/\s+/)[0] : '';
 });
 
-const stats = [
-    {
-        label: 'Clientes activos',
-        value: '—',
-        hint: 'Tus contactos registrados',
-        gradient: 'from-[#7c3aed] to-[#a855f7]',
-        icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
-    },
-    {
-        label: 'Pedidos del mes',
-        value: '—',
-        hint: 'Actividad reciente',
-        gradient: 'from-[#a21caf] to-[#c026d3]',
-        icon: 'M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293A1 1 0 005.414 17H17M17 17a2 2 0 100 4 2 2 0 000-4zM9 19a2 2 0 11-4 0 2 2 0 014 0z',
-    },
-    {
-        label: 'Ingresos',
-        value: '—',
-        hint: 'Total acumulado',
-        gradient: 'from-[#7c3aed] to-[#c026d3]',
-        icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-    },
-    {
-        label: 'Tareas pendientes',
-        value: '—',
-        hint: 'Por completar',
-        gradient: 'from-[#c026d3] to-[#db2777]',
-        icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
-    },
-];
+const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n ?? 0);
 </script>
 
 <template>
-    <Head title="Inicio" />
-
+    <Head title="Panel de Control" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-bold tracking-tight text-slate-800">
-                Panel de control
-            </h2>
+            <h2 class="text-xl font-bold tracking-tight text-slate-800">Panel de Control</h2>
         </template>
 
         <div class="mx-auto max-w-7xl space-y-8">
             <!-- Hero -->
-            <section
-                class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#c026d3] p-8 text-white shadow-xl shadow-fuchsia-500/20 sm:p-10"
-            >
-                <div
-                    class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl"
-                ></div>
-                <div
-                    class="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-fuchsia-300/20 blur-2xl"
-                ></div>
-                <div class="relative">
-                    <p class="text-sm font-medium uppercase tracking-widest text-white/70">
-                        Bienvenido a tu sistema
-                    </p>
-                    <h1 class="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
-                        Hola<span v-if="userFirstName">, {{ userFirstName }}</span> 👋
-                    </h1>
-                    <p class="mt-3 max-w-2xl text-base text-white/85">
-                        Este es el panel de
-                        <span class="font-semibold">{{ businessName }}</span>.
-                        Desde aquí podrás gestionar tu negocio, dar seguimiento a tu
-                        actividad y mantener todo organizado en un solo lugar.
-                    </p>
+            <section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-teal-600 to-emerald-700 p-8 text-white shadow-xl shadow-teal-500/20 sm:p-10">
+                <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl"></div>
+                <div class="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-2xl"></div>
+                <div class="relative flex items-center gap-6">
+                    <img src="/brand-logo.jpeg" alt="AJDUT Mexico" class="hidden h-20 w-20 rounded-2xl object-contain shadow-lg sm:block bg-white/10 p-1" />
+                    <div>
+                        <p class="text-sm font-medium uppercase tracking-widest text-white/70">Plataforma de Donaciones</p>
+                        <h1 class="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">
+                            Hola<span v-if="userFirstName">, {{ userFirstName }}</span> 👋
+                        </h1>
+                        <p class="mt-2 max-w-2xl text-base text-white/85">
+                            Bienvenido al panel de administración de <span class="font-semibold">{{ businessName }}</span>.
+                            Gestiona causas, donadores y transparencia desde aquí.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Stat cards -->
+            <!-- Stats grid -->
             <section>
                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-                    <div
-                        v-for="stat in stats"
-                        :key="stat.label"
-                        class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
-                    >
-                        <div class="flex items-start justify-between">
-                            <span
-                                :class="[
-                                    'flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-md',
-                                    stat.gradient,
-                                ]"
-                            >
-                                <svg
-                                    class="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        :d="stat.icon"
-                                    />
-                                </svg>
-                            </span>
+                    <div class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-md shadow-teal-500/20">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
                         </div>
-                        <p class="mt-4 text-3xl font-extrabold text-slate-800">
-                            {{ stat.value }}
-                        </p>
-                        <p class="mt-1 text-sm font-semibold text-slate-600">
-                            {{ stat.label }}
-                        </p>
-                        <p class="mt-0.5 text-xs text-slate-400">{{ stat.hint }}</p>
+                        <p class="mt-4 text-3xl font-extrabold text-slate-800">{{ stats?.donadores ?? 0 }}</p>
+                        <p class="mt-1 text-sm font-semibold text-slate-600">Donadores Activos</p>
+                        <p class="mt-0.5 text-xs text-slate-400">Registrados en la plataforma</p>
+                    </div>
+
+                    <div class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/20">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <p class="mt-4 text-3xl font-extrabold text-slate-800">{{ fmt(stats?.total_recaudado) }}</p>
+                        <p class="mt-1 text-sm font-semibold text-slate-600">Total Recaudado</p>
+                        <p class="mt-0.5 text-xs text-slate-400">Donaciones completadas</p>
+                    </div>
+
+                    <div class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 text-white shadow-md shadow-teal-500/20">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </div>
+                        <p class="mt-4 text-3xl font-extrabold text-slate-800">{{ stats?.causas_activas ?? 0 }}</p>
+                        <p class="mt-1 text-sm font-semibold text-slate-600">Causas Activas</p>
+                        <p class="mt-0.5 text-xs text-slate-400">Programas en curso</p>
+                    </div>
+
+                    <div class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-md shadow-emerald-500/20">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <p class="mt-4 text-3xl font-extrabold text-slate-800">{{ stats?.donaciones_mes ?? 0 }}</p>
+                        <p class="mt-1 text-sm font-semibold text-slate-600">Donaciones este Mes</p>
+                        <p class="mt-0.5 text-xs text-slate-400">Transacciones completadas</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Welcome / next steps -->
-            <section class="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <div
-                    class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm lg:col-span-2"
-                >
-                    <h3 class="text-lg font-bold text-slate-800">
-                        Tu sistema está listo
-                    </h3>
-                    <p class="mt-2 text-sm leading-relaxed text-slate-600">
-                        Hemos preparado el panel de
-                        <span class="font-semibold text-slate-800">{{ businessName }}</span>
-                        para que empieces a trabajar. A medida que se activen nuevos
-                        módulos, aparecerán aquí y en el menú lateral.
-                    </p>
-                    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div class="rounded-xl bg-slate-50 p-4">
-                            <p class="text-sm font-semibold text-slate-700">
-                                Personaliza tu perfil
-                            </p>
-                            <p class="mt-1 text-xs text-slate-500">
-                                Actualiza tus datos desde el menú de tu cuenta.
-                            </p>
-                        </div>
-                        <div class="rounded-xl bg-slate-50 p-4">
-                            <p class="text-sm font-semibold text-slate-700">
-                                Explora tu panel
-                            </p>
-                            <p class="mt-1 text-xs text-slate-500">
-                                Tus métricas y herramientas vivirán en esta pantalla.
-                            </p>
+            <!-- Content grid -->
+            <section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <!-- Causas recientes -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-bold text-slate-800">Causas Activas</h3>
+                        <Link href="/admin/causas" class="text-sm font-medium text-teal-600 hover:text-teal-700">Ver todas →</Link>
+                    </div>
+                    <div v-if="causas_recientes && causas_recientes.length" class="space-y-4">
+                        <div v-for="causa in causas_recientes" :key="causa.id">
+                            <div class="flex items-center justify-between text-sm mb-1">
+                                <span class="font-medium text-slate-700 truncate flex-1 mr-2">{{ causa.titulo }}</span>
+                                <span class="text-teal-600 font-semibold flex-shrink-0">
+                                    {{ Math.min(100, Math.round((causa.recaudado / (causa.meta_recaudacion || 1)) * 100)) }}%
+                                </span>
+                            </div>
+                            <div class="h-2 rounded-full bg-slate-100 overflow-hidden">
+                                <div
+                                    class="h-2 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 transition-all"
+                                    :style="{ width: Math.min(100, Math.round((causa.recaudado / (causa.meta_recaudacion || 1)) * 100)) + '%' }"
+                                ></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-slate-400 mt-1">
+                                <span>{{ fmt(causa.recaudado) }} recaudados</span>
+                                <span>Meta: {{ fmt(causa.meta_recaudacion) }}</span>
+                            </div>
                         </div>
                     </div>
+                    <p v-else class="text-sm text-slate-400">No hay causas activas aún.</p>
                 </div>
 
-                <div
-                    class="flex flex-col justify-between rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-white shadow-sm"
-                >
-                    <div>
-                        <h3 class="text-lg font-bold">¿Necesitas ayuda?</h3>
-                        <p class="mt-2 text-sm text-slate-300">
-                            Estamos para acompañarte. Cualquier ajuste o nueva función
-                            que necesites, lo resolvemos por ti.
-                        </p>
+                <!-- Últimas donaciones -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-bold text-slate-800">Últimas Donaciones</h3>
+                        <Link href="/admin/donaciones" class="text-sm font-medium text-teal-600 hover:text-teal-700">Ver todas →</Link>
                     </div>
-                    <p class="mt-6 text-xs text-slate-400">
-                        Plataforma impulsada por
-                        <span class="font-semibold text-slate-200">Overcloud</span>
-                    </p>
+                    <div v-if="donaciones_recientes && donaciones_recientes.length" class="divide-y divide-slate-100">
+                        <div v-for="d in donaciones_recientes" :key="d.id" class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-semibold text-slate-700">{{ d.donador?.nombre ?? 'Anónimo' }} {{ d.donador?.apellido ?? '' }}</p>
+                                <p class="text-xs text-slate-400">{{ d.folio }} · {{ d.frecuencia }}</p>
+                            </div>
+                            <span class="text-sm font-bold text-teal-600">{{ fmt(d.monto) }}</span>
+                        </div>
+                    </div>
+                    <p v-else class="text-sm text-slate-400">No hay donaciones recientes.</p>
+                </div>
+            </section>
+
+            <!-- Quick access -->
+            <section>
+                <h3 class="text-base font-bold text-slate-800 mb-4">Acceso Rápido</h3>
+                <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                    <Link v-for="item in [
+                        { href: '/admin/causas/crear', label: 'Nueva Causa', icon: '❤️' },
+                        { href: '/admin/donaciones/crear', label: 'Registrar Donación', icon: '💳' },
+                        { href: '/admin/noticias/crear', label: 'Nueva Noticia', icon: '📰' },
+                        { href: '/admin/mensajes', label: `Mensajes${stats?.mensajes_nuevos ? ' (' + stats.mensajes_nuevos + ')' : ''}`, icon: '✉️' },
+                    ]" :key="item.href" :href="item.href"
+                        class="flex flex-col items-center gap-2 rounded-xl border border-slate-200 bg-white p-5 text-center shadow-sm transition hover:border-teal-300 hover:shadow-md"
+                    >
+                        <span class="text-2xl">{{ item.icon }}</span>
+                        <span class="text-xs font-semibold text-slate-600">{{ item.label }}</span>
+                    </Link>
                 </div>
             </section>
         </div>

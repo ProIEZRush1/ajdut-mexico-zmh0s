@@ -33,8 +33,14 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'capabilities' => config('capabilities.nav', []),
+            'trial_locked' => config('trial.locked'),
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'flash' => [
+                'success' => session('success'),
+                'error' => session('error'),
+                'trial_locked' => session('trial_locked'),
             ],
         ];
     }
