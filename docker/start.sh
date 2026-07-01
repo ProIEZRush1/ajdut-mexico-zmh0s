@@ -14,17 +14,23 @@ fi
 APP_KEY="$(grep '^APP_KEY=' .env | head -1 | cut -d '=' -f2-)"
 export APP_KEY
 
-# 3. Ensure the SQLite database file and its directory exist (default path).
-DB_DATABASE="${DB_DATABASE:-/app/database/database.sqlite}"
-export DB_DATABASE
-DB_DIR="$(dirname "$DB_DATABASE")"
-mkdir -p "$DB_DIR" 2>/dev/null || true
-[ -f "$DB_DATABASE" ] || touch "$DB_DATABASE" 2>/dev/null || true
+# 3. SQLite-only: ensure the database file and its directory exist.
+#    When DB_CONNECTION is pgsql/mysql, skip this block entirely so we never
+#    export a file path as DB_DATABASE for a server-based engine.
+_DB_CONN="${DB_CONNECTION:-sqlite}"
+if [ "$_DB_CONN" = "sqlite" ]; then
+    DB_DATABASE="${DB_DATABASE:-/app/database/database.sqlite}"
+    export DB_DATABASE
+    _DB_DIR="$(dirname "$DB_DATABASE")"
+    mkdir -p "$_DB_DIR" 2>/dev/null || true
+    [ -f "$DB_DATABASE" ] || touch "$DB_DATABASE" 2>/dev/null || true
+    chmod -R ug+rwX "$_DB_DIR" 2>/dev/null || true
+fi
 
 # Make runtime dirs writable (best effort).
 mkdir -p storage/framework/cache storage/framework/sessions \
          storage/framework/views storage/logs bootstrap/cache 2>/dev/null || true
-chmod -R ug+rwX storage bootstrap/cache "$DB_DIR" 2>/dev/null || true
+chmod -R ug+rwX storage bootstrap/cache 2>/dev/null || true
 
 # 4. Migrate + seed in the BACKGROUND, best-effort with a retry loop, so a
 #    slow/unready database never blocks or crashes serving.
@@ -42,8 +48,10 @@ chmod -R ug+rwX storage bootstrap/cache "$DB_DIR" 2>/dev/null || true
     done
 ) &
 
-# 5. Cache config (uses the exported APP_KEY). Best effort.
-php artisan config:cache || true
+# 5. Cache config/routes/views (uses the exported APP_KEY). Best effort.
+php artisan config:cache 2>/dev/null || true
+php artisan route:cache  2>/dev/null || true
+php artisan view:cache   2>/dev/null || true
 
 # 6. Serve under an auto-respawn loop: if a request ever crashes the dev server, it restarts
 #    immediately, so the app is never permanently down (no `set -e`, so the loop always continues).
