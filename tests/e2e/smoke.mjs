@@ -170,8 +170,9 @@ console.log('\n── 4. Planes ──');
 
     const { body: createPage } = await get('/admin/planes/crear');
     const csrf = extractCsrf(createPage) || csrfToken;
+    const ts = Date.now();
     const planData = {
-        nombre: 'Plan Smoke Test',
+        nombre: `Plan Smoke ${ts}`,
         descripcion: 'Plan de prueba smoke test E2E',
         monto_sugerido: '500',
         frecuencia: 'mensual',
@@ -181,7 +182,7 @@ console.log('\n── 4. Planes ──');
     assert(s2 === 200 || u2.includes('planes'), `Plan store accepted (status=${s2}, url=${u2})`);
 
     const { body: listBody } = await get('/admin/planes');
-    assert(listBody.includes('Plan Smoke Test') || listBody.includes('Amigo'), 'Plan appears in listing');
+    assert(listBody.includes(`Plan Smoke ${ts}`) || listBody.includes('Amigo'), 'Plan appears in listing');
 }
 
 // ── 5. Module: Donadores ──────────────────────────────────────────────────────
