@@ -6,13 +6,29 @@ cd /app || exit 1
 # 1. Ensure a .env exists.
 [ -f .env ] || cp .env.production .env
 
-# 2. Ensure a valid APP_KEY and export it so request handlers read the baked
-#    key (overrides any empty injected env var).
-if ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
+# 2. Ensure a valid APP_KEY in .env BEFORE config:cache.
+#    Prefer the Coolify-injected APP_KEY (the REAL key that matches the
+#    DB-encrypted data). Only generate a fresh one if nothing valid exists.
+#    Always write the resolved key into .env so it survives container
+#    recreation (a fresh container resets .env from the image otherwise).
+if echo "$APP_KEY" | grep -q "^base64:"; then
+    sed -i '/^APP_KEY=/d' .env
+    echo "APP_KEY=$APP_KEY" >> .env
+elif ! grep -q "^APP_KEY=base64:" .env 2>/dev/null; then
     php artisan key:generate --force || true
 fi
 APP_KEY="$(grep '^APP_KEY=' .env | head -1 | cut -d '=' -f2-)"
 export APP_KEY
+
+# 2b. Sync injected runtime secrets into .env so config:cache bakes them
+#     (config:cache reads .env; a fresh container has no STRIPE_* lines).
+for _k in STRIPE_KEY STRIPE_SECRET STRIPE_WEBHOOK_SECRET; do
+    eval _v=\"\$$_k\"
+    if [ -n "$_v" ]; then
+        sed -i "/^$_k=/d" .env
+        echo "$_k=$_v" >> .env
+    fi
+done
 
 # 3. SQLite-only: ensure the database file and its directory exist.
 #    When DB_CONNECTION is pgsql/mysql, skip this block entirely so we never
