@@ -28,15 +28,15 @@ const navLinks = computed(() => [
 <template>
     <div class="min-h-screen flex flex-col bg-white">
         <!-- Header -->
-        <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
+        <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-emerald-200/60 shadow-sm">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-18 items-center justify-between py-3">
+                <div class="flex h-20 items-center justify-between py-3">
                     <!-- Logo -->
                     <Link href="/" class="flex items-center gap-3 min-w-0 flex-shrink-0">
                         <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-12 w-12 rounded-xl object-contain shadow-sm border border-slate-100" />
                         <div class="hidden sm:block">
-                            <span class="block text-base font-extrabold text-teal-700 leading-tight">AJDUT México</span>
-                            <span class="block text-xs text-slate-400 font-medium">Plataforma de Donaciones</span>
+                            <span class="block font-serif text-lg font-bold text-teal-800 leading-tight tracking-tight">AJDUT México</span>
+                            <span class="block text-[11px] text-emerald-700 font-semibold uppercase tracking-wider">Plataforma de Donaciones</span>
                         </div>
                     </Link>
 
@@ -116,15 +116,15 @@ const navLinks = computed(() => [
         </main>
 
         <!-- Footer -->
-        <footer class="bg-slate-900 text-slate-300">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <footer class="bg-teal-900 text-teal-100 border-t-2 border-emerald-500/40">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+                <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
                     <div>
                         <div class="flex items-center gap-3 mb-4">
                             <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-10 w-10 rounded-xl object-contain bg-white/10 p-0.5" />
-                            <span class="text-white font-extrabold text-lg">AJDUT México</span>
+                            <span class="font-serif text-white font-bold text-lg tracking-tight">AJDUT México</span>
                         </div>
-                        <p class="text-sm text-slate-400 leading-relaxed">
+                        <p class="text-sm text-teal-200/80 leading-relaxed">
                             Institución de donaciones comprometida con el bienestar social de México. Transparencia total, impacto real.
                         </p>
                     </div>
@@ -132,25 +132,25 @@ const navLinks = computed(() => [
                         <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Navegación</h4>
                         <ul class="space-y-2">
                             <li v-for="link in navLinks" :key="link.href">
-                                <Link :href="link.href" class="text-sm text-slate-400 hover:text-teal-400 transition">{{ link.label }}</Link>
+                                <Link :href="link.href" class="text-sm text-teal-200/80 hover:text-emerald-400 transition">{{ link.label }}</Link>
                             </li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Donar</h4>
-                        <Link href="/donar" class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-teal-500 transition mb-4">
+                        <Link href="/donar" class="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-bold text-teal-950 hover:bg-emerald-400 transition mb-4">
                             ❤️ {{ t('nav.donate') }}
                         </Link>
-                        <p class="text-xs text-slate-500 mt-2">Pagos seguros procesados con Stripe.</p>
+                        <p class="text-xs text-teal-300/70 mt-2">Pagos seguros procesados con Stripe.</p>
                     </div>
                 </div>
-                <div class="mt-10 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                <div class="mt-10 pt-8 border-t border-teal-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-teal-300/70">
                     <p>&copy; {{ new Date().getFullYear() }} AJDUT México. {{ t('footer.rights') }}</p>
                     <p>
                         Desarrollado por
-                        <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="text-teal-400 font-semibold hover:text-teal-300">Overcloud</a>
+                        <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="text-emerald-400 font-semibold hover:text-emerald-300">Overcloud</a>
                         ·
-                        <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="hover:text-slate-300 transition">{{ t('footer.cta') }}</a>
+                        <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="hover:text-teal-100 transition">{{ t('footer.cta') }}</a>
                     </p>
                 </div>
             </div>

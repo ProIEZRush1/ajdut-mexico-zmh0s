@@ -15,10 +15,10 @@ defineProps({
         />
         <span
             v-if="showText"
-            :class="[textSize, 'font-extrabold tracking-tight leading-tight']"
-            style="color: #0d9488;"
+            :class="[textSize, 'font-serif font-bold tracking-tight leading-tight']"
+            style="color: #e9c574;"
         >
-            AJDUT Mexico
+            AJDUT México
         </span>
     </div>
 </template>

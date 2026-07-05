@@ -1,9 +1,14 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Modal from '@/Components/Modal.vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const props = defineProps({ donaciones: Object, filters: Object, flash: Object, totales: Object });
+
+const cartaAbierta = ref(false);
+const donacionSeleccionada = ref(null);
+const verCarta = (d) => { donacionSeleccionada.value = d; cartaAbierta.value = true; };
 
 const search = ref(props.filters?.q ?? '');
 const filterEstado = ref(props.filters?.estado ?? '');
@@ -100,6 +105,8 @@ const frecLabel = { unica: 'Única', mensual: 'Mensual', anual: 'Anual' };
                             </td>
                             <td class="px-5 py-4 text-right">
                                 <div class="flex items-center justify-end gap-1.5">
+                                    <button v-if="d.firma_electronica" @click="verCarta(d)"
+                                        class="rounded-lg bg-teal-50 px-2.5 py-1.5 text-xs font-medium text-teal-700 hover:bg-teal-100">📜 Carta</button>
                                     <button v-if="d.estado === 'completada' && !d.recibo_emitido" @click="emitirRecibo(d.id)"
                                         class="rounded-lg bg-amber-50 px-2.5 py-1.5 text-xs font-medium text-amber-700 hover:bg-amber-100">Recibo</button>
                                     <button @click="eliminar(d.id)"
@@ -120,5 +127,21 @@ const frecLabel = { unica: 'Única', mensual: 'Mensual', anual: 'Anual' };
                     v-html="link.label" />
             </div>
         </div>
+
+        <Modal :show="cartaAbierta" @close="cartaAbierta = false" max-width="md">
+            <div v-if="donacionSeleccionada" class="p-6">
+                <h3 class="font-serif text-lg font-bold text-teal-900 mb-1">📜 Carta de Autorización de Cargo</h3>
+                <p class="text-xs text-slate-400 font-mono mb-4">Folio {{ donacionSeleccionada.folio }}</p>
+                <div class="space-y-1 text-sm text-slate-600 mb-4">
+                    <p><span class="text-slate-400">Nombre en la carta:</span> <strong class="text-slate-800">{{ donacionSeleccionada.firma_nombre }}</strong></p>
+                    <p><span class="text-slate-400">Monto autorizado:</span> <strong class="text-teal-700">{{ fmt(donacionSeleccionada.monto) }}</strong></p>
+                    <p><span class="text-slate-400">Frecuencia:</span> {{ frecLabel[donacionSeleccionada.frecuencia] ?? donacionSeleccionada.frecuencia }}</p>
+                    <p><span class="text-slate-400">Fecha de firma:</span> {{ fmtDate(donacionSeleccionada.firma_fecha) }}</p>
+                </div>
+                <p class="text-xs font-semibold text-slate-500 mb-2">Firma</p>
+                <img :src="donacionSeleccionada.firma_electronica" alt="Firma del donador" class="w-full h-32 object-contain rounded-xl border border-slate-200 bg-white" />
+                <button @click="cartaAbierta = false" class="mt-5 w-full rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-teal-700">Cerrar</button>
+            </div>
+        </Modal>
     </AuthenticatedLayout>
 </template>

@@ -1,9 +1,3 @@
-Se transformó la plataforma en un sitio de donaciones completo para AJDUT México:
+Se renovó el diseño de todo el sitio con una paleta más elegante (azul profundo, dorado suave y tonos cálidos) y tipografía tipo serif en los títulos, manteniendo el flujo de donación tal cual funcionaba.
 
-(1) PÁGINAS PÚBLICAS NUEVAS: el menú superior ahora incluye "Quiénes Somos", "Causas", "Planes de Donación", "Transparencia" y "Noticias/Blog" — cada una con contenido institucional real y barras de progreso de recaudación. La portada (inicio) muestra el logo oficial, estadísticas de impacto, causas activas y planes. Se quitó "Roles" del menú de administración.
-
-(2) PORTAL DEL DONADOR: el donador inicia sesión con su cuenta y accede desde el menú a "Mi Portal" (/portal) donde puede ver su historial de donaciones, descargar recibos fiscales, gestionar su plan recurrente y actualizar sus datos fiscales (RFC, razón social, teléfono).
-
-(3) BILINGÜE ES/EN: en el encabezado de todas las páginas públicas aparece un selector "ES / EN" que cambia todo el texto al idioma elegido y recuerda la preferencia del visitante.
-
-(4) FIRMA ELECTRÓNICA: al elegir frecuencia "Mensual" o "Anual" en el formulario de donación (/donar), aparece automáticamente una carta de autorización de cargo recurrente con un pad de firma digital; el donador firma con el ratón o el dedo y la firma queda guardada junto a la donación.
+En el formulario de donación (menú "Donar ahora" → /donar) ahora aparece siempre una "Carta de Autorización de Cargo a Tarjeta": el donante debe escribir su nombre completo y firmar en el recuadro antes de continuar. Esa carta (nombre, firma y monto/frecuencia autorizados) queda guardada junto con cada donación y el equipo puede consultarla desde el panel en Donaciones → botón "📜 Carta".

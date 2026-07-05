@@ -61,21 +61,21 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                 <div class="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-emerald-300/20 blur-3xl"></div>
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-teal-500/10 blur-3xl"></div>
             </div>
-            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <span class="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold backdrop-blur mb-6">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 border border-emerald-300/40 px-4 py-1.5 text-sm font-semibold text-emerald-100 backdrop-blur mb-7 tracking-wide">
                             ❤️ {{ t('home.eyebrow') }}
                         </span>
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-7 tracking-tight">
                             {{ t('home.hero.title') }}
                         </h1>
-                        <p class="text-lg sm:text-xl text-white/85 mb-8 max-w-lg leading-relaxed">
+                        <p class="text-lg sm:text-xl text-white/85 mb-10 max-w-lg leading-relaxed">
                             {{ t('home.hero.subtitle') }}
                         </p>
                         <div class="flex flex-wrap gap-4">
                             <Link href="/donar"
-                                class="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-3.5 text-base font-bold text-teal-700 shadow-xl hover:bg-teal-50 transition">
+                                class="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-7 py-3.5 text-base font-bold text-teal-950 shadow-xl hover:bg-emerald-400 transition">
                                 ❤️ {{ t('home.hero.cta') }}
                             </Link>
                             <Link href="/causas-publicas"

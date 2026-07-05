@@ -18,13 +18,13 @@ import { Link } from '@inertiajs/vue3';
                 <p class="mt-3 text-sm text-slate-400">Plataforma de Donaciones</p>
             </div>
 
-            <div class="w-full rounded-2xl border border-white/10 bg-white/96 p-8 shadow-2xl shadow-teal-950/40 backdrop-blur-sm sm:p-10">
+            <div class="w-full rounded-2xl border border-emerald-500/20 bg-white/96 p-8 shadow-2xl shadow-teal-950/40 backdrop-blur-sm sm:p-10">
                 <slot />
             </div>
 
-            <p class="mt-8 text-center text-xs text-slate-500">
-                AJDUT Mexico &middot; Desarrollado por
-                <span class="font-semibold text-slate-400">Overcloud</span>
+            <p class="mt-8 text-center text-xs text-teal-300/70">
+                AJDUT México &middot; Desarrollado por
+                <span class="font-semibold text-teal-200/80">Overcloud</span>
             </p>
         </div>
     </div>
