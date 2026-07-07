@@ -31,9 +31,9 @@ const staticPlanes = [
 const displayPlanes = computed(() => props.planes?.length ? props.planes : staticPlanes)
 
 const planColors = [
-    { from: 'from-teal-500', to: 'to-emerald-500', shadow: 'shadow-teal-500/20' },
-    { from: 'from-amber-500', to: 'to-orange-500', shadow: 'shadow-amber-500/20' },
-    { from: 'from-violet-500', to: 'to-purple-600', shadow: 'shadow-violet-500/20' },
+    { from: 'from-teal-500', to: 'to-teal-700', shadow: 'shadow-teal-500/20' },
+    { from: 'from-emerald-400', to: 'to-emerald-600', shadow: 'shadow-emerald-500/20' },
+    { from: 'from-coral-500', to: 'to-coral-700', shadow: 'shadow-coral-500/20' },
 ]
 const planIcons = ['🌱', '🌟', '💎']
 
@@ -45,9 +45,12 @@ const frecuenciaLibre = ref('mensual')
     <Head title="Planes de Donación — AJDUT México" />
     <PublicLayout>
         <!-- Hero -->
-        <section class="bg-gradient-to-br from-teal-700 to-emerald-600 text-white py-16">
-            <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ t('plans.title') }}</h1>
+        <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-coral-700 text-white py-16">
+            <div class="pointer-events-none absolute -top-16 -right-10 h-64 w-64 rounded-full bg-coral-400/20 blur-3xl animate-float-slow"></div>
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-3xl animate-float-slow" style="animation-delay:2s"></div>
+            <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+                <span class="font-accent text-2xl text-coral-200">Súmate con un plan</span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-extrabold mt-1 mb-4">{{ t('plans.title') }}</h1>
                 <p class="text-xl text-white/85 max-w-2xl mx-auto">{{ t('plans.subtitle') }}</p>
             </div>
         </section>
@@ -57,16 +60,17 @@ const frecuenciaLibre = ref('mensual')
             <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
                     <div v-for="(plan, idx) in displayPlanes" :key="plan.id ?? plan.nombre"
-                        :class="plan.destacado ? 'md:scale-105 ring-2 ring-teal-500' : ''"
-                        class="relative bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col">
+                        :class="plan.destacado ? 'md:scale-105 ring-2 ring-coral-500 shadow-xl' : 'shadow-sm'"
+                        class="card-lift relative bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-2xl transition flex flex-col">
                         <!-- Popular badge -->
-                        <div v-if="plan.destacado" class="bg-teal-600 text-white text-xs font-bold text-center py-2 uppercase tracking-wider">
+                        <div v-if="plan.destacado" class="bg-coral-600 text-white text-xs font-bold text-center py-2 uppercase tracking-wider">
                             ⭐ {{ t('plans.recommended') }}
                         </div>
                         <!-- Header -->
-                        <div :class="`bg-gradient-to-br ${planColors[idx % 3].from} ${planColors[idx % 3].to}`" class="p-8 text-white">
+                        <div :class="`bg-gradient-to-br ${planColors[idx % 3].from} ${planColors[idx % 3].to}`" class="relative overflow-hidden p-8 text-white">
+                            <span class="absolute -right-4 -top-4 text-8xl opacity-20">{{ planIcons[idx % 3] }}</span>
                             <span class="text-4xl block mb-3">{{ planIcons[idx % 3] }}</span>
-                            <h2 class="text-2xl font-extrabold mb-1">{{ plan.nombre }}</h2>
+                            <h2 class="font-serif text-2xl font-extrabold mb-1">{{ plan.nombre }}</h2>
                             <div class="flex items-baseline gap-2 mt-3">
                                 <span class="text-4xl font-extrabold">{{ fmt(plan.monto_sugerido) }}</span>
                                 <span class="text-white/75 text-sm">/{{ freqLabel(plan.frecuencia) }}</span>
@@ -80,15 +84,15 @@ const frecuenciaLibre = ref('mensual')
                                 <ul class="space-y-2.5">
                                     <li v-for="b in (Array.isArray(plan.beneficios) ? plan.beneficios : (plan.beneficios ? plan.beneficios.split('\n') : []))"
                                         :key="b" class="flex items-start gap-2 text-sm">
-                                        <span class="text-teal-500 mt-0.5 font-bold flex-shrink-0">✓</span>
+                                        <span class="text-coral-500 mt-0.5 font-bold flex-shrink-0">✓</span>
                                         <span class="text-slate-600">{{ b }}</span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="mt-auto">
                                 <Link :href="plan.id ? `/donar?plan=${plan.id}` : '/donar'"
-                                    :class="plan.destacado ? 'bg-teal-600 text-white hover:bg-teal-700 shadow-lg shadow-teal-500/20' : 'border-2 border-teal-600 text-teal-600 hover:bg-teal-50'"
-                                    class="block text-center w-full rounded-xl py-3 text-sm font-bold transition">
+                                    :class="plan.destacado ? 'bg-coral-600 text-white hover:bg-coral-700 shadow-lg shadow-coral-500/20' : 'border-2 border-teal-600 text-teal-600 hover:bg-teal-50'"
+                                    class="btn-pop block text-center w-full rounded-xl py-3 text-sm font-bold transition">
                                     {{ t('plans.join') }}
                                 </Link>
                             </div>
@@ -103,16 +107,16 @@ const frecuenciaLibre = ref('mensual')
             <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-2xl font-extrabold text-slate-800 mb-2">{{ t('plans.custom') }}</h2>
                 <p class="text-slate-500 mb-8">¿Prefieres elegir tu propio monto? No hay problema, cada aportación cuenta.</p>
-                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+                <div class="bg-white rounded-2xl border-2 border-dashed border-coral-200 p-8 shadow-sm">
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div>
                             <label class="block text-xs font-bold text-slate-600 mb-2 text-left">Monto (MXN)</label>
                             <input v-model="montoLibre" type="number" min="10" placeholder="$ 200"
-                                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-teal-400 focus:outline-none" />
+                                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-coral-400 focus:outline-none" />
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-600 mb-2 text-left">Frecuencia</label>
-                            <select v-model="frecuenciaLibre" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-teal-400 focus:outline-none">
+                            <select v-model="frecuenciaLibre" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-coral-400 focus:outline-none">
                                 <option value="unica">{{ t('plans.frequency.unica') }}</option>
                                 <option value="mensual">{{ t('plans.frequency.mensual') }}</option>
                                 <option value="anual">{{ t('plans.frequency.anual') }}</option>
@@ -120,7 +124,7 @@ const frecuenciaLibre = ref('mensual')
                         </div>
                     </div>
                     <Link :href="`/donar?monto=${montoLibre}&frecuencia=${frecuenciaLibre}`"
-                        class="block w-full text-center rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 py-3 text-sm font-bold text-white hover:from-teal-700 transition shadow-lg shadow-teal-500/20">
+                        class="btn-pop block w-full text-center rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 py-3 text-sm font-bold text-white hover:from-coral-600 transition shadow-lg shadow-coral-500/20">
                         ❤️ Donar {{ montoLibre ? fmt(montoLibre) : '' }}
                     </Link>
                 </div>
@@ -138,7 +142,7 @@ const frecuenciaLibre = ref('mensual')
                         { q: '¿Las donaciones son deducibles de impuestos?', a: 'Sí, emitimos comprobantes fiscales (CFDI) para todas las donaciones. Puedes descargarlos en tu portal.' },
                         { q: '¿Es seguro pagar en línea?', a: 'Absolutamente. Usamos Stripe, el estándar mundial en seguridad de pagos. Nunca almacenamos datos de tarjeta.' },
                     ]" :key="q.q"
-                        class="bg-white rounded-2xl border border-slate-200 p-6">
+                        class="card-lift bg-white rounded-2xl border border-slate-200 p-6 hover:border-teal-200 hover:shadow-md">
                         <h3 class="font-bold text-slate-800 mb-2">{{ q.q }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed">{{ q.a }}</p>
                     </div>

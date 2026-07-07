@@ -28,15 +28,16 @@ const navLinks = computed(() => [
 <template>
     <div class="min-h-screen flex flex-col bg-white">
         <!-- Header -->
-        <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-emerald-200/60 shadow-sm">
+        <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-coral-100/70 shadow-sm">
+            <div class="h-1 w-full bg-gradient-to-r from-coral-500 via-emerald-400 to-teal-600"></div>
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-20 items-center justify-between py-3">
                     <!-- Logo -->
-                    <Link href="/" class="flex items-center gap-3 min-w-0 flex-shrink-0">
-                        <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-12 w-12 rounded-xl object-contain shadow-sm border border-slate-100" />
+                    <Link href="/" class="group flex items-center gap-3 min-w-0 flex-shrink-0">
+                        <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-12 w-12 rounded-2xl object-contain shadow-md border border-slate-100 transition duration-300 group-hover:rotate-3 group-hover:scale-105" />
                         <div class="hidden sm:block">
                             <span class="block font-serif text-lg font-bold text-teal-800 leading-tight tracking-tight">AJDUT México</span>
-                            <span class="block text-[11px] text-emerald-700 font-semibold uppercase tracking-wider">Plataforma de Donaciones</span>
+                            <span class="block text-[11px] text-coral-600 font-semibold uppercase tracking-wider">Plataforma de Donaciones</span>
                         </div>
                     </Link>
 
@@ -44,39 +45,42 @@ const navLinks = computed(() => [
                     <nav class="hidden lg:flex items-center gap-1">
                         <Link v-for="link in navLinks" :key="link.href" :href="link.href"
                             :class="isActive(link.href)
-                                ? 'text-teal-700 bg-teal-50 font-semibold'
-                                : 'text-slate-600 hover:text-teal-700 hover:bg-teal-50 font-medium'"
-                            class="px-3 py-2 rounded-lg text-sm transition-colors whitespace-nowrap">
+                                ? 'text-teal-700 font-bold'
+                                : 'text-slate-600 hover:text-teal-700 font-medium'"
+                            class="relative px-3 py-2 text-sm transition-colors whitespace-nowrap group">
                             {{ link.label }}
+                            <span
+                                :class="isActive(link.href) ? 'scale-x-100 bg-coral-500' : 'scale-x-0 bg-teal-400 group-hover:scale-x-100'"
+                                class="absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full origin-center transition-transform duration-300"></span>
                         </Link>
                     </nav>
 
                     <!-- Right actions -->
                     <div class="flex items-center gap-2">
                         <!-- Lang selector -->
-                        <div class="hidden sm:flex items-center gap-1 rounded-lg border border-slate-200 p-0.5">
+                        <div class="hidden sm:flex items-center gap-0.5 rounded-full border border-slate-200 p-0.5 bg-slate-50">
                             <button @click="setLang('es')"
-                                :class="lang === 'es' ? 'bg-teal-600 text-white' : 'text-slate-500 hover:text-slate-700'"
-                                class="px-2.5 py-1 rounded-md text-xs font-bold transition">ES</button>
+                                :class="lang === 'es' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+                                class="px-2.5 py-1 rounded-full text-xs font-bold transition">🇲🇽 ES</button>
                             <button @click="setLang('en')"
-                                :class="lang === 'en' ? 'bg-teal-600 text-white' : 'text-slate-500 hover:text-slate-700'"
-                                class="px-2.5 py-1 rounded-md text-xs font-bold transition">EN</button>
+                                :class="lang === 'en' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+                                class="px-2.5 py-1 rounded-full text-xs font-bold transition">🇺🇸 EN</button>
                         </div>
 
                         <!-- Portal / login -->
                         <Link v-if="$page.props.auth?.user" href="/portal"
-                            class="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 px-3 py-2 rounded-lg hover:bg-teal-50 transition">
+                            class="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 px-3 py-2 rounded-full hover:bg-teal-50 transition">
                             {{ t('nav.portal') }}
                         </Link>
                         <Link v-else href="/login"
-                            class="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-teal-700 px-3 py-2 rounded-lg hover:bg-teal-50 transition">
+                            class="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-teal-700 px-3 py-2 rounded-full hover:bg-teal-50 transition">
                             {{ t('nav.login') }}
                         </Link>
 
                         <!-- Donate CTA -->
                         <Link href="/donar"
-                            class="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-teal-500/20 hover:from-teal-700 transition">
-                            ❤️ {{ t('nav.donate') }}
+                            class="btn-pop group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-coral-500 to-coral-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-coral-500/30 hover:shadow-lg hover:shadow-coral-500/40 transition">
+                            <span class="inline-block group-hover:animate-heartbeat">❤️</span> {{ t('nav.donate') }}
                         </Link>
 
                         <!-- Mobile hamburger -->
@@ -116,8 +120,10 @@ const navLinks = computed(() => [
         </main>
 
         <!-- Footer -->
-        <footer class="bg-teal-900 text-teal-100 border-t-2 border-emerald-500/40">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+        <footer class="relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-900 to-coral-900/80 text-teal-100 border-t-2 border-coral-500/40">
+            <div class="pointer-events-none absolute -top-16 -right-16 h-72 w-72 rounded-full bg-coral-500/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl"></div>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
                 <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
                     <div>
                         <div class="flex items-center gap-3 mb-4">
@@ -127,18 +133,19 @@ const navLinks = computed(() => [
                         <p class="text-sm text-teal-200/80 leading-relaxed">
                             Institución de donaciones comprometida con el bienestar social de México. Transparencia total, impacto real.
                         </p>
+                        <p class="mt-3 font-accent text-2xl text-emerald-300/90">Cada aportación es una mitzvá ✨</p>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Navegación</h4>
                         <ul class="space-y-2">
                             <li v-for="link in navLinks" :key="link.href">
-                                <Link :href="link.href" class="text-sm text-teal-200/80 hover:text-emerald-400 transition">{{ link.label }}</Link>
+                                <Link :href="link.href" class="text-sm text-teal-200/80 hover:text-coral-300 transition">{{ link.label }}</Link>
                             </li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Donar</h4>
-                        <Link href="/donar" class="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-bold text-teal-950 hover:bg-emerald-400 transition mb-4">
+                        <Link href="/donar" class="btn-pop inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-coral-500 to-coral-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-coral-900/30 hover:from-coral-400 hover:to-coral-500 transition mb-4">
                             ❤️ {{ t('nav.donate') }}
                         </Link>
                         <p class="text-xs text-teal-300/70 mt-2">Pagos seguros procesados con Stripe.</p>
@@ -148,7 +155,7 @@ const navLinks = computed(() => [
                     <p>&copy; {{ new Date().getFullYear() }} AJDUT México. {{ t('footer.rights') }}</p>
                     <p>
                         Desarrollado por
-                        <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="text-emerald-400 font-semibold hover:text-emerald-300">Overcloud</a>
+                        <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="text-coral-300 font-semibold hover:text-coral-200">Overcloud</a>
                         ·
                         <a :href="'https://wa.me/5215594356241'" target="_blank" rel="noopener" class="hover:text-teal-100 transition">{{ t('footer.cta') }}</a>
                     </p>

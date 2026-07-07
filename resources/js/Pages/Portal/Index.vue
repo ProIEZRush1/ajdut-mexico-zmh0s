@@ -60,14 +60,15 @@ const tabs = computed(() => [
 
             <template v-else>
                 <!-- Welcome card -->
-                <div class="rounded-2xl bg-gradient-to-br from-teal-600 to-emerald-700 p-6 text-white shadow-xl shadow-teal-500/20">
-                    <div class="flex items-center gap-4">
+                <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-teal-700 via-teal-600 to-coral-600 p-6 text-white shadow-xl shadow-teal-500/20">
+                    <span class="pointer-events-none absolute -right-4 -top-4 text-7xl opacity-20">❤️</span>
+                    <div class="relative flex items-center gap-4">
                         <div class="h-16 w-16 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center text-3xl font-bold text-white">
                             {{ (donador.nombre ?? '?')[0] }}
                         </div>
                         <div>
                             <p class="text-sm text-white/70 font-medium">Bienvenido/a de nuevo</p>
-                            <h2 class="text-2xl font-extrabold">{{ donador.nombre }} {{ donador.apellido }}</h2>
+                            <h2 class="font-serif text-2xl font-extrabold">{{ donador.nombre }} {{ donador.apellido }}</h2>
                             <p class="text-white/80 text-sm mt-0.5">Total donado: <strong>{{ fmt(donador.total_donado) }}</strong></p>
                         </div>
                     </div>
@@ -78,7 +79,7 @@ const tabs = computed(() => [
                     <div class="flex overflow-x-auto border-b border-slate-200">
                         <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id"
                             :class="activeTab === tab.id
-                                ? 'border-b-2 border-teal-600 text-teal-700 bg-teal-50 font-bold'
+                                ? 'border-b-2 border-coral-600 text-coral-700 bg-coral-50 font-bold'
                                 : 'text-slate-500 hover:text-slate-700 font-medium'"
                             class="flex items-center gap-2 px-5 py-4 text-sm whitespace-nowrap transition flex-shrink-0">
                             <span>{{ tab.icon }}</span>
@@ -131,7 +132,7 @@ const tabs = computed(() => [
                                         <p class="text-xs text-slate-400">{{ fmt(r.monto) }} · {{ fmtDate(r.fecha_emision ?? r.created_at) }}</p>
                                     </div>
                                     <a v-if="r.archivo_pdf" :href="`/portal/recibos/${r.id}/pdf`" target="_blank"
-                                        class="inline-flex items-center gap-1.5 rounded-xl bg-teal-50 border border-teal-200 px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-100 transition">
+                                        class="btn-pop inline-flex items-center gap-1.5 rounded-xl bg-coral-50 border border-coral-200 px-4 py-2 text-sm font-semibold text-coral-700 hover:bg-coral-100 transition">
                                         ⬇️ {{ t('portal.download') }}
                                     </a>
                                     <span v-else class="text-xs text-slate-400 italic">Pendiente</span>
@@ -167,7 +168,7 @@ const tabs = computed(() => [
                             <div v-else class="text-center py-12 text-slate-400">
                                 <p class="text-4xl mb-3">🔄</p>
                                 <p class="font-semibold mb-4">No tienes un plan recurrente activo.</p>
-                                <a href="/donar" class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-teal-700 transition">
+                                <a href="/donar" class="btn-pop inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-coral-500/20 hover:from-coral-600 transition">
                                     ❤️ Activar plan recurrente
                                 </a>
                             </div>

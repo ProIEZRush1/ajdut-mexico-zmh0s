@@ -16,7 +16,7 @@ defineProps({
         <span
             v-if="showText"
             :class="[textSize, 'font-serif font-bold tracking-tight leading-tight']"
-            style="color: #e9c574;"
+            style="color: #e9b563;"
         >
             AJDUT México
         </span>

@@ -44,26 +44,29 @@ const fmtDate = (d) => {
     <Head title="Noticias y Blog — AJDUT México" />
     <PublicLayout>
         <!-- Hero -->
-        <section class="bg-gradient-to-br from-teal-700 to-emerald-600 text-white py-16">
-            <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ t('news.title') }}</h1>
+        <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-coral-700 text-white py-16">
+            <div class="pointer-events-none absolute -top-16 -right-10 h-64 w-64 rounded-full bg-coral-400/20 blur-3xl animate-float-slow"></div>
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-3xl animate-float-slow" style="animation-delay:2s"></div>
+            <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+                <span class="font-accent text-2xl text-coral-200">Historias que inspiran</span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-extrabold mt-1 mb-4">{{ t('news.title') }}</h1>
                 <p class="text-xl text-white/85 max-w-2xl mx-auto">{{ t('news.subtitle') }}</p>
             </div>
         </section>
 
         <!-- Filtros -->
-        <section class="bg-white border-b border-slate-100 sticky top-16 z-30">
+        <section class="bg-white border-b border-slate-100 sticky top-[85px] z-30">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center gap-3">
                 <input v-model="search" type="text" :placeholder="t('news.search')"
-                    class="rounded-xl border border-slate-200 px-4 py-2 text-sm focus:outline-none focus:border-teal-400 flex-1 min-w-48" />
+                    class="rounded-xl border border-slate-200 px-4 py-2 text-sm focus:outline-none focus:border-coral-400 flex-1 min-w-48" />
                 <button @click="catActiva = 'todas'"
-                    :class="catActiva === 'todas' ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                    class="rounded-lg px-4 py-2 text-sm font-semibold transition whitespace-nowrap">
+                    :class="catActiva === 'todas' ? 'bg-coral-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
+                    class="rounded-full px-4 py-2 text-sm font-semibold transition whitespace-nowrap">
                     {{ t('news.all') }}
                 </button>
                 <button v-for="cat in categoriasDisplay" :key="cat" @click="catActiva = cat"
-                    :class="catActiva === cat ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
-                    class="rounded-lg px-4 py-2 text-sm font-semibold transition whitespace-nowrap">
+                    :class="catActiva === cat ? 'bg-coral-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'"
+                    class="rounded-full px-4 py-2 text-sm font-semibold transition whitespace-nowrap">
                     {{ cat }}
                 </button>
             </div>
@@ -74,22 +77,22 @@ const fmtDate = (d) => {
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div v-if="filtradas.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <article v-for="n in filtradas" :key="n.id"
-                        class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition group">
+                        class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-2xl transition group">
                         <!-- Color header by category -->
-                        <div class="h-2" :style="{ background: n.categoria?.color ?? '#0d9488' }"></div>
+                        <div class="h-2" :style="{ background: n.categoria?.color ?? '#284a87' }"></div>
                         <div class="p-6">
                             <div class="flex items-center gap-2 mb-3">
                                 <span class="inline-block rounded-full text-white text-xs font-bold px-3 py-1"
-                                    :style="{ background: n.categoria?.color ?? '#0d9488' }">
+                                    :style="{ background: n.categoria?.color ?? '#284a87' }">
                                     {{ n.categoria?.nombre ?? 'Blog' }}
                                 </span>
                                 <span class="text-xs text-slate-400">{{ fmtDate(n.fecha_publicacion) }}</span>
                             </div>
-                            <h3 class="font-bold text-slate-800 text-base mb-2 group-hover:text-teal-700 transition leading-snug">{{ n.titulo }}</h3>
+                            <h3 class="font-bold text-slate-800 text-base mb-2 group-hover:text-coral-700 transition leading-snug">{{ n.titulo }}</h3>
                             <p class="text-sm text-slate-500 leading-relaxed mb-5">{{ n.resumen }}</p>
                             <div class="flex items-center justify-between">
                                 <span v-if="n.autor" class="text-xs text-slate-400">✍️ {{ n.autor }}</span>
-                                <button class="text-sm font-semibold text-teal-600 hover:text-teal-700 transition">{{ t('news.readmore') }} →</button>
+                                <button class="text-sm font-semibold text-coral-600 hover:text-coral-700 transition">{{ t('news.readmore') }} →</button>
                             </div>
                         </div>
                     </article>

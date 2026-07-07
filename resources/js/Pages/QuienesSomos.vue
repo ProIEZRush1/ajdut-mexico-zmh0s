@@ -27,9 +27,12 @@ const staticEquipo = [
     <Head title="Quiénes Somos — AJDUT México" />
     <PublicLayout>
         <!-- Hero -->
-        <section class="bg-gradient-to-br from-teal-700 to-emerald-600 text-white py-16">
-            <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ t('about.title') }}</h1>
+        <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-coral-700 text-white py-16">
+            <div class="pointer-events-none absolute -top-16 -right-10 h-64 w-64 rounded-full bg-coral-400/20 blur-3xl animate-float-slow"></div>
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-3xl animate-float-slow" style="animation-delay:2s"></div>
+            <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+                <span class="font-accent text-2xl text-coral-200">Quiénes somos</span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-extrabold mt-1 mb-4">{{ t('about.title') }}</h1>
                 <p class="text-xl text-white/85 max-w-2xl mx-auto">{{ t('about.subtitle') }}</p>
             </div>
         </section>
@@ -48,21 +51,21 @@ const staticEquipo = [
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold">15+</p>
+                        <div class="card-lift bg-gradient-to-br from-teal-600 to-teal-800 rounded-2xl p-6 text-white text-center shadow-lg">
+                            <p class="text-4xl font-extrabold font-serif">15+</p>
                             <p class="text-sm mt-1 text-white/80">años de experiencia</p>
                         </div>
-                        <div class="bg-slate-800 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold">5K+</p>
-                            <p class="text-sm mt-1 text-slate-400">familias beneficiadas</p>
+                        <div class="card-lift bg-gradient-to-br from-coral-500 to-coral-700 rounded-2xl p-6 text-white text-center shadow-lg">
+                            <p class="text-4xl font-extrabold font-serif">5K+</p>
+                            <p class="text-sm mt-1 text-coral-100">familias beneficiadas</p>
                         </div>
-                        <div class="bg-amber-500 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold">18</p>
-                            <p class="text-sm mt-1 text-amber-100">causas exitosas</p>
+                        <div class="card-lift bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl p-6 text-white text-center shadow-lg">
+                            <p class="text-4xl font-extrabold font-serif">18</p>
+                            <p class="text-sm mt-1 text-emerald-50">causas exitosas</p>
                         </div>
-                        <div class="bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold">100%</p>
-                            <p class="text-sm mt-1 text-violet-100">transparencia</p>
+                        <div class="card-lift bg-slate-800 rounded-2xl p-6 text-white text-center shadow-lg">
+                            <p class="text-4xl font-extrabold font-serif">100%</p>
+                            <p class="text-sm mt-1 text-slate-400">transparencia</p>
                         </div>
                     </div>
                 </div>
@@ -73,14 +76,14 @@ const staticEquipo = [
         <section class="py-20 bg-slate-50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-3xl mb-6 shadow-md shadow-teal-500/20">🎯</div>
-                        <h2 class="text-2xl font-extrabold text-slate-800 mb-4">{{ t('about.mission.title') }}</h2>
+                    <div class="card-lift bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:border-teal-200 hover:shadow-xl">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-3xl mb-6 shadow-md shadow-teal-500/20">🎯</div>
+                        <h2 class="font-serif text-2xl font-extrabold text-slate-800 mb-4">{{ t('about.mission.title') }}</h2>
                         <p class="text-slate-600 leading-relaxed">Canalizar recursos de donadores comprometidos hacia causas de alto impacto social, garantizando transparencia absoluta, eficiencia en la administración y resultados medibles que transformen vidas en las comunidades más vulnerables de México.</p>
                     </div>
-                    <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-3xl mb-6 shadow-md shadow-amber-500/20">🔭</div>
-                        <h2 class="text-2xl font-extrabold text-slate-800 mb-4">{{ t('about.vision.title') }}</h2>
+                    <div class="card-lift bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:border-coral-200 hover:shadow-xl">
+                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-coral-500 to-coral-600 flex items-center justify-center text-3xl mb-6 shadow-md shadow-coral-500/20">🔭</div>
+                        <h2 class="font-serif text-2xl font-extrabold text-slate-800 mb-4">{{ t('about.vision.title') }}</h2>
                         <p class="text-slate-600 leading-relaxed">Ser la plataforma de donaciones más confiable e innovadora de México, donde cada ciudadano pueda contribuir fácilmente a construir un país más justo, y donde cada peso donado tenga un impacto verificable y duradero.</p>
                     </div>
                 </div>
@@ -95,7 +98,7 @@ const staticEquipo = [
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div v-for="v in valores" :key="v.titulo"
-                        class="flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-teal-200 transition">
+                        class="card-lift flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-coral-200 hover:bg-white hover:shadow-lg transition">
                         <span class="text-3xl flex-shrink-0">{{ v.icon }}</span>
                         <div>
                             <h3 class="font-bold text-slate-800 mb-1">{{ v.titulo }}</h3>
@@ -113,13 +116,14 @@ const staticEquipo = [
                     <h2 class="text-3xl font-extrabold text-slate-800">{{ t('about.team.title') }}</h2>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div v-for="m in (equipo?.length ? equipo : staticEquipo)" :key="m.nombre ?? m.id"
-                        class="bg-white rounded-2xl border border-slate-200 p-6 text-center shadow-sm hover:shadow-lg transition">
-                        <div class="h-20 w-20 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 shadow-md shadow-teal-500/20">
+                    <div v-for="(m, i) in (equipo?.length ? equipo : staticEquipo)" :key="m.nombre ?? m.id"
+                        class="card-lift bg-white rounded-2xl border border-slate-200 p-6 text-center shadow-sm hover:shadow-xl hover:border-coral-200 transition">
+                        <div :class="['from-teal-500 to-teal-700', 'from-coral-500 to-coral-600', 'from-emerald-400 to-emerald-500', 'from-teal-600 to-coral-500'][i % 4]"
+                            class="h-20 w-20 rounded-2xl bg-gradient-to-br flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 shadow-md">
                             {{ (m.nombre ?? 'T')[0] }}
                         </div>
                         <h3 class="font-bold text-slate-800">{{ m.nombre }}</h3>
-                        <p class="text-sm font-semibold text-teal-600 mt-0.5 mb-2">{{ m.cargo ?? m.puesto }}</p>
+                        <p class="text-sm font-semibold text-coral-600 mt-0.5 mb-2">{{ m.cargo ?? m.puesto }}</p>
                         <p class="text-xs text-slate-500 leading-relaxed">{{ m.descripcion ?? m.bio }}</p>
                     </div>
                 </div>

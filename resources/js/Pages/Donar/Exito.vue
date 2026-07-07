@@ -11,11 +11,12 @@ const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency:
     <Head title="¡Gracias por tu donación! — AJDUT Mexico" />
     <GuestLayout>
         <div class="text-center space-y-4">
-            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 text-4xl shadow-lg shadow-teal-500/20">
+            <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-coral-500 to-coral-600 text-4xl shadow-lg shadow-coral-500/30 animate-heartbeat">
                 ❤️
             </div>
             <h1 class="font-serif text-2xl font-bold text-slate-900 tracking-tight">¡Gracias por tu donación!</h1>
             <p class="text-sm text-slate-500">Tu generosidad hace posible el trabajo de AJDUT Mexico.</p>
+            <p class="font-accent text-xl text-emerald-600">Es una mitzvá que transforma vidas ✨</p>
 
             <div v-if="donacion" class="rounded-xl bg-slate-50 p-4 text-left space-y-2 mt-4">
                 <div class="flex justify-between text-sm">
@@ -24,7 +25,7 @@ const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency:
                 </div>
                 <div class="flex justify-between text-sm">
                     <span class="text-slate-500">Monto</span>
-                    <span class="font-bold text-teal-600">{{ fmt(donacion.monto) }}</span>
+                    <span class="font-bold text-coral-600">{{ fmt(donacion.monto) }}</span>
                 </div>
                 <div v-if="donacion.causa" class="flex justify-between text-sm">
                     <span class="text-slate-500">Causa</span>
@@ -40,7 +41,7 @@ const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency:
 
             <div class="pt-4 space-y-3">
                 <p class="text-xs text-slate-400">Recibirás un correo de confirmación con tu comprobante.</p>
-                <Link href="/donar" class="block w-full rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-4 py-3 text-center text-sm font-bold text-white shadow hover:from-teal-700">
+                <Link href="/donar" class="btn-pop block w-full rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 px-4 py-3 text-center text-sm font-bold text-white shadow-lg shadow-coral-500/20 hover:from-coral-600">
                     Hacer otra donación
                 </Link>
             </div>

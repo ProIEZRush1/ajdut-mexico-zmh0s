@@ -43,7 +43,7 @@ const nombreError = ref(false)
 onMounted(() => {
     if (sigCanvas.value) {
         sigCtx.value = sigCanvas.value.getContext('2d')
-        sigCtx.value.strokeStyle = '#182438'
+        sigCtx.value.strokeStyle = '#1c3157'
         sigCtx.value.lineWidth = 2.5
         sigCtx.value.lineCap = 'round'
         sigCtx.value.lineJoin = 'round'
@@ -113,7 +113,8 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
     <Head :title="t('donate.title') + ' — AJDUT México'" />
     <GuestLayout>
         <div class="mb-6 text-center">
-            <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-14 w-14 rounded-xl object-contain mx-auto mb-3 shadow-sm" />
+            <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-14 w-14 rounded-2xl object-contain mx-auto mb-3 shadow-md" />
+            <span class="animate-heartbeat inline-block text-2xl mb-1">❤️</span>
             <h1 class="font-serif text-2xl font-bold text-slate-900 tracking-tight">{{ t('donate.title') }}</h1>
             <p class="mt-1 text-sm text-slate-500">{{ t('donate.subtitle') }}</p>
         </div>
@@ -133,19 +134,19 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
                 <label class="block text-xs font-semibold text-slate-600 mb-2">{{ t('donate.cause') }}</label>
                 <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
                     <label v-for="c in causas" :key="c.id"
-                        :class="form.causa_id == c.id ? 'border-teal-400 bg-teal-50' : 'border-slate-200 bg-white'"
-                        class="flex items-center gap-3 rounded-xl border p-3 cursor-pointer transition hover:border-teal-300">
-                        <input type="radio" :value="c.id" v-model="form.causa_id" class="h-4 w-4 text-teal-600" />
+                        :class="form.causa_id == c.id ? 'border-coral-400 bg-coral-50' : 'border-slate-200 bg-white'"
+                        class="flex items-center gap-3 rounded-xl border p-3 cursor-pointer transition hover:border-coral-300">
+                        <input type="radio" :value="c.id" v-model="form.causa_id" class="h-4 w-4 text-coral-600" />
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-semibold text-slate-700 truncate">{{ c.titulo }}</p>
                             <div class="h-1.5 rounded-full bg-slate-100 mt-1 overflow-hidden">
-                                <div class="h-1.5 rounded-full bg-teal-500" :style="{ width: pct(c.recaudado, c.meta_recaudacion) + '%' }"></div>
+                                <div class="h-1.5 rounded-full bg-coral-500" :style="{ width: pct(c.recaudado, c.meta_recaudacion) + '%' }"></div>
                             </div>
                         </div>
                     </label>
-                    <label :class="!form.causa_id ? 'border-teal-400 bg-teal-50' : 'border-slate-200 bg-white'"
-                        class="flex items-center gap-3 rounded-xl border p-3 cursor-pointer transition hover:border-teal-300">
-                        <input type="radio" value="" v-model="form.causa_id" class="h-4 w-4 text-teal-600" />
+                    <label :class="!form.causa_id ? 'border-coral-400 bg-coral-50' : 'border-slate-200 bg-white'"
+                        class="flex items-center gap-3 rounded-xl border p-3 cursor-pointer transition hover:border-coral-300">
+                        <input type="radio" value="" v-model="form.causa_id" class="h-4 w-4 text-coral-600" />
                         <p class="text-sm font-semibold text-slate-700">Donde más se necesite</p>
                     </label>
                 </div>
@@ -155,27 +156,27 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.name') }} *</label>
-                    <input v-model="form.nombre" type="text" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none" required />
+                    <input v-model="form.nombre" type="text" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.lastname') }} *</label>
-                    <input v-model="form.apellido" type="text" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none" required />
+                    <input v-model="form.apellido" type="text" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
                 </div>
             </div>
             <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.email') }} *</label>
-                <input v-model="form.email" type="email" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none" required />
+                <input v-model="form.email" type="email" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
             </div>
 
             <!-- Monto y frecuencia -->
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.amount') }} *</label>
-                    <input v-model="form.monto" type="number" min="10" step="0.01" placeholder="$ 200" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none" required />
+                    <input v-model="form.monto" type="number" min="10" step="0.01" placeholder="$ 200" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.frequency') }}</label>
-                    <select v-model="form.frecuencia" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none">
+                    <select v-model="form.frecuencia" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none">
                         <option value="unica">Única vez</option>
                         <option value="mensual">Mensual</option>
                         <option value="anual">Anual</option>
@@ -204,7 +205,7 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
                     <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('sig.fullname') }} *</label>
                     <input v-model="form.firma_nombre" type="text" :placeholder="t('sig.fullname_placeholder')"
                         :class="nombreError ? 'border-red-400' : 'border-slate-200'"
-                        class="w-full rounded-xl border px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none" required />
+                        class="w-full rounded-xl border px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
                     <p v-if="nombreError" class="text-xs text-red-500 mt-1">{{ t('sig.required_name') }}</p>
                 </div>
 
@@ -237,8 +238,9 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
             </div>
 
             <button type="submit" :disabled="form.processing"
-                class="w-full rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-teal-500/20 hover:from-teal-700 disabled:opacity-50 flex items-center justify-center gap-2">
+                class="btn-pop w-full rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-coral-500/30 hover:from-coral-600 disabled:opacity-50 flex items-center justify-center gap-2">
                 <span v-if="trial_locked">🔒</span>
+                <span v-else class="animate-heartbeat inline-block">❤️</span>
                 {{ form.processing ? 'Procesando...' : t('donate.btn') }}
             </button>
 
