@@ -9,6 +9,7 @@ const form = useForm({
     descripcion: '',
     meta_recaudacion: '',
     categoria: 'Educación',
+    jag: '',
     activa: true,
     destacada: false,
     fecha_inicio: '',
@@ -69,6 +70,22 @@ const submit = () => form.post('/admin/causas');
                             <option>Emergencias</option>
                         </select>
                     </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Festividad / Jag (opcional)</label>
+                    <input v-model="form.jag" type="text" list="jag-list" placeholder="Ej. Pesaj, Rosh Hashaná, Sucot…" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-400" />
+                    <datalist id="jag-list">
+                        <option value="Pesaj" />
+                        <option value="Rosh Hashaná" />
+                        <option value="Iom Kipur" />
+                        <option value="Sucot" />
+                        <option value="Janucá" />
+                        <option value="Purim" />
+                        <option value="Shavuot" />
+                    </datalist>
+                    <p class="mt-1 text-xs text-slate-400">Si la llenas, esta campaña aparece en la sección pública de <span class="font-semibold">Jaguim</span>.</p>
+                    <InputError :message="form.errors.jag" class="mt-1" />
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">

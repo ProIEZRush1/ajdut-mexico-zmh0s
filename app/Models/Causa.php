@@ -12,7 +12,7 @@ class Causa extends Model
 
     protected $fillable = [
         'titulo', 'slug', 'descripcion_corta', 'descripcion', 'imagen',
-        'meta_recaudacion', 'recaudado', 'categoria', 'activa', 'destacada',
+        'meta_recaudacion', 'recaudado', 'categoria', 'jag', 'activa', 'destacada',
         'fecha_inicio', 'fecha_fin', 'beneficiarios', 'ubicacion',
     ];
 

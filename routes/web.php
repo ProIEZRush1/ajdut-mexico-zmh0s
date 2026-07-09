@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicPagesController::class, 'home'])->name('home');
 Route::get('/quienes-somos', [PublicPagesController::class, 'quienesSomos'])->name('quienes-somos');
 Route::get('/causas-publicas', [PublicPagesController::class, 'causas'])->name('causas-publicas');
+Route::get('/jaguim', [PublicPagesController::class, 'jaguim'])->name('jaguim');
 Route::get('/planes-donacion', [PublicPagesController::class, 'planes'])->name('planes-donacion');
 Route::get('/transparencia-publica', [PublicPagesController::class, 'transparencia'])->name('transparencia-publica');
 Route::get('/noticias-blog', [PublicPagesController::class, 'noticias'])->name('noticias-blog');

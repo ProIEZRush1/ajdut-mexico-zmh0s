@@ -12,6 +12,7 @@ const form = useForm({
     meta_recaudacion: props.causa.meta_recaudacion,
     recaudado: props.causa.recaudado,
     categoria: props.causa.categoria,
+    jag: props.causa.jag ?? '',
     activa: props.causa.activa,
     destacada: props.causa.destacada,
     fecha_inicio: props.causa.fecha_inicio,
@@ -75,6 +76,21 @@ const submit = () => form.put(`/admin/causas/${props.causa.id}`);
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Beneficiarios</label>
                         <input v-model="form.beneficiarios" type="number" min="0" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none" />
                     </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Festividad / Jag (opcional)</label>
+                    <input v-model="form.jag" type="text" list="jag-list" placeholder="Ej. Pesaj, Rosh Hashaná, Sucot…" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-teal-400 focus:outline-none focus:ring-1 focus:ring-teal-400" />
+                    <datalist id="jag-list">
+                        <option value="Pesaj" />
+                        <option value="Rosh Hashaná" />
+                        <option value="Iom Kipur" />
+                        <option value="Sucot" />
+                        <option value="Janucá" />
+                        <option value="Purim" />
+                        <option value="Shavuot" />
+                    </datalist>
+                    <p class="mt-1 text-xs text-slate-400">Si la llenas, esta campaña aparece en la sección pública de <span class="font-semibold">Jaguim</span>.</p>
                 </div>
 
                 <div>

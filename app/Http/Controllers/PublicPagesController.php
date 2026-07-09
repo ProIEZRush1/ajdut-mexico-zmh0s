@@ -50,6 +50,17 @@ class PublicPagesController extends Controller
         ]);
     }
 
+    public function jaguim(): Response
+    {
+        return Inertia::render('JaguimPublicas', [
+            'campanas' => Causa::where('activa', true)
+                ->whereNotNull('jag')
+                ->orderByDesc('destacada')
+                ->orderBy('jag')
+                ->get(['id', 'titulo', 'descripcion_corta', 'descripcion', 'imagen', 'meta_recaudacion', 'recaudado', 'jag', 'beneficiarios', 'ubicacion']),
+        ]);
+    }
+
     public function planes(): Response
     {
         return Inertia::render('PlanesPublicos', [
