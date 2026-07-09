@@ -35,7 +35,7 @@ const navLinks = computed(() => [
                 <div class="flex h-20 items-center justify-between py-3">
                     <!-- Logo -->
                     <Link href="/" class="group flex items-center gap-3 min-w-0 flex-shrink-0">
-                        <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-12 w-12 rounded-2xl object-contain shadow-md border border-slate-100 transition duration-300 group-hover:rotate-3 group-hover:scale-105" />
+                        <img src="/brand-logo.svg" alt="AJDUT México" class="h-12 w-12 rounded-2xl object-contain shadow-md border border-slate-100 transition duration-300 group-hover:rotate-3 group-hover:scale-105" />
                         <div class="hidden sm:block">
                             <span class="block font-serif text-lg font-bold text-teal-800 leading-tight tracking-tight">AJDUT México</span>
                             <span class="block text-[11px] text-coral-600 font-semibold uppercase tracking-wider">Plataforma de Donaciones</span>
@@ -128,7 +128,7 @@ const navLinks = computed(() => [
                 <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
                     <div>
                         <div class="flex items-center gap-3 mb-4">
-                            <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-10 w-10 rounded-xl object-contain bg-white/10 p-0.5" />
+                            <img src="/brand-logo.svg" alt="AJDUT México" class="h-10 w-10 rounded-xl object-contain bg-white/10 p-0.5" />
                             <span class="font-serif text-white font-bold text-lg tracking-tight">AJDUT México</span>
                         </div>
                         <p class="text-sm text-teal-200/80 leading-relaxed">

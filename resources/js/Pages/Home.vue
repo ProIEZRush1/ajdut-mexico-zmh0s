@@ -93,7 +93,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                         <div class="relative">
                             <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-coral-400/30 via-emerald-300/20 to-transparent blur-xl"></div>
                             <div class="relative h-72 w-72 xl:h-80 xl:w-80 rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shadow-2xl">
-                                <img src="/brand-logo.jpeg" alt="AJDUT México" class="h-48 w-48 object-contain rounded-2xl" />
+                                <img src="/brand-logo.svg" alt="AJDUT México" class="h-48 w-48 object-contain rounded-2xl" />
                             </div>
                             <div class="absolute -bottom-6 -left-6 rounded-2xl bg-white p-4 shadow-xl animate-float">
                                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Impacto Real</p>

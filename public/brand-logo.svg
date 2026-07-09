@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AJDUT México">
+  <defs>
+    <linearGradient id="ajd" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d9488"/>
+      <stop offset="0.55" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#f4623a"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#ajd)"/>
+  <g stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M41 99 L64 33 L87 99"/>
+    <path d="M51 77 H77"/>
+  </g>
+  <path d="M64 108c-.8-.7-8.4-5-8.4-10.2a4.2 4.2 0 0 1 8.4-1.4 4.2 4.2 0 0 1 8.4 1.4c0 5.2-7.6 9.5-8.4 10.2z" fill="#ffd7c2"/>
+</svg>
