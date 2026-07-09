@@ -19,7 +19,7 @@ import { Link } from '@inertiajs/vue3';
                 <p class="mt-3 font-accent text-xl text-coral-300">Plataforma de Donaciones</p>
             </div>
 
-            <div class="w-full rounded-2xl border border-coral-500/20 bg-white/96 p-8 shadow-2xl shadow-teal-950/40 backdrop-blur-sm sm:p-10">
+            <div class="w-full rounded-2xl border border-coral-500/20 bg-white p-8 shadow-2xl shadow-teal-950/40 backdrop-blur-sm sm:p-10">
                 <slot />
             </div>
 
