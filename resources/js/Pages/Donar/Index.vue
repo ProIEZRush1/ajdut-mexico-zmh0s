@@ -8,16 +8,19 @@ const props = defineProps({
     causas: Array,
     planes: Array,
     causa_preseleccionada: Object,
+    monto_preseleccionado: Number,
     trial_locked: Boolean,
 })
 
 const { t, lang } = useI18n()
 
+const montosSugeridos = [200, 500, 1000, 2000, 4000]
+
 const form = useForm({
     nombre: '',
     apellido: '',
     email: '',
-    monto: '',
+    monto: props.monto_preseleccionado ?? '',
     frecuencia: 'unica',
     causa_id: props.causa_preseleccionada?.id ?? '',
     plan_id: '',
@@ -129,27 +132,10 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
         </div>
 
         <form @submit.prevent="submit" class="space-y-5">
-            <!-- Causa -->
-            <div v-if="causas?.length">
-                <label class="block text-xs font-semibold text-slate-600 mb-2">{{ t('donate.cause') }}</label>
-                <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
-                    <label v-for="c in causas" :key="c.id"
-                        :class="form.causa_id == c.id ? 'border-coral-400 bg-coral-50' : 'border-slate-200 bg-white'"
-                        class="flex items-center gap-3 rounded-xl border p-3 cursor-pointer transition hover:border-coral-300">
-                        <input type="radio" :value="c.id" v-model="form.causa_id" class="h-4 w-4 text-coral-600" />
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm font-semibold text-slate-700 truncate">{{ c.titulo }}</p>
-                            <div class="h-1.5 rounded-full bg-slate-100 mt-1 overflow-hidden">
-                                <div class="h-1.5 rounded-full bg-coral-500" :style="{ width: pct(c.recaudado, c.meta_recaudacion) + '%' }"></div>
-                            </div>
-                        </div>
-                    </label>
-                    <label :class="!form.causa_id ? 'border-coral-400 bg-coral-50' : 'border-slate-200 bg-white'"
-                        class="flex items-center gap-3 rounded-xl border p-3 cursor-pointer transition hover:border-coral-300">
-                        <input type="radio" value="" v-model="form.causa_id" class="h-4 w-4 text-coral-600" />
-                        <p class="text-sm font-semibold text-slate-700">Donde más se necesite</p>
-                    </label>
-                </div>
+            <!-- Causa preseleccionada (ej. desde Jaguim) -->
+            <div v-if="causa_preseleccionada" class="flex items-center gap-2 rounded-xl border border-coral-200 bg-coral-50 p-3">
+                <span class="text-lg">❤️</span>
+                <p class="text-sm text-slate-700">Estás donando para <span class="font-bold text-coral-700">{{ causa_preseleccionada.titulo }}</span></p>
             </div>
 
             <!-- Datos del donador -->
@@ -166,6 +152,16 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
             <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.email') }} *</label>
                 <input v-model="form.email" type="email" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
+            </div>
+
+            <!-- Montos sugeridos -->
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Elige un monto</label>
+                <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                    <button v-for="m in montosSugeridos" :key="m" type="button" @click="form.monto = m"
+                        :class="Number(form.monto) === m ? 'border-coral-500 bg-coral-50 text-coral-700' : 'border-slate-200 text-slate-600 hover:border-coral-300'"
+                        class="rounded-xl border py-2 text-sm font-bold transition">${{ m.toLocaleString('es-MX') }}</button>
+                </div>
             </div>
 
             <!-- Monto y frecuencia -->

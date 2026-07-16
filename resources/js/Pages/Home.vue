@@ -21,6 +21,22 @@ const planIcons = ['🌱', '🌟', '💎']
 
 const causaAccents = ['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600']
 
+const comoAyudamos = [
+    { icon: '💳', titulo: 'Tarjetas para despensa', texto: 'Brindamos tarjetas con saldo para que cada familia pueda comprar alimentos en tiendas kosher con dignidad y tranquilidad.' },
+    { icon: '🤝', titulo: 'Apoyo a familias', texto: 'Acompañamos a viudas y a sus hijos en momentos difíciles, asegurando que no enfrenten solos sus necesidades básicas.' },
+    { icon: '🫂', titulo: 'Juntos hacemos más', texto: 'Cada aportación nos permite llegar a más hogares y brindar estabilidad a quienes más lo necesitan.' },
+    { icon: '✨', titulo: 'Sé parte del cambio', texto: 'Tu ayuda devuelve esperanza y tranquilidad a familias que están reconstruyendo su vida.' },
+]
+
+const montos = [
+    { monto: 200, texto: 'Ayudas a una familia con alimentos básicos.', destacado: false },
+    { monto: 500, texto: 'Brindas apoyo para la despensa de una familia.', destacado: false },
+    { monto: 1000, texto: 'Das tranquilidad y alimento a una familia.', destacado: true },
+    { monto: 2000, texto: 'Cubres una tarjeta mensual completa para una familia.', destacado: false },
+    { monto: 4000, texto: 'Apoyas a 2 familias completas durante el mes.', destacado: false },
+]
+const montoColors = ['from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600', 'from-coral-500 to-coral-600', 'from-teal-600 to-coral-500', 'from-coral-500 to-teal-700']
+
 const statsDisplay = computed(() => [
     { value: props.stats?.donadores ?? '0', label: t('home.stats.donors'), icon: '👥' },
     { value: fmt(props.stats?.total_recaudado ?? 0), label: t('home.stats.raised'), icon: '💰' },
@@ -73,23 +89,23 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-coral-500/20 border border-coral-300/40 px-4 py-1.5 text-sm font-semibold text-coral-100 backdrop-blur mb-7 tracking-wide shadow-lg shadow-coral-900/10">
-                            <span class="animate-heartbeat inline-block">❤️</span> {{ t('home.eyebrow') }}
+                            <span class="animate-heartbeat inline-block">❤️</span> Asóciate a esta gran mitzvá
                         </span>
                         <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-7 tracking-tight">
-                            {{ t('home.hero.title') }}
+                            Alimento y esperanza para nuestras familias
                         </h1>
                         <p class="text-lg sm:text-xl text-white/85 mb-10 max-w-lg leading-relaxed">
-                            {{ t('home.hero.subtitle') }}
+                            Hay viudas que sonríen frente a sus hijos… mientras por dentro no saben si mañana habrá comida en casa. Tu ayuda les devuelve tranquilidad y alimento con dignidad.
                         </p>
                         <div class="flex flex-wrap gap-4">
                             <Link href="/donar"
                                 class="btn-pop inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral-500 to-coral-600 px-7 py-3.5 text-base font-bold text-white shadow-xl shadow-coral-900/30 hover:shadow-2xl transition">
-                                ❤️ {{ t('home.hero.cta') }}
+                                ❤️ Quiero ayudar
                             </Link>
-                            <Link href="/causas-publicas"
+                            <a href="#como-ayudar"
                                 class="btn-pop inline-flex items-center gap-2 rounded-2xl border-2 border-white/40 px-7 py-3.5 text-base font-bold text-white hover:bg-white/10 transition">
-                                {{ t('home.hero.cta2') }} →
-                            </Link>
+                                Cómo ayudar →
+                            </a>
                         </div>
                     </div>
                     <div class="hidden lg:flex justify-center">
@@ -128,90 +144,52 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
             </div>
         </section>
 
-        <!-- CAUSAS ACTIVAS -->
+        <!-- ¿CÓMO AYUDAMOS? -->
         <section class="relative bg-slate-50 py-20 overflow-hidden">
             <div class="pointer-events-none absolute -top-10 right-0 h-64 w-64 rounded-full bg-coral-100/60 blur-3xl"></div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <span class="font-accent text-2xl text-coral-600">Programas con corazón</span>
-                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">{{ t('home.causes.title') }}</h2>
-                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">{{ t('home.causes.subtitle') }}</p>
+                    <span class="font-accent text-2xl text-coral-600">Con dignidad y tranquilidad</span>
+                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">¿Cómo ayudamos?</h2>
+                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Acompañamos a viudas y a sus hijos para que ninguna familia de la comunidad enfrente sola sus necesidades básicas.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                    <div v-for="(causa, i) in displayCausas" :key="causa.id ?? causa.titulo"
-                        class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-coral-200 transition group">
-                        <div :class="causaAccents[i % 3]" class="h-3 bg-gradient-to-r"></div>
-                        <div class="p-6">
-                            <span :class="i % 3 === 0 ? 'bg-coral-50 text-coral-700' : i % 3 === 1 ? 'bg-teal-50 text-teal-700' : 'bg-emerald-50 text-emerald-700'"
-                                class="inline-block rounded-full text-xs font-bold px-3 py-1 mb-3 capitalize">{{ causa.categoria }}</span>
-                            <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-coral-700 transition">{{ causa.titulo }}</h3>
-                            <p class="text-sm text-slate-500 mb-5 leading-relaxed">{{ causa.descripcion_corta }}</p>
-                            <!-- Progress bar -->
-                            <div class="mb-1 flex justify-between text-xs font-semibold">
-                                <span class="text-coral-600">{{ pct(causa.recaudado, causa.meta_recaudacion) }}%</span>
-                                <span class="text-slate-400">{{ t('home.causes.goal') }}: {{ fmt(causa.meta_recaudacion) }}</span>
-                            </div>
-                            <div class="h-2.5 rounded-full bg-slate-100 overflow-hidden mb-2">
-                                <div :class="causaAccents[i % 3]" class="h-2.5 rounded-full bg-gradient-to-r transition-all duration-700"
-                                    :style="{ width: pct(causa.recaudado, causa.meta_recaudacion) + '%' }"></div>
-                            </div>
-                            <p class="text-xs text-slate-400 mb-5">{{ fmt(causa.recaudado) }} {{ t('home.causes.raised') }}</p>
-                            <Link :href="causa.id ? `/donar?causa=${causa.id}` : '/donar'"
-                                class="btn-pop flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 py-2.5 text-sm font-bold text-white shadow-md shadow-coral-500/20 hover:shadow-lg transition">
-                                ❤️ {{ t('home.causes.donate') }}
-                            </Link>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="(item, i) in comoAyudamos" :key="item.titulo"
+                        class="card-lift bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-2xl hover:border-coral-200 transition">
+                        <span :class="['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-500', 'from-coral-400 to-teal-600'][i % 4]"
+                            class="h-14 w-14 rounded-2xl bg-gradient-to-br flex items-center justify-center text-3xl mb-4 shadow-md">{{ item.icon }}</span>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">{{ item.titulo }}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">{{ item.texto }}</p>
                     </div>
-                </div>
-                <div class="text-center">
-                    <Link href="/causas-publicas"
-                        class="btn-pop inline-flex items-center gap-2 rounded-xl border-2 border-teal-600 px-6 py-3 text-sm font-bold text-teal-600 hover:bg-teal-50 transition">
-                        {{ t('home.causes.viewall') }} →
-                    </Link>
                 </div>
             </div>
         </section>
 
-        <!-- PLANES DE DONACIÓN -->
-        <section class="bg-white py-20">
+        <!-- ELIGE CÓMO AYUDAR (MONTOS) -->
+        <section id="como-ayudar" class="scroll-mt-24 bg-white py-20">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <span class="font-accent text-2xl text-teal-600">Únete a la comunidad</span>
-                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">{{ t('home.plans.title') }}</h2>
-                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">{{ t('home.plans.subtitle') }}</p>
+                    <span class="font-accent text-2xl text-teal-600">Cada aportación es una mitzvá</span>
+                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">Elige cómo ayudar</h2>
+                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Con tarjetas para despensa, cada familia compra su alimento en tiendas kosher con dignidad. Tú eliges el monto:</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div v-for="(plan, idx) in displayPlanes" :key="plan.id ?? plan.nombre"
-                        :class="plan.destacado ? 'ring-2 ring-coral-500 scale-105 shadow-xl' : 'shadow-sm'"
-                        class="card-lift relative rounded-2xl border border-slate-200 overflow-hidden bg-white hover:shadow-2xl transition">
-                        <div v-if="plan.destacado" class="bg-coral-600 text-white text-xs font-bold text-center py-1.5 uppercase tracking-wider">
-                            ⭐ {{ t('plans.recommended') }}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                    <Link v-for="(m, idx) in montos" :key="m.monto" :href="`/donar?monto=${m.monto}`"
+                        :class="m.destacado ? 'ring-2 ring-coral-500 lg:scale-105 shadow-xl' : 'shadow-sm hover:border-coral-200'"
+                        class="card-lift group relative flex flex-col rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-2xl transition">
+                        <div v-if="m.destacado" class="bg-coral-600 text-white text-[11px] font-bold text-center py-1 uppercase tracking-wider">⭐ Más elegido</div>
+                        <div :class="`bg-gradient-to-br ${montoColors[idx % montoColors.length]}`" class="p-5 text-white text-center">
+                            <span class="block text-3xl font-extrabold font-serif">{{ fmt(m.monto) }}</span>
                         </div>
-                        <div :class="`bg-gradient-to-r ${planColors[idx % 3]}`" class="relative overflow-hidden p-6 text-white">
-                            <span class="absolute -right-3 -top-3 text-6xl opacity-20">{{ planIcons[idx % 3] }}</span>
-                            <span class="text-3xl block mb-2">{{ planIcons[idx % 3] }}</span>
-                            <h3 class="text-xl font-extrabold">{{ plan.nombre }}</h3>
-                            <div class="mt-2 flex items-baseline gap-1">
-                                <span class="text-3xl font-extrabold">{{ fmt(plan.monto_sugerido) }}</span>
-                                <span class="text-white/80 text-sm">/{{ plan.frecuencia === 'mensual' ? 'mes' : plan.frecuencia === 'anual' ? 'año' : 'vez' }}</span>
-                            </div>
+                        <div class="flex flex-1 flex-col p-5 text-center">
+                            <p class="flex-1 text-sm text-slate-600 leading-relaxed">{{ m.texto }}</p>
+                            <span class="btn-pop mt-4 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 py-2.5 text-sm font-bold text-white shadow-md shadow-coral-500/20 group-hover:shadow-lg transition">
+                                ❤️ Donar
+                            </span>
                         </div>
-                        <div class="p-6">
-                            <p class="text-sm text-slate-500 mb-5 leading-relaxed">{{ plan.descripcion }}</p>
-                            <ul v-if="Array.isArray(plan.beneficios)" class="space-y-2 mb-6">
-                                <li v-for="b in plan.beneficios" :key="b" class="flex items-start gap-2 text-sm">
-                                    <span class="text-coral-500 mt-0.5 flex-shrink-0">✓</span>
-                                    <span class="text-slate-600">{{ b }}</span>
-                                </li>
-                            </ul>
-                            <Link :href="plan.id ? `/donar?plan=${plan.id}` : '/donar'"
-                                :class="plan.destacado ? 'bg-coral-600 text-white hover:bg-coral-700 shadow-md shadow-coral-500/30' : 'border border-teal-600 text-teal-600 hover:bg-teal-50'"
-                                class="btn-pop block text-center rounded-xl py-2.5 text-sm font-bold transition">
-                                {{ t('home.plans.join') }}
-                            </Link>
-                        </div>
-                    </div>
+                    </Link>
                 </div>
+                <p class="mt-8 text-center text-sm text-slate-500">¿Prefieres otro monto? <Link href="/donar" class="font-semibold text-coral-600 hover:text-coral-700">Dona la cantidad que tú quieras →</Link></p>
             </div>
         </section>
 

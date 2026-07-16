@@ -23,6 +23,9 @@ class DonarController extends Controller
             'causa_preseleccionada' => $request->filled('causa')
                 ? Causa::where('activa', true)->find($request->causa, ['id', 'titulo'])
                 : null,
+            'monto_preseleccionado' => $request->filled('monto') && is_numeric($request->monto)
+                ? (int) $request->monto
+                : null,
             'trial_locked' => config('trial.locked'),
         ]);
     }

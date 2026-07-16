@@ -17,11 +17,9 @@ const isActive = (path) => {
 const navLinks = computed(() => [
     { href: '/', label: t('nav.home') },
     { href: '/quienes-somos', label: t('nav.about') },
-    { href: '/causas-publicas', label: t('nav.causes') },
+    { href: '/#como-ayudar', label: 'Cómo ayudar' },
     { href: '/jaguim', label: 'Jaguim' },
-    { href: '/planes-donacion', label: t('nav.plans') },
     { href: '/transparencia-publica', label: t('nav.transparency') },
-    { href: '/noticias-blog', label: t('nav.news') },
     { href: '/contacto', label: t('nav.contact') },
 ])
 </script>
