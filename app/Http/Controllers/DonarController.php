@@ -96,4 +96,25 @@ class DonarController extends Controller
 
         return Inertia::render('Donar/Exito', ['donacion' => $donacion]);
     }
+
+    public function carta(string $folio)
+    {
+        $donacion = Donacion::with('donador')->where('folio', $folio)->firstOrFail();
+
+        $frecuencias = ['unica' => 'única vez', 'mensual' => 'mensual', 'anual' => 'anual'];
+        $fechaBase = $donacion->firma_fecha ?? $donacion->fecha_pago ?? $donacion->created_at ?? now();
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('carta-autorizacion', [
+            'folio' => $donacion->folio,
+            'fecha' => $fechaBase->locale('es')->isoFormat('D [de] MMMM [de] Y'),
+            'monto' => '$' . number_format((float) $donacion->monto, 2) . ' MXN',
+            'frecuencia' => $frecuencias[$donacion->frecuencia] ?? $donacion->frecuencia,
+            'firmante' => $donacion->firma_nombre
+                ?: trim(($donacion->donador->nombre ?? '') . ' ' . ($donacion->donador->apellido ?? '')),
+            'firma_img' => $donacion->firma_electronica,
+            'donador_email' => $donacion->donador->email ?? null,
+        ])->setPaper('letter');
+
+        return $pdf->stream('carta-autorizacion-' . $donacion->folio . '.pdf');
+    }
 }

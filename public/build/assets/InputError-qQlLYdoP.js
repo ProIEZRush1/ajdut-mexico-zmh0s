@@ -1,1 +1,0 @@
-import{M as e,T as t,_ as n,l as r,m as i,z as a}from"./app-C2KbuyDD.js";var o={class:`text-sm text-red-600`},s={__name:`InputError`,props:{message:{type:String}},setup(s){return(c,l)=>e((t(),n(`div`,null,[i(`p`,o,a(s.message),1)],512)),[[r,s.message]])}};export{s as t};

@@ -35,8 +35,13 @@ const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency:
 
             <div v-if="donacion?.firma_electronica" class="rounded-xl border border-teal-100 bg-teal-50/50 p-4 text-left mt-3">
                 <p class="text-xs font-bold text-teal-800 flex items-center gap-1.5 mb-2">📜 Carta de autorización de cargo firmada</p>
-                <img :src="donacion.firma_electronica" alt="Firma" class="h-16 rounded-lg bg-white border border-teal-100 mb-2" />
-                <p class="text-xs text-slate-500">{{ donacion.firma_nombre }}</p>
+                <img :src="donacion.firma_electronica" alt="Firma" class="h-16 rounded-lg bg-white border border-teal-100 mb-3" />
+                <p class="text-xs text-slate-500 mb-3">{{ donacion.firma_nombre }}</p>
+                <a :href="`/donar/carta/${donacion.folio}`" target="_blank" rel="noopener"
+                    class="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-teal-600 py-2.5 text-sm font-semibold text-teal-700 transition hover:bg-teal-600 hover:text-white">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v2.625a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3V14.25m10.5-3-3 3m0 0-3-3m3 3V4.5" /></svg>
+                    Descargar carta de autorización (PDF)
+                </a>
             </div>
 
             <div class="pt-4 space-y-3">
