@@ -13,16 +13,6 @@ const catActiva = ref('todas')
 const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n ?? 0)
 const pct = (r, m) => m > 0 ? Math.min(100, Math.round((r / m) * 100)) : 0
 
-const causaImgMap = {
-    'educación': '/img/causa-educacion.jpg', 'educacion': '/img/causa-educacion.jpg',
-    'alimentación': '/img/causa-alimentacion.jpg', 'alimentacion': '/img/causa-alimentacion.jpg',
-    'salud': '/img/causa-salud.jpg', 'adultos mayores': '/img/causa-salud.jpg',
-    'desarrollo comunitario': '/img/comunidad.jpg', 'vivienda': '/img/comunidad.jpg',
-    'emprendimiento': '/img/comunidad.jpg', 'jaguim': '/img/comunidad.jpg',
-}
-const causaFallback = ['/img/causa-educacion.jpg', '/img/causa-alimentacion.jpg', '/img/causa-salud.jpg']
-const causaImg = (causa, i) => causa.imagen || causaImgMap[(causa.categoria || '').toLowerCase()] || causaFallback[i % 3]
-
 const staticCausas = [
     { id: 1, titulo: 'Alimentación Infantil', descripcion_corta: 'Garantizamos tres comidas diarias a niños en situación de vulnerabilidad en comunidades rurales y semiurbanas.', descripcion: '', meta_recaudacion: 200000, recaudado: 142000, categoria: 'alimentación', beneficiarios: 850, ubicacion: 'Oaxaca, México', activa: true },
     { id: 2, titulo: 'Educación para Todos', descripcion_corta: 'Becas, útiles y apoyo educativo para jóvenes de escasos recursos que sueñan con un mejor futuro.', descripcion: '', meta_recaudacion: 350000, recaudado: 210000, categoria: 'educación', beneficiarios: 320, ubicacion: 'Guerrero, México', activa: true },
@@ -87,16 +77,14 @@ const filtradas = computed(() => {
                 <div v-if="filtradas.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div v-for="(causa, i) in filtradas" :key="causa.id"
                         class="card-lift bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-2xl hover:border-coral-200 transition group">
-                        <!-- Photo by category -->
-                        <div class="relative h-44 overflow-hidden">
-                            <img :src="causaImg(causa, i)" :alt="causa.titulo" loading="lazy"
-                                class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-slate-900/10 to-transparent"></div>
-                            <span :class="i % 3 === 0 ? 'bg-coral-500 text-white' : i % 3 === 1 ? 'bg-teal-500 text-white' : 'bg-emerald-500 text-white'"
-                                class="absolute top-3 left-3 rounded-full text-xs font-bold px-3 py-1 capitalize shadow-lg">{{ causa.categoria }}</span>
-                            <span v-if="causa.ubicacion" class="absolute bottom-3 right-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium text-slate-600 shadow">📍 {{ causa.ubicacion }}</span>
-                        </div>
+                        <!-- Color bar by category -->
+                        <div :class="['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600'][i % 3]" class="h-2 bg-gradient-to-r"></div>
                         <div class="p-6">
+                            <div class="flex items-start justify-between mb-3">
+                                <span :class="i % 3 === 0 ? 'bg-coral-50 text-coral-700' : i % 3 === 1 ? 'bg-teal-50 text-teal-700' : 'bg-emerald-50 text-emerald-700'"
+                                    class="inline-block rounded-full text-xs font-bold px-3 py-1 capitalize">{{ causa.categoria }}</span>
+                                <span v-if="causa.ubicacion" class="text-xs text-slate-400">📍 {{ causa.ubicacion }}</span>
+                            </div>
                             <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-coral-700 transition">{{ causa.titulo }}</h3>
                             <p class="text-sm text-slate-500 mb-5 leading-relaxed">{{ causa.descripcion_corta }}</p>
 
