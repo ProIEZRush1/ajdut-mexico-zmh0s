@@ -22,10 +22,10 @@ const planIcons = ['🌱', '🌟', '💎']
 const causaAccents = ['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600']
 
 const comoAyudamos = [
-    { icon: '💳', titulo: 'Tarjetas para despensa', texto: 'Brindamos tarjetas con saldo para que cada familia pueda comprar alimentos en tiendas kosher con dignidad y tranquilidad.' },
-    { icon: '🤝', titulo: 'Apoyo a familias', texto: 'Acompañamos a viudas y a sus hijos en momentos difíciles, asegurando que no enfrenten solos sus necesidades básicas.' },
-    { icon: '🫂', titulo: 'Juntos hacemos más', texto: 'Cada aportación nos permite llegar a más hogares y brindar estabilidad a quienes más lo necesitan.' },
-    { icon: '✨', titulo: 'Sé parte del cambio', texto: 'Tu ayuda devuelve esperanza y tranquilidad a familias que están reconstruyendo su vida.' },
+    { path: 'M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z', titulo: 'Tarjetas para despensa', texto: 'Brindamos tarjetas con saldo para que cada familia pueda comprar alimentos en tiendas kosher con dignidad y tranquilidad.' },
+    { path: 'M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z', titulo: 'Apoyo a familias', texto: 'Acompañamos a viudas y a sus hijos en momentos difíciles, asegurando que no enfrenten solos sus necesidades básicas.' },
+    { path: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z', titulo: 'Juntos hacemos más', texto: 'Cada aportación nos permite llegar a más hogares y brindar estabilidad a quienes más lo necesitan.' },
+    { path: 'M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z', titulo: 'Sé parte del cambio', texto: 'Tu ayuda devuelve esperanza y tranquilidad a familias que están reconstruyendo su vida.' },
 ]
 
 const montos = [
@@ -78,18 +78,15 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
         <!-- HERO -->
         <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-teal-600 text-white">
             <div class="pointer-events-none absolute inset-0">
-                <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-coral-400/20 blur-3xl animate-float-slow"></div>
-                <div class="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-emerald-300/20 blur-3xl animate-float-slow" style="animation-delay:2s"></div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-teal-500/10 blur-3xl"></div>
-                <div class="absolute inset-0 opacity-[0.06] text-white bg-dot-pattern"></div>
-                <span class="absolute top-16 right-[12%] text-4xl opacity-30 animate-float">✨</span>
-                <span class="absolute bottom-24 left-[8%] text-5xl opacity-20 animate-float" style="animation-delay:1.2s">🤲</span>
+                <div class="absolute -top-32 -right-32 h-[30rem] w-[30rem] rounded-full bg-teal-900/40 blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-emerald-900/20 blur-3xl"></div>
+                <div class="absolute inset-0 opacity-[0.05] text-white bg-dot-pattern"></div>
             </div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <span class="inline-flex items-center gap-2 rounded-full bg-coral-500/20 border border-coral-300/40 px-4 py-1.5 text-sm font-semibold text-coral-100 backdrop-blur mb-7 tracking-wide shadow-lg shadow-coral-900/10">
-                            <span class="animate-heartbeat inline-block">❤️</span> Asóciate a esta gran mitzvá
+                            <span class="inline-block">❤️</span> Asóciate a esta gran mitzvá
                         </span>
                         <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-7 tracking-tight">
                             Alimento y esperanza para nuestras familias
@@ -109,20 +106,10 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                         </div>
                     </div>
                     <div class="hidden lg:flex justify-center">
-                        <div class="relative">
-                            <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-coral-400/30 via-emerald-300/20 to-transparent blur-xl"></div>
-                            <div class="relative h-72 w-72 xl:h-80 xl:w-80 rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shadow-2xl">
-                                <img src="/brand-logo.svg" alt="AJDUT México" class="h-48 w-48 object-contain rounded-2xl" />
-                            </div>
-                            <div class="absolute -bottom-6 -left-6 rounded-2xl bg-white p-4 shadow-xl animate-float">
-                                <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Impacto Real</p>
-                                <p class="text-2xl font-extrabold text-coral-600">+5,000</p>
-                                <p class="text-xs text-slate-500">beneficiarios</p>
-                            </div>
-                            <div class="absolute -top-4 -right-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500 p-3 shadow-xl animate-float" style="animation-delay:1.5s">
-                                <p class="text-2xl">🏆</p>
-                                <p class="text-xs font-bold text-emerald-950">Confiables</p>
-                            </div>
+                        <div class="w-full max-w-sm rounded-3xl border border-white/15 bg-white/[0.06] p-10 text-center backdrop-blur-sm shadow-2xl">
+                            <img src="/brand-logo.svg" alt="AJDUT México" class="mx-auto h-36 w-36 object-contain" />
+                            <p class="mt-8 font-accent text-2xl text-emerald-200/90 leading-snug">"Quien salva una vida, salva un mundo entero"</p>
+                            <p class="mt-4 text-sm text-teal-100/70">Cada aportación es una mitzvá</p>
                         </div>
                     </div>
                 </div>
@@ -133,12 +120,10 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
         <section class="bg-white border-b border-slate-100">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 -mt-10 sm:-mt-14 relative z-10">
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div v-for="(s, i) in statsDisplay" :key="s.label"
-                        class="card-lift text-center bg-white rounded-2xl border border-slate-100 shadow-lg shadow-slate-900/5 p-6 hover:border-coral-200 hover:shadow-xl">
-                        <span :class="['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-500', 'from-coral-400 to-teal-600'][i % 4]"
-                            class="h-12 w-12 rounded-2xl bg-gradient-to-br flex items-center justify-center text-2xl mx-auto mb-3 shadow-md">{{ s.icon }}</span>
-                        <p class="text-2xl sm:text-3xl font-extrabold text-slate-800 font-serif">{{ s.value }}</p>
-                        <p class="text-sm text-slate-500 mt-1">{{ s.label }}</p>
+                    <div v-for="s in statsDisplay" :key="s.label"
+                        class="text-center bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                        <p class="text-3xl sm:text-4xl font-bold text-teal-800 font-serif">{{ s.value }}</p>
+                        <p class="text-sm text-slate-500 mt-1.5">{{ s.label }}</p>
                     </div>
                 </div>
             </div>
@@ -154,11 +139,14 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                     <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Acompañamos a viudas y a sus hijos para que ninguna familia de la comunidad enfrente sola sus necesidades básicas.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div v-for="(item, i) in comoAyudamos" :key="item.titulo"
-                        class="card-lift bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-2xl hover:border-coral-200 transition">
-                        <span :class="['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-500', 'from-coral-400 to-teal-600'][i % 4]"
-                            class="h-14 w-14 rounded-2xl bg-gradient-to-br flex items-center justify-center text-3xl mb-4 shadow-md">{{ item.icon }}</span>
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">{{ item.titulo }}</h3>
+                    <div v-for="item in comoAyudamos" :key="item.titulo"
+                        class="rounded-2xl border border-slate-200 bg-white p-7 transition hover:border-teal-200 hover:shadow-md">
+                        <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" :d="item.path" />
+                            </svg>
+                        </span>
+                        <h3 class="text-base font-bold text-slate-800 mb-2">{{ item.titulo }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed">{{ item.texto }}</p>
                     </div>
                 </div>
@@ -174,22 +162,17 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                     <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Con tarjetas para despensa, cada familia compra su alimento en tiendas kosher con dignidad. Tú eliges el monto:</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-                    <Link v-for="(m, idx) in montos" :key="m.monto" :href="`/donar?monto=${m.monto}`"
-                        :class="m.destacado ? 'ring-2 ring-coral-500 lg:scale-105 shadow-xl' : 'shadow-sm hover:border-coral-200'"
-                        class="card-lift group relative flex flex-col rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-2xl transition">
-                        <div v-if="m.destacado" class="bg-coral-600 text-white text-[11px] font-bold text-center py-1 uppercase tracking-wider">⭐ Más elegido</div>
-                        <div :class="`bg-gradient-to-br ${montoColors[idx % montoColors.length]}`" class="p-5 text-white text-center">
-                            <span class="block text-3xl font-extrabold font-serif">{{ fmt(m.monto) }}</span>
-                        </div>
-                        <div class="flex flex-1 flex-col p-5 text-center">
-                            <p class="flex-1 text-sm text-slate-600 leading-relaxed">{{ m.texto }}</p>
-                            <span class="btn-pop mt-4 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-coral-500 to-coral-600 py-2.5 text-sm font-bold text-white shadow-md shadow-coral-500/20 group-hover:shadow-lg transition">
-                                ❤️ Donar
-                            </span>
-                        </div>
+                    <Link v-for="m in montos" :key="m.monto" :href="`/donar?monto=${m.monto}`"
+                        :class="m.destacado ? 'border-coral-300 ring-1 ring-coral-200' : 'border-slate-200'"
+                        class="group relative flex flex-col rounded-2xl border bg-white p-6 text-center transition hover:border-coral-300 hover:shadow-md">
+                        <span v-if="m.destacado" class="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-coral-600 px-3 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">Más elegido</span>
+                        <span class="font-serif text-3xl font-bold text-teal-800">{{ fmt(m.monto) }}</span>
+                        <span class="mx-auto mt-2 h-px w-8 bg-coral-300"></span>
+                        <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-500">{{ m.texto }}</p>
+                        <span class="mt-5 inline-flex items-center justify-center rounded-lg border border-teal-600 py-2 text-sm font-semibold text-teal-700 transition group-hover:bg-teal-700 group-hover:text-white">Donar</span>
                     </Link>
                 </div>
-                <p class="mt-8 text-center text-sm text-slate-500">¿Prefieres otro monto? <Link href="/donar" class="font-semibold text-coral-600 hover:text-coral-700">Dona la cantidad que tú quieras →</Link></p>
+                <p class="mt-8 text-center text-sm text-slate-500">¿Prefieres otro monto? <Link href="/donar" class="font-semibold text-coral-700 hover:text-coral-800 underline underline-offset-2">Dona la cantidad que tú quieras →</Link></p>
             </div>
         </section>
 
