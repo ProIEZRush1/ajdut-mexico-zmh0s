@@ -104,7 +104,13 @@ class DonarController extends Controller
         $frecuencias = ['unica' => 'única vez', 'mensual' => 'mensual', 'anual' => 'anual'];
         $fechaBase = $donacion->firma_fecha ?? $donacion->fecha_pago ?? $donacion->created_at ?? now();
 
+        $logoPath = public_path('logo-ajdut.jpg');
+        $logo = is_file($logoPath)
+            ? 'data:image/jpeg;base64,' . base64_encode(file_get_contents($logoPath))
+            : null;
+
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('carta-autorizacion', [
+            'logo' => $logo,
             'folio' => $donacion->folio,
             'fecha' => $fechaBase->locale('es')->isoFormat('D [de] MMMM [de] Y'),
             'monto' => '$' . number_format((float) $donacion->monto, 2) . ' MXN',

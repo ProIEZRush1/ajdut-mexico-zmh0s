@@ -16,7 +16,7 @@ import { Link } from '@inertiajs/vue3';
                 <Link href="/" class="transition hover:scale-105 hover:opacity-90">
                     <ApplicationLogo mark-size="h-16 w-16" text-size="text-2xl" />
                 </Link>
-                <p class="mt-3 font-accent text-xl text-coral-300">Plataforma de Donaciones</p>
+                <p class="mt-3 font-accent text-xl text-coral-300">Apoyo a viudas y huérfanos de México</p>
             </div>
 
             <div class="w-full rounded-2xl border border-coral-500/20 bg-white p-8 shadow-2xl shadow-teal-950/40 backdrop-blur-sm sm:p-10">

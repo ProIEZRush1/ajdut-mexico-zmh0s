@@ -32,9 +32,9 @@ const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency:
                 <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl"></div>
                 <div class="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-2xl"></div>
                 <div class="relative flex items-center gap-6">
-                    <img src="/brand-logo.svg" alt="AJDUT Mexico" class="hidden h-20 w-20 rounded-2xl object-contain shadow-lg sm:block bg-white/10 p-1" />
+                    <img src="/logo-ajdut.jpg" alt="AJDUT Mexico" class="hidden h-20 w-20 rounded-2xl object-contain shadow-lg sm:block bg-white/10 p-1" />
                     <div>
-                        <p class="text-sm font-medium uppercase tracking-widest text-white/70">Plataforma de Donaciones</p>
+                        <p class="text-sm font-medium uppercase tracking-widest text-white/70">Apoyo a viudas y huérfanos de México</p>
                         <h1 class="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">
                             Hola<span v-if="userFirstName">, {{ userFirstName }}</span> 👋
                         </h1>

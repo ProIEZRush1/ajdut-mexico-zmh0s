@@ -14,21 +14,16 @@
         }
         .sheet { padding: 0 0 40px 0; }
         .header {
-            background: #244543;
+            background: #22304c;
             color: #ffffff;
-            padding: 26px 48px 22px 48px;
+            padding: 22px 48px 20px 48px;
         }
         .brand-row { width: 100%; }
         .logo {
-            width: 46px; height: 46px;
-            background: #2e6862;
-            border-radius: 12px;
-            color: #ffffff;
-            font-family: "Times New Roman", serif;
-            font-size: 30px; font-weight: bold;
-            text-align: center;
-            line-height: 46px;
-            display: inline-block;
+            width: 54px; height: 54px;
+            border-radius: 10px;
+            background: #ffffff;
+            padding: 3px;
             vertical-align: middle;
         }
         .brand-name {
@@ -44,7 +39,7 @@
             font-family: "Times New Roman", serif;
             font-size: 22px;
             font-weight: bold;
-            color: #244543;
+            color: #22304c;
             margin: 0 0 4px 0;
         }
         .doc-sub { color: #6b7280; font-size: 11px; margin-bottom: 22px; }
@@ -58,7 +53,7 @@
         .meta-box .label { color: #6b7280; text-transform: uppercase; font-size: 9.5px; letter-spacing: 1px; }
         .meta-box .val { color: #111827; font-weight: bold; font-size: 14px; }
         .legal { text-align: justify; color: #374151; margin-bottom: 8px; }
-        .legal strong { color: #244543; }
+        .legal strong { color: #22304c; }
         .amount-inline { color: #bd5836; font-weight: bold; }
         .sig-wrap { margin-top: 30px; }
         .sig-box {
@@ -78,17 +73,17 @@
             color: #9ca3af;
             font-size: 9.5px;
         }
-        .mitzva { font-family: "Times New Roman", serif; font-style: italic; color: #2e6862; font-size: 13px; }
+        .mitzva { font-family: "Times New Roman", serif; font-style: italic; color: #2f4677; font-size: 13px; }
     </style>
 </head>
 <body>
 <div class="sheet">
     <div class="header">
         <table class="brand-row"><tr>
-            <td style="width:60px;"><span class="logo">A</span></td>
+            <td style="width:68px;"><img class="logo" src="{{ $logo }}" alt="AJDUT"></td>
             <td class="brand-name">
                 <div class="t1">AJDUT México</div>
-                <div class="t2">Plataforma de Donaciones</div>
+                <div class="t2">Apoyo a viudas y huérfanos de México</div>
             </td>
             <td style="text-align:right; vertical-align:middle; color:#cfa049; font-size:10px; letter-spacing:1px;">
                 FOLIO<br><span style="color:#ffffff; font-size:14px; font-weight:bold; letter-spacing:0;">{{ $folio }}</span>

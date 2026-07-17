@@ -52,7 +52,7 @@ const userInitials = computed(() => {
             <!-- Brand -->
             <div class="flex h-20 items-center gap-3 px-5 border-b border-slate-100">
                 <Link :href="route('dashboard')" class="flex items-center gap-3 min-w-0">
-                    <img src="/brand-logo.svg" alt="AJDUT Mexico" class="h-10 w-10 rounded-lg object-contain flex-shrink-0" />
+                    <img src="/logo-ajdut.jpg" alt="AJDUT Mexico" class="h-10 w-10 rounded-lg object-contain flex-shrink-0" />
                     <span class="text-base font-extrabold tracking-tight leading-tight text-teal-700 truncate">
                         {{ businessName }}
                     </span>
@@ -115,7 +115,7 @@ const userInitials = computed(() => {
                         </svg>
                     </button>
                     <Link :href="route('dashboard')" class="flex items-center gap-2">
-                        <img src="/brand-logo.svg" alt="AJDUT Mexico" class="h-8 w-8 rounded-lg object-contain" />
+                        <img src="/logo-ajdut.jpg" alt="AJDUT Mexico" class="h-8 w-8 rounded-lg object-contain" />
                         <span class="text-base font-extrabold text-teal-700">{{ businessName }}</span>
                     </Link>
                 </div>

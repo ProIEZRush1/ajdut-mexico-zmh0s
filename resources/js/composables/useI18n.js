@@ -21,7 +21,7 @@ const T = {
         'nav.donate': 'Donar ahora',
         'nav.login': 'Iniciar sesión',
         'nav.admin': 'Panel Admin',
-        'home.eyebrow': 'Plataforma de Donaciones',
+        'home.eyebrow': 'Apoyo a viudas y huérfanos de México',
         'home.hero.title': 'Cada donación transforma una vida',
         'home.hero.subtitle': 'Juntos construimos un México más justo. Tu aportación llega directamente a quienes más lo necesitan.',
         'home.hero.cta': 'Quiero donar',

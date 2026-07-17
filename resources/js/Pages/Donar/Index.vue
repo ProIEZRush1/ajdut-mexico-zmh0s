@@ -116,7 +116,7 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
     <Head :title="t('donate.title') + ' — AJDUT México'" />
     <GuestLayout>
         <div class="mb-6 text-center">
-            <img src="/brand-logo.svg" alt="AJDUT México" class="h-14 w-14 rounded-2xl object-contain mx-auto mb-3 shadow-md" />
+            <img src="/logo-ajdut.jpg" alt="AJDUT México" class="h-14 w-14 rounded-2xl object-contain mx-auto mb-3 shadow-md" />
             <span class="animate-heartbeat inline-block text-2xl mb-1">❤️</span>
             <h1 class="font-serif text-2xl font-bold text-slate-900 tracking-tight">{{ t('donate.title') }}</h1>
             <p class="mt-1 text-sm text-slate-500">{{ t('donate.subtitle') }}</p>

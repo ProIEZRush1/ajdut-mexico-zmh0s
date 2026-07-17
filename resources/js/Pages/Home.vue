@@ -73,7 +73,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
 </script>
 
 <template>
-    <Head title="AJDUT México — Plataforma de Donaciones" />
+    <Head title="AJDUT México — Apoyo a viudas y huérfanos de México" />
     <PublicLayout>
         <!-- HERO -->
         <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-teal-600 text-white">
@@ -107,7 +107,9 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                     </div>
                     <div class="hidden lg:flex justify-center">
                         <div class="w-full max-w-sm rounded-3xl border border-white/15 bg-white/[0.06] p-10 text-center backdrop-blur-sm shadow-2xl">
-                            <img src="/brand-logo.svg" alt="AJDUT México" class="mx-auto h-36 w-36 object-contain" />
+                            <div class="mx-auto flex h-44 w-44 items-center justify-center rounded-2xl bg-white p-3 shadow-xl">
+                                <img src="/logo-ajdut.jpg" alt="AJDUT México" class="h-full w-full object-contain" />
+                            </div>
                             <p class="mt-8 font-accent text-2xl text-emerald-200/90 leading-snug">"Quien salva una vida, salva un mundo entero"</p>
                             <p class="mt-4 text-sm text-teal-100/70">Cada aportación es una mitzvá</p>
                         </div>

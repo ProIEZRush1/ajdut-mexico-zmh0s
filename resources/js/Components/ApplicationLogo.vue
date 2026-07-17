@@ -9,7 +9,7 @@ defineProps({
 <template>
     <div class="flex items-center gap-2">
         <img
-            src="/brand-logo.svg"
+            src="/logo-ajdut.jpg"
             alt="AJDUT Mexico"
             :class="[markSize, 'rounded-lg object-contain flex-shrink-0']"
         />
