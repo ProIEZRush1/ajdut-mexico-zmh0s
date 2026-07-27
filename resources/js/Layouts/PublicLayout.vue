@@ -31,10 +31,10 @@ const navLinks = computed(() => [
         <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-coral-100/70 shadow-sm">
             <div class="h-1 w-full bg-gradient-to-r from-coral-500 via-emerald-400 to-teal-600"></div>
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-20 items-center justify-between py-3">
+                <div class="flex h-24 items-center justify-between py-3">
                     <!-- Logo -->
                     <Link href="/" class="group flex items-center gap-3 min-w-0 flex-shrink-0">
-                        <img src="/logo-ajdut.jpg" alt="AJDUT México" class="h-12 w-12 rounded-2xl object-contain shadow-md border border-slate-100 transition duration-300 group-hover:rotate-3 group-hover:scale-105" />
+                        <img src="/logo-ajdut.jpg" alt="AJDUT México" class="h-16 w-16 rounded-2xl object-contain shadow-md border border-slate-100 transition duration-300 group-hover:rotate-3 group-hover:scale-105" />
                         <div class="hidden sm:block">
                             <span class="block font-serif text-lg font-bold text-teal-800 leading-tight tracking-tight">AJDUT México</span>
                             <span class="block text-[11px] text-coral-600 font-semibold uppercase tracking-wider">Apoyo a viudas y huérfanos de México</span>

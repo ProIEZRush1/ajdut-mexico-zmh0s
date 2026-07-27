@@ -31,8 +31,8 @@ const comoAyudamos = [
 const montos = [
     { monto: 200, texto: 'Ayudas a una familia con alimentos básicos.', destacado: false },
     { monto: 500, texto: 'Brindas apoyo para la despensa de una familia.', destacado: false },
-    { monto: 1000, texto: 'Das tranquilidad y alimento a una familia.', destacado: true },
-    { monto: 2000, texto: 'Cubres una tarjeta mensual completa para una familia.', destacado: false },
+    { monto: 1000, texto: 'Das tranquilidad y alimento a una familia.', destacado: false },
+    { monto: 2000, texto: 'Cubres una tarjeta mensual completa para una familia.', destacado: true },
     { monto: 4000, texto: 'Apoyas a 2 familias completas durante el mes.', destacado: false },
 ]
 const montoColors = ['from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600', 'from-coral-500 to-coral-600', 'from-teal-600 to-coral-500', 'from-coral-500 to-teal-700']
