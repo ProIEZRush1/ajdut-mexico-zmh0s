@@ -76,33 +76,40 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
     <Head title="AJDUT México — Apoyo a viudas y huérfanos de México" />
     <PublicLayout>
         <!-- HERO / PORTADA -->
-        <section class="relative overflow-hidden text-white">
-            <div class="absolute inset-0">
-                <img src="/hero-familia.jpg" alt="Una madre y sus hijos haciendo su despensa" class="h-full w-full object-cover object-center" />
-                <div class="absolute inset-0 bg-gradient-to-r from-teal-950/95 via-teal-950/75 to-teal-900/25"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-teal-950/80 via-transparent to-teal-950/40"></div>
+        <section class="relative overflow-hidden bg-[#faf6ee]">
+            <span class="absolute top-4 right-5 sm:right-8 font-serif text-lg text-teal-900/70" dir="rtl">בס״ד</span>
+            <div class="relative mx-auto max-w-3xl px-4 sm:px-6 pt-14 sm:pt-16 text-center">
+                <img src="/logo-ajdut.png" alt="AJDUT México" class="mx-auto h-40 sm:h-56 w-auto object-contain" />
+                <h1 class="mt-5 font-serif text-5xl sm:text-6xl font-bold uppercase tracking-wide text-[#c19a54]">Asóciate</h1>
+                <p class="mt-1 font-serif text-3xl sm:text-4xl font-semibold text-teal-900">a esta gran mitzvá</p>
+                <div class="my-6 flex items-center justify-center gap-4 text-teal-900">
+                    <span class="h-px w-16 bg-teal-900/40"></span>
+                    <span class="text-lg leading-none">♥</span>
+                    <span class="h-px w-16 bg-teal-900/40"></span>
+                </div>
+                <p class="mx-auto max-w-xl font-serif text-xl sm:text-2xl leading-relaxed text-teal-900">
+                    Hay viudas que sonríen frente a sus hijos… mientras por dentro no saben si mañana habrá comida en casa.
+                </p>
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+                    <Link href="/donar"
+                        class="btn-pop inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-coral-500 to-coral-600 px-8 py-3.5 text-base font-bold text-white shadow-xl shadow-coral-900/20 hover:shadow-2xl transition">
+                        ❤️ Quiero ayudar
+                    </Link>
+                    <a href="#como-ayudar"
+                        class="btn-pop inline-flex items-center gap-2 rounded-full border-2 border-teal-800/60 px-7 py-3.5 text-base font-bold text-teal-900 hover:bg-teal-900/5 transition">
+                        Cómo ayudar →
+                    </a>
+                </div>
             </div>
-            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 lg:py-40">
-                <div class="max-w-2xl">
-                    <span class="inline-flex items-center gap-2 rounded-full bg-coral-500/25 border border-coral-300/40 px-4 py-1.5 text-sm font-semibold text-coral-100 backdrop-blur mb-7 tracking-wide shadow-lg shadow-coral-900/20">
-                        <span class="inline-block">❤️</span> Asóciate a esta gran mitzvá
-                    </span>
-                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-7 tracking-tight drop-shadow-lg">
-                        Alimento y esperanza para nuestras familias
-                    </h1>
-                    <p class="text-lg sm:text-xl text-white/90 mb-10 max-w-xl leading-relaxed drop-shadow-md">
-                        Hay viudas que sonríen frente a sus hijos… mientras por dentro no saben si mañana habrá comida en casa. Tu ayuda les devuelve tranquilidad y alimento con dignidad.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <Link href="/donar"
-                            class="btn-pop inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral-500 to-coral-600 px-7 py-3.5 text-base font-bold text-white shadow-xl shadow-coral-900/40 hover:shadow-2xl transition">
-                            ❤️ Quiero ayudar
-                        </Link>
-                        <a href="#como-ayudar"
-                            class="btn-pop inline-flex items-center gap-2 rounded-2xl border-2 border-white/50 px-7 py-3.5 text-base font-bold text-white hover:bg-white/10 transition backdrop-blur-sm">
-                            Cómo ayudar →
-                        </a>
-                    </div>
+            <!-- Foto de la familia con desvanecido superior y onda navy inferior -->
+            <div class="relative mt-10 sm:mt-12">
+                <img src="/hero-familia.jpg" alt="Una madre y sus hijos haciendo su despensa" class="w-full max-h-[560px] object-cover object-[center_30%]" />
+                <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#faf6ee] via-[#faf6ee]/70 to-transparent"></div>
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 leading-none">
+                    <svg viewBox="0 0 1440 130" preserveAspectRatio="none" class="w-full h-16 sm:h-24">
+                        <path d="M0,70 C340,130 1080,10 1440,70 L1440,130 L0,130 Z" fill="#1c2742"></path>
+                        <path d="M0,70 C340,130 1080,10 1440,70" fill="none" stroke="#c19a54" stroke-width="5"></path>
+                    </svg>
                 </div>
             </div>
         </section>
