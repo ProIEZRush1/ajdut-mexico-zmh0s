@@ -131,6 +131,50 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
             </div>
         </section>
 
+        <!-- ROSH HASHANÁ -->
+        <section id="rosh-hashana" class="scroll-mt-24 relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-900 to-teal-800 text-white">
+            <div class="pointer-events-none absolute inset-0">
+                <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-coral-500/10 blur-3xl"></div>
+            </div>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                    <!-- Foto -->
+                    <div class="relative">
+                        <div class="absolute -inset-2 rounded-[1.9rem] bg-gradient-to-br from-emerald-400/40 to-coral-400/20 blur-lg"></div>
+                        <div class="relative overflow-hidden rounded-3xl ring-2 ring-emerald-300/40 shadow-2xl">
+                            <img src="/rosh-hashana.jpg" alt="Familia celebrando Rosh Hashaná" class="w-full object-cover" />
+                        </div>
+                        <div class="absolute -bottom-4 right-4 rounded-2xl bg-white px-4 py-2 shadow-xl">
+                            <span class="text-xl font-bold text-teal-800" dir="rtl">שנה טובה ומתוקה</span>
+                        </div>
+                    </div>
+                    <!-- Copy -->
+                    <div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-emerald-400/15 border border-emerald-300/40 px-4 py-1.5 text-sm font-semibold text-emerald-200 mb-6">
+                            🍎🍯 Rosh Hashaná 5787
+                        </span>
+                        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5">
+                            Que su año nuevo también sea dulce
+                        </h2>
+                        <p class="text-lg text-teal-50/90 leading-relaxed mb-4">
+                            Mientras muchas familias se sientan a la mesa con manzana y miel, hay viudas y huérfanos de la comunidad que no saben si tendrán qué servir.
+                        </p>
+                        <p class="text-base text-teal-100/80 leading-relaxed mb-8">
+                            Antes de que suene el shofar, endulcemos su año: con tu donativo llevamos despensa y alegría a sus hogares para recibir Rosh Hashaná con dignidad. Tu tzedaká es un mérito para todo el año.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <Link href="/donar?causa=6"
+                                class="btn-pop inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral-500 to-coral-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-coral-900/30 hover:shadow-2xl transition">
+                                ❤️ Donar para Rosh Hashaná
+                            </Link>
+                            <span class="text-sm text-teal-200/70">Recíbelos con una mesa digna 🍯</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ¿CÓMO AYUDAMOS? -->
         <section class="relative bg-slate-50 py-20 overflow-hidden">
             <div class="pointer-events-none absolute -top-10 right-0 h-64 w-64 rounded-full bg-coral-100/60 blur-3xl"></div>

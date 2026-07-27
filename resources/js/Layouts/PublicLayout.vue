@@ -18,6 +18,7 @@ const navLinks = computed(() => [
     { href: '/', label: t('nav.home') },
     { href: '/quienes-somos', label: t('nav.about') },
     { href: '/#como-ayudar', label: 'Cómo ayudar' },
+    { href: '/#rosh-hashana', label: 'Rosh Hashaná' },
     { href: '/jaguim', label: 'Jaguim' },
     { href: '/transparencia-publica', label: t('nav.transparency') },
     { href: '/contacto', label: t('nav.contact') },
