@@ -29,17 +29,17 @@ const comoAyudamos = [
 ]
 
 const montos = [
-    { monto: 200, texto: 'Ayudas a una familia con alimentos básicos.', destacado: false },
     { monto: 500, texto: 'Brindas apoyo para la despensa de una familia.', destacado: false },
     { monto: 1000, texto: 'Das tranquilidad y alimento a una familia.', destacado: false },
     { monto: 2000, texto: 'Cubres una tarjeta mensual completa para una familia.', destacado: true },
-    { monto: 4000, texto: 'Apoyas a 2 familias completas durante el mes.', destacado: false },
+    { monto: 5000, texto: 'Cubres la tarjeta mensual de 2 familias completas.', destacado: false },
+    { monto: 10000, texto: 'Sostienes a 5 familias completas durante el mes.', destacado: false },
 ]
 const montoColors = ['from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600', 'from-coral-500 to-coral-600', 'from-teal-600 to-coral-500', 'from-coral-500 to-teal-700']
 
 const statsDisplay = computed(() => [
     { value: props.stats?.donadores ?? '0', label: t('home.stats.donors'), icon: '👥' },
-    { value: fmt(props.stats?.total_recaudado ?? 0), label: t('home.stats.raised'), icon: '💰' },
+    { value: fmt(props.stats?.total_recaudado ?? 0), label: props.stats?.mes ? `Recaudado en ${props.stats.mes}` : t('home.stats.raised'), icon: '💰' },
     { value: props.stats?.causas_activas ?? '0', label: t('home.stats.causes'), icon: '❤️' },
     { value: props.stats?.beneficiarios ?? '5,000+', label: t('home.stats.beneficiaries'), icon: '🤝' },
 ])
@@ -107,9 +107,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                     </div>
                     <div class="hidden lg:flex justify-center">
                         <div class="w-full max-w-sm rounded-3xl border border-white/15 bg-white/[0.06] p-10 text-center backdrop-blur-sm shadow-2xl">
-                            <div class="mx-auto flex h-44 w-44 items-center justify-center rounded-2xl bg-white p-3 shadow-xl">
-                                <img src="/logo-ajdut.jpg" alt="AJDUT México" class="h-full w-full object-contain" />
-                            </div>
+                            <img src="/logo-ajdut.png" alt="AJDUT México" class="mx-auto h-56 w-56 object-contain drop-shadow-2xl" />
                             <p class="mt-8 font-accent text-2xl text-emerald-200/90 leading-snug">"Quien salva una vida, salva un mundo entero"</p>
                             <p class="mt-4 text-sm text-teal-100/70">Cada aportación es una mitzvá</p>
                         </div>

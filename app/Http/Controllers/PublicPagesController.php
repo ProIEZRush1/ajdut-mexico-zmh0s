@@ -26,10 +26,14 @@ class PublicPagesController extends Controller
             'planes' => PlanDonacion::where('activo', true)->orderBy('orden')->limit(3)->get(),
             'testimonios' => Testimonio::where('activo', true)->orderByDesc('created_at')->limit(3)->get(),
             'stats' => [
-                'donadores' => Donador::where('estado', 'activo')->count(),
-                'total_recaudado' => Donacion::where('estado', 'completada')->sum('monto'),
+                'donadores' => 154,
+                'total_recaudado' => Donacion::where('estado', 'completada')
+                    ->whereYear('fecha_pago', now()->year)
+                    ->whereMonth('fecha_pago', now()->month)
+                    ->sum('monto'),
+                'mes' => now()->locale('es')->isoFormat('MMMM'),
                 'causas_activas' => Causa::where('activa', true)->count(),
-                'beneficiarios' => '5,000+',
+                'beneficiarios' => '80+',
             ],
         ]);
     }
