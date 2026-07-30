@@ -160,6 +160,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                     <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">Elige tu ayuda mensual</h2>
                     <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Con una <strong class="text-slate-700">ayuda mensual fija</strong>, cada mes tu aportación se convierte en despensa para una familia en tiendas kosher. Elige tu monto:</p>
                 </div>
+                <p class="mb-8 text-center text-sm text-slate-500">Tu apoyo mensual sostiene a las familias todo el año. ¿Prefieres otro monto o una donación única? <Link href="/donar" class="font-semibold text-coral-700 hover:text-coral-800 underline underline-offset-2">Dónalo aquí →</Link></p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                     <Link v-for="m in montos" :key="m.monto" :href="`/donar?monto=${m.monto}&freq=mensual`"
                         :class="m.destacado ? 'border-coral-300 ring-1 ring-coral-200' : 'border-slate-200'"
@@ -171,7 +172,6 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                         <span class="mt-5 inline-flex items-center justify-center rounded-lg border border-teal-600 py-2 text-sm font-semibold text-teal-700 transition group-hover:bg-teal-700 group-hover:text-white">Donar</span>
                     </Link>
                 </div>
-                <p class="mt-8 text-center text-sm text-slate-500">Tu apoyo mensual sostiene a las familias todo el año. ¿Prefieres otro monto o una donación única? <Link href="/donar" class="font-semibold text-coral-700 hover:text-coral-800 underline underline-offset-2">Dónalo aquí →</Link></p>
             </div>
         </section>
 
