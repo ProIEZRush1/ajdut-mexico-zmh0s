@@ -172,7 +172,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
         </section>
 
         <!-- ¿CÓMO AYUDAMOS? -->
-        <section class="relative bg-slate-50 py-20 overflow-hidden">
+        <section class="relative bg-white py-20 overflow-hidden">
             <div class="pointer-events-none absolute -top-10 right-0 h-64 w-64 rounded-full bg-coral-100/60 blur-3xl"></div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
@@ -182,7 +182,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div v-for="item in comoAyudamos" :key="item.titulo"
-                        class="rounded-2xl border border-slate-200 bg-white p-7 transition hover:border-teal-200 hover:shadow-md">
+                        class="rounded-2xl border border-[#eaddc4] bg-[#faf6ee] p-7 transition hover:border-teal-300 hover:shadow-md">
                         <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" :d="item.path" />
