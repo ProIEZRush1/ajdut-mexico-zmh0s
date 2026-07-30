@@ -38,10 +38,10 @@ const montos = [
 const montoColors = ['from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-600', 'from-coral-500 to-coral-600', 'from-teal-600 to-coral-500', 'from-coral-500 to-teal-700']
 
 const statsDisplay = computed(() => [
-    { value: props.stats?.donadores ?? '0', label: t('home.stats.donors'), icon: '👥' },
-    { value: fmt(props.stats?.total_recaudado ?? 0), label: props.stats?.mes ? `Recaudado en ${props.stats.mes}` : t('home.stats.raised'), icon: '💰' },
-    { value: props.stats?.causas_activas ?? '0', label: t('home.stats.causes'), icon: '❤️' },
-    { value: props.stats?.beneficiarios ?? '5,000+', label: t('home.stats.beneficiaries'), icon: '🤝' },
+    { value: props.stats?.donadores ?? '154', label: 'Donadores activos', icon: '👥' },
+    { value: fmt(props.stats?.total_recaudado ?? 0), label: 'Total recaudado 2026', icon: '💰' },
+    { value: props.stats?.causas_completadas ?? '80', label: 'Causas completadas', icon: '❤️' },
+    { value: props.stats?.beneficiarios ?? '+80', label: 'Beneficiados', icon: '🤝' },
 ])
 
 const staticTestimonios = [
@@ -104,7 +104,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
             <!-- Foto de la familia con desvanecido superior y onda navy inferior -->
             <div class="relative mt-10 sm:mt-12">
                 <img src="/hero-familia.jpg" alt="Una madre y sus hijos haciendo su despensa" class="w-full max-h-[560px] object-cover object-[center_30%]" />
-                <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#faf6ee] via-[#faf6ee]/70 to-transparent"></div>
+                <div class="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#faf6ee]/90 to-transparent"></div>
                 <div class="pointer-events-none absolute inset-x-0 bottom-0 leading-none">
                     <svg viewBox="0 0 1440 130" preserveAspectRatio="none" class="w-full h-16 sm:h-24">
                         <path d="M0,70 C340,130 1080,10 1440,70 L1440,130 L0,130 Z" fill="#1c2742"></path>
@@ -261,6 +261,24 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                         <h3 class="font-bold text-slate-800 mb-2">{{ t(`home.trust.${n}.title`) }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed">{{ t(`home.trust.${n}.text`) }}</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVAL RABÍNICO -->
+        <section class="bg-[#faf6ee] py-16">
+            <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+                <span class="font-accent text-2xl text-coral-600">Con la bendición de la Torá</span>
+                <h2 class="mt-1 font-serif text-3xl sm:text-4xl font-bold text-teal-900">Una labor avalada por nuestros jajamim</h2>
+                <div class="mt-8 rounded-2xl border border-[#eaddc4] bg-white px-6 sm:px-10 py-9 shadow-sm">
+                    <p class="text-lg leading-relaxed text-teal-900/90">
+                        Esta gran mitzvá de apoyo a viudas y huérfanos cuenta con el aval y la bendición del
+                        <strong class="text-teal-900">Jajam Shemuel Peretz</strong> <span dir="rtl">שליט״א</span>.
+                    </p>
+                    <img src="/firma-jajam.jpg" alt="Firma del Jajam Shemuel Peretz" class="mx-auto mt-7 h-20 w-auto object-contain" />
+                    <div class="mx-auto mt-2 h-px w-40 bg-teal-900/20"></div>
+                    <p class="mt-3 font-serif text-lg font-bold text-teal-900">Jajam Shemuel Peretz</p>
+                    <p class="text-sm text-slate-500">Aval rabínico</p>
                 </div>
             </div>
         </section>

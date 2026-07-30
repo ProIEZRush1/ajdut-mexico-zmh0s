@@ -1,25 +1,13 @@
 <script setup>
-import { Head } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3'
 import PublicLayout from '@/Layouts/PublicLayout.vue'
-import { useI18n } from '@/composables/useI18n'
 
 defineProps({ equipo: Array })
-const { t } = useI18n()
 
-const valores = [
-    { icon: '❤️', titulo: 'Solidaridad', desc: 'Creemos en la fuerza de la comunidad unida por un bien común.' },
-    { icon: '🔍', titulo: 'Transparencia', desc: 'Rendimos cuentas claras a nuestros donadores en todo momento.' },
-    { icon: '💡', titulo: 'Innovación Social', desc: 'Buscamos soluciones creativas a los problemas más urgentes.' },
-    { icon: '🤝', titulo: 'Compromiso', desc: 'Nos comprometemos con el bienestar de cada persona que apoyamos.' },
-    { icon: '⚖️', titulo: 'Justicia', desc: 'Trabajamos por una sociedad más equitativa para todos.' },
-    { icon: '🌱', titulo: 'Sustentabilidad', desc: 'Generamos impacto duradero pensando en las generaciones futuras.' },
-]
-
-const staticEquipo = [
-    { nombre: 'Lic. Patricia Morales', cargo: 'Directora General', descripcion: 'Más de 20 años de trayectoria en organizaciones de impacto social.' },
-    { nombre: 'Dr. Alejandro Ríos', cargo: 'Director de Programas', descripcion: 'Especialista en desarrollo comunitario y diseño de intervenciones sociales.' },
-    { nombre: 'Lic. Sofía Vega', cargo: 'Directora de Transparencia', descripcion: 'Experta en gobernanza y rendición de cuentas para organizaciones civiles.' },
-    { nombre: 'Ing. Marco Torres', cargo: 'Director de Tecnología', descripcion: 'Lidera la transformación digital de nuestra plataforma de donaciones.' },
+const compromisos = [
+    { titulo: 'Transparencia', desc: 'Rendimos cuentas claras y nos aseguramos de que cada apoyo llegue a quien más lo necesita.', path: 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' },
+    { titulo: 'Responsabilidad', desc: 'Administramos cada donativo con cuidado, constancia y absoluto respeto por cada familia.', path: 'M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z' },
+    { titulo: 'Sensibilidad', desc: 'Acompañamos a cada familia con calidez y respeto absoluto por su privacidad y dignidad.', path: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z' },
 ]
 </script>
 
@@ -27,106 +15,67 @@ const staticEquipo = [
     <Head title="Quiénes Somos — AJDUT México" />
     <PublicLayout>
         <!-- Hero -->
-        <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-coral-700 text-white py-16">
-            <div class="pointer-events-none absolute -top-16 -right-10 h-64 w-64 rounded-full bg-coral-400/20 blur-3xl animate-float-slow"></div>
-            <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-3xl animate-float-slow" style="animation-delay:2s"></div>
-            <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                <span class="font-accent text-2xl text-coral-200">Quiénes somos</span>
-                <h1 class="font-serif text-4xl sm:text-5xl font-extrabold mt-1 mb-4">{{ t('about.title') }}</h1>
-                <p class="text-xl text-white/85 max-w-2xl mx-auto">{{ t('about.subtitle') }}</p>
+        <section class="relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-900 to-teal-800 text-white py-16">
+            <div class="pointer-events-none absolute -top-16 -right-10 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl"></div>
+            <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-coral-500/10 blur-3xl"></div>
+            <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+                <span class="font-accent text-2xl text-emerald-200">Quiénes somos</span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold mt-1 mb-4">Nadie debe enfrentar la vida solo</h1>
+                <p class="text-lg text-teal-50/90 max-w-2xl mx-auto leading-relaxed">
+                    Ajdut nace con la convicción de que ninguna viuda ni ningún huérfano deben enfrentar solos las dificultades de la vida.
+                </p>
             </div>
         </section>
 
-        <!-- Historia -->
-        <section class="py-20 bg-white">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-14 items-center">
-                    <div>
-                        <span class="text-sm font-bold text-teal-600 uppercase tracking-wider">Desde 2010</span>
-                        <h2 class="mt-2 text-3xl font-extrabold text-slate-800 mb-6">{{ t('about.history.title') }}</h2>
-                        <div class="space-y-4 text-slate-600 leading-relaxed">
-                            <p>AJDUT México nació en 2010 como respuesta a la creciente brecha de desigualdad en comunidades rurales y urbanas marginadas de nuestro país. Un grupo de profesionistas y ciudadanos comprometidos decidieron crear una institución transparente y eficiente que canalizara recursos hacia quienes más los necesitan.</p>
-                            <p>Desde nuestra fundación, hemos apoyado a más de 5,000 familias a través de programas de alimentación, educación, salud y desarrollo comunitario. Cada peso que nos confían es administrado con absoluta honestidad y publicado en nuestros reportes de transparencia.</p>
-                            <p>Hoy, AJDUT México es una institución reconocida por su rigor en la rendición de cuentas, su impacto medible y su profundo compromiso con la dignidad humana.</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="card-lift bg-gradient-to-br from-teal-600 to-teal-800 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold font-serif">15+</p>
-                            <p class="text-sm mt-1 text-white/80">años de experiencia</p>
-                        </div>
-                        <div class="card-lift bg-gradient-to-br from-coral-500 to-coral-700 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold font-serif">5K+</p>
-                            <p class="text-sm mt-1 text-coral-100">familias beneficiadas</p>
-                        </div>
-                        <div class="card-lift bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold font-serif">18</p>
-                            <p class="text-sm mt-1 text-emerald-50">causas exitosas</p>
-                        </div>
-                        <div class="card-lift bg-slate-800 rounded-2xl p-6 text-white text-center shadow-lg">
-                            <p class="text-4xl font-extrabold font-serif">100%</p>
-                            <p class="text-sm mt-1 text-slate-400">transparencia</p>
-                        </div>
-                    </div>
+        <!-- Narrativa -->
+        <section class="bg-[#faf6ee] py-20">
+            <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+                <div class="space-y-6 font-serif text-lg sm:text-xl leading-relaxed text-teal-900/90">
+                    <p>Somos una organización dedicada a brindar <strong class="font-semibold text-teal-900">apoyo económico, acompañamiento y esperanza</strong> a familias que han perdido a su principal sostén. Gracias a la generosidad de nuestros donadores, llevamos ayuda de manera digna, constante y con absoluto respeto por la privacidad de cada familia.</p>
+                    <p>Creemos que cada acto de bondad transforma vidas. Por eso trabajamos para crear una comunidad unida, donde cada persona que dona se convierte en un <strong class="font-semibold text-teal-900">verdadero socio</strong> en esta misión de ayudar.</p>
+                    <p>Nuestro compromiso es actuar con transparencia, responsabilidad y sensibilidad, asegurándonos de que cada apoyo llegue a quienes más lo necesitan.</p>
+                    <p>En Ajdut, no solo entregamos ayuda; ofrecemos <strong class="font-semibold text-teal-900">tranquilidad, esperanza</strong> y la certeza de que siempre hay una comunidad dispuesta a tender la mano.</p>
                 </div>
+
+                <blockquote class="mt-12 rounded-2xl border-l-4 border-coral-500 bg-white px-8 py-7 shadow-sm">
+                    <p class="font-serif text-2xl sm:text-3xl font-semibold leading-snug text-teal-900">
+                        Porque cuando nos unimos para ayudar, cambiamos el mundo de una familia a la vez.
+                    </p>
+                </blockquote>
             </div>
         </section>
 
-        <!-- Misión y Visión -->
-        <section class="py-20 bg-slate-50">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="card-lift bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:border-teal-200 hover:shadow-xl">
-                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-3xl mb-6 shadow-md shadow-teal-500/20">🎯</div>
-                        <h2 class="font-serif text-2xl font-extrabold text-slate-800 mb-4">{{ t('about.mission.title') }}</h2>
-                        <p class="text-slate-600 leading-relaxed">Canalizar recursos de donadores comprometidos hacia causas de alto impacto social, garantizando transparencia absoluta, eficiencia en la administración y resultados medibles que transformen vidas en las comunidades más vulnerables de México.</p>
-                    </div>
-                    <div class="card-lift bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:border-coral-200 hover:shadow-xl">
-                        <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-coral-500 to-coral-600 flex items-center justify-center text-3xl mb-6 shadow-md shadow-coral-500/20">🔭</div>
-                        <h2 class="font-serif text-2xl font-extrabold text-slate-800 mb-4">{{ t('about.vision.title') }}</h2>
-                        <p class="text-slate-600 leading-relaxed">Ser la plataforma de donaciones más confiable e innovadora de México, donde cada ciudadano pueda contribuir fácilmente a construir un país más justo, y donde cada peso donado tenga un impacto verificable y duradero.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Valores -->
-        <section class="py-20 bg-white">
+        <!-- Nuestro compromiso -->
+        <section class="bg-white py-20">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-extrabold text-slate-800">{{ t('about.values.title') }}</h2>
+                    <span class="font-accent text-2xl text-coral-600">Con el corazón</span>
+                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">Nuestro compromiso</h2>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div v-for="v in valores" :key="v.titulo"
-                        class="card-lift flex gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-coral-200 hover:bg-white hover:shadow-lg transition">
-                        <span class="text-3xl flex-shrink-0">{{ v.icon }}</span>
-                        <div>
-                            <h3 class="font-bold text-slate-800 mb-1">{{ v.titulo }}</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">{{ v.desc }}</p>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div v-for="c in compromisos" :key="c.titulo"
+                        class="rounded-2xl border border-[#eaddc4] bg-[#faf6ee] p-8 text-center transition hover:border-teal-300 hover:shadow-md">
+                        <span class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-700">
+                            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" :d="c.path" />
+                            </svg>
+                        </span>
+                        <h3 class="font-serif text-lg font-bold text-slate-800 mb-2">{{ c.titulo }}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">{{ c.desc }}</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Equipo -->
-        <section class="py-20 bg-slate-50">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-extrabold text-slate-800">{{ t('about.team.title') }}</h2>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div v-for="(m, i) in (equipo?.length ? equipo : staticEquipo)" :key="m.nombre ?? m.id"
-                        class="card-lift bg-white rounded-2xl border border-slate-200 p-6 text-center shadow-sm hover:shadow-xl hover:border-coral-200 transition">
-                        <div :class="['from-teal-500 to-teal-700', 'from-coral-500 to-coral-600', 'from-emerald-400 to-emerald-500', 'from-teal-600 to-coral-500'][i % 4]"
-                            class="h-20 w-20 rounded-2xl bg-gradient-to-br flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 shadow-md">
-                            {{ (m.nombre ?? 'T')[0] }}
-                        </div>
-                        <h3 class="font-bold text-slate-800">{{ m.nombre }}</h3>
-                        <p class="text-sm font-semibold text-coral-600 mt-0.5 mb-2">{{ m.cargo ?? m.puesto }}</p>
-                        <p class="text-xs text-slate-500 leading-relaxed">{{ m.descripcion ?? m.bio }}</p>
-                    </div>
-                </div>
+        <!-- CTA -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-900 to-teal-800 py-16 text-center text-white">
+            <div class="relative mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+                <p class="font-accent text-3xl text-emerald-200 mb-3">Sé parte de esta gran mitzvá</p>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-8">Conviértete en socio de esta misión</h2>
+                <Link href="/donar"
+                    class="btn-pop inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-coral-500 to-coral-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-coral-900/30 hover:shadow-2xl transition">
+                    ❤️ Quiero ayudar
+                </Link>
             </div>
         </section>
     </PublicLayout>

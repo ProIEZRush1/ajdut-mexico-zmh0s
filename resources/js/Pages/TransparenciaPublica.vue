@@ -18,17 +18,16 @@ const staticReportes = [
 const displayReportes = props.reportes?.filter(r => r.publicado)?.length ? props.reportes.filter(r => r.publicado) : staticReportes
 
 const usoFondos = [
-    { label: 'Programas y causas directas', pct: 82, color: 'bg-coral-500' },
-    { label: 'Administración y operaciones', pct: 10, color: 'bg-emerald-400' },
-    { label: 'Comunicación y captación', pct: 5, color: 'bg-teal-500' },
-    { label: 'Reserva institucional', pct: 3, color: 'bg-slate-400' },
+    { label: 'Causas directas', pct: 70, color: 'bg-coral-500' },
+    { label: 'Administración', pct: 20, color: 'bg-emerald-400' },
+    { label: 'Servicios de cobranza', pct: 10, color: 'bg-teal-500' },
 ]
 
 const metricasDisplay = [
-    { label: 'Donadores activos', value: props.metricas?.donadores ?? '389', icon: '👥' },
-    { label: 'Total recaudado 2025', value: fmt(props.metricas?.total_recaudado ?? 1850000), icon: '💰' },
-    { label: 'Beneficiarios atendidos', value: props.metricas?.beneficiarios ?? '5,000+', icon: '🤝' },
-    { label: 'Causas completadas', value: props.metricas?.causas_completadas ?? '18', icon: '✅' },
+    { label: 'Donadores activos', value: props.metricas?.donadores ?? '154', icon: '👥' },
+    { label: 'Total recaudado 2026', value: fmt(props.metricas?.total_recaudado ?? 506680), icon: '💰' },
+    { label: 'Beneficiados', value: props.metricas?.beneficiarios ?? '+80', icon: '🤝' },
+    { label: 'Causas completadas', value: props.metricas?.causas_completadas ?? '80', icon: '✅' },
     { label: 'Eficiencia operativa', value: '92%', icon: '📈' },
     { label: 'Satisfacción donadores', value: '98%', icon: '⭐' },
 ]
