@@ -9,6 +9,7 @@ const props = defineProps({
     planes: Array,
     causa_preseleccionada: Object,
     monto_preseleccionado: Number,
+    frecuencia_preseleccionada: String,
     trial_locked: Boolean,
 })
 
@@ -21,7 +22,7 @@ const form = useForm({
     apellido: '',
     email: '',
     monto: props.monto_preseleccionado ?? '',
-    frecuencia: 'unica',
+    frecuencia: props.frecuencia_preseleccionada ?? 'unica',
     causa_id: props.causa_preseleccionada?.id ?? '',
     plan_id: '',
     firma_nombre: '',

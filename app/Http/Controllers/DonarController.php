@@ -26,6 +26,9 @@ class DonarController extends Controller
             'monto_preseleccionado' => $request->filled('monto') && is_numeric($request->monto)
                 ? (int) $request->monto
                 : null,
+            'frecuencia_preseleccionada' => in_array($request->freq, ['unica', 'mensual', 'anual'], true)
+                ? $request->freq
+                : null,
             'trial_locked' => config('trial.locked'),
         ]);
     }

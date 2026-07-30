@@ -127,6 +127,53 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
             </div>
         </section>
 
+        <!-- ¿CÓMO AYUDAMOS? -->
+        <section class="relative bg-white py-20 overflow-hidden">
+            <div class="pointer-events-none absolute -top-10 right-0 h-64 w-64 rounded-full bg-coral-100/60 blur-3xl"></div>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="font-accent text-2xl text-coral-600">Con dignidad y tranquilidad</span>
+                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">¿Cómo ayudamos?</h2>
+                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Acompañamos a viudas y a sus hijos para que ninguna familia de la comunidad enfrente sola sus necesidades básicas.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="item in comoAyudamos" :key="item.titulo"
+                        class="rounded-2xl border border-[#eaddc4] bg-[#faf6ee] p-7 transition hover:border-teal-300 hover:shadow-md">
+                        <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" :d="item.path" />
+                            </svg>
+                        </span>
+                        <h3 class="text-base font-bold text-slate-800 mb-2">{{ item.titulo }}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">{{ item.texto }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ELIGE CÓMO AYUDAR (MONTOS) -->
+        <section id="como-ayudar" class="scroll-mt-24 bg-white py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="font-accent text-2xl text-teal-600">Cada aportación es una mitzvá</span>
+                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">Elige tu ayuda mensual</h2>
+                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Con una <strong class="text-slate-700">ayuda mensual fija</strong>, cada mes tu aportación se convierte en despensa para una familia en tiendas kosher. Elige tu monto:</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                    <Link v-for="m in montos" :key="m.monto" :href="`/donar?monto=${m.monto}&freq=mensual`"
+                        :class="m.destacado ? 'border-coral-300 ring-1 ring-coral-200' : 'border-slate-200'"
+                        class="group relative flex flex-col rounded-2xl border bg-white p-6 text-center transition hover:border-coral-300 hover:shadow-md">
+                        <span v-if="m.destacado" class="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-coral-600 px-3 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">Más elegido</span>
+                        <span class="font-serif text-3xl font-bold text-teal-800">{{ fmt(m.monto) }}<span class="font-sans text-base font-semibold text-slate-400">/mes</span></span>
+                        <span class="mx-auto mt-2 h-px w-8 bg-coral-300"></span>
+                        <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-500">{{ m.texto }}</p>
+                        <span class="mt-5 inline-flex items-center justify-center rounded-lg border border-teal-600 py-2 text-sm font-semibold text-teal-700 transition group-hover:bg-teal-700 group-hover:text-white">Donar</span>
+                    </Link>
+                </div>
+                <p class="mt-8 text-center text-sm text-slate-500">Tu apoyo mensual sostiene a las familias todo el año. ¿Prefieres otro monto o una donación única? <Link href="/donar" class="font-semibold text-coral-700 hover:text-coral-800 underline underline-offset-2">Dónalo aquí →</Link></p>
+            </div>
+        </section>
+
         <!-- ROSH HASHANÁ -->
         <section id="rosh-hashana" class="scroll-mt-24 relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-900 to-teal-800 text-white">
             <div class="pointer-events-none absolute inset-0">
@@ -168,53 +215,6 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- ¿CÓMO AYUDAMOS? -->
-        <section class="relative bg-white py-20 overflow-hidden">
-            <div class="pointer-events-none absolute -top-10 right-0 h-64 w-64 rounded-full bg-coral-100/60 blur-3xl"></div>
-            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <span class="font-accent text-2xl text-coral-600">Con dignidad y tranquilidad</span>
-                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">¿Cómo ayudamos?</h2>
-                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Acompañamos a viudas y a sus hijos para que ninguna familia de la comunidad enfrente sola sus necesidades básicas.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div v-for="item in comoAyudamos" :key="item.titulo"
-                        class="rounded-2xl border border-[#eaddc4] bg-[#faf6ee] p-7 transition hover:border-teal-300 hover:shadow-md">
-                        <span class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" :d="item.path" />
-                            </svg>
-                        </span>
-                        <h3 class="text-base font-bold text-slate-800 mb-2">{{ item.titulo }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed">{{ item.texto }}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ELIGE CÓMO AYUDAR (MONTOS) -->
-        <section id="como-ayudar" class="scroll-mt-24 bg-white py-20">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <span class="font-accent text-2xl text-teal-600">Cada aportación es una mitzvá</span>
-                    <h2 class="mt-1 text-3xl sm:text-4xl font-extrabold text-slate-800">Elige cómo ayudar</h2>
-                    <p class="mt-3 text-slate-500 max-w-2xl mx-auto">Con tarjetas para despensa, cada familia compra su alimento en tiendas kosher con dignidad. Tú eliges el monto:</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-                    <Link v-for="m in montos" :key="m.monto" :href="`/donar?monto=${m.monto}`"
-                        :class="m.destacado ? 'border-coral-300 ring-1 ring-coral-200' : 'border-slate-200'"
-                        class="group relative flex flex-col rounded-2xl border bg-white p-6 text-center transition hover:border-coral-300 hover:shadow-md">
-                        <span v-if="m.destacado" class="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-coral-600 px-3 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">Más elegido</span>
-                        <span class="font-serif text-3xl font-bold text-teal-800">{{ fmt(m.monto) }}</span>
-                        <span class="mx-auto mt-2 h-px w-8 bg-coral-300"></span>
-                        <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-500">{{ m.texto }}</p>
-                        <span class="mt-5 inline-flex items-center justify-center rounded-lg border border-teal-600 py-2 text-sm font-semibold text-teal-700 transition group-hover:bg-teal-700 group-hover:text-white">Donar</span>
-                    </Link>
-                </div>
-                <p class="mt-8 text-center text-sm text-slate-500">¿Prefieres otro monto? <Link href="/donar" class="font-semibold text-coral-700 hover:text-coral-800 underline underline-offset-2">Dona la cantidad que tú quieras →</Link></p>
             </div>
         </section>
 
