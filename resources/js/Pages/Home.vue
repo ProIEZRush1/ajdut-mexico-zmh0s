@@ -120,7 +120,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 -mt-10 sm:-mt-14 relative z-10">
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
                     <div v-for="s in statsDisplay" :key="s.label"
-                        class="text-center bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                        class="text-center bg-[#faf6ee] rounded-2xl border border-[#eaddc4] shadow-sm p-6">
                         <p class="text-3xl sm:text-4xl font-bold text-teal-800 font-serif">{{ s.value }}</p>
                         <p class="text-sm text-slate-500 mt-1.5">{{ s.label }}</p>
                     </div>
@@ -163,8 +163,8 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                 <p class="mb-8 text-center text-sm text-slate-500">Tu apoyo mensual sostiene a las familias todo el año. ¿Prefieres otro monto o una donación única? <Link href="/donar" class="font-semibold text-coral-700 hover:text-coral-800 underline underline-offset-2">Dónalo aquí →</Link></p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                     <Link v-for="m in montos" :key="m.monto" :href="`/donar?monto=${m.monto}&freq=mensual`"
-                        :class="m.destacado ? 'border-coral-300 ring-1 ring-coral-200' : 'border-slate-200'"
-                        class="group relative flex flex-col rounded-2xl border bg-white p-6 text-center transition hover:border-coral-300 hover:shadow-md">
+                        :class="m.destacado ? 'border-coral-300 ring-1 ring-coral-200' : 'border-[#eaddc4]'"
+                        class="group relative flex flex-col rounded-2xl border bg-[#faf6ee] p-6 text-center transition hover:border-coral-300 hover:shadow-md">
                         <span v-if="m.destacado" class="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-coral-600 px-3 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">Más elegido</span>
                         <span class="font-serif text-3xl font-bold text-teal-800">{{ fmt(m.monto) }}<span class="font-sans text-base font-semibold text-slate-400">/mes</span></span>
                         <span class="mx-auto mt-2 h-px w-8 bg-coral-300"></span>
@@ -229,7 +229,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
         </section>
 
         <!-- TESTIMONIOS -->
-        <section class="relative bg-slate-50 py-20 overflow-hidden">
+        <section class="relative bg-white py-20 overflow-hidden">
             <div class="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-emerald-100/50 blur-3xl"></div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
@@ -238,7 +238,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div v-for="t_ in displayTestimonios" :key="t_.nombre"
-                        class="card-lift bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:border-emerald-200 relative">
+                        class="card-lift bg-[#faf6ee] rounded-2xl border border-[#eaddc4] p-6 shadow-sm hover:shadow-xl hover:border-emerald-200 relative">
                         <p class="font-serif text-5xl text-emerald-300 leading-none mb-2">"</p>
                         <p class="text-slate-600 text-sm leading-relaxed mb-5 -mt-4">{{ t_.texto ?? t_.contenido }}</p>
                         <div class="flex items-center gap-3">
@@ -263,7 +263,7 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div v-for="n in [1,2,3,4]" :key="n"
-                        class="card-lift text-center p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-coral-200">
+                        class="card-lift text-center p-6 rounded-2xl bg-[#faf6ee] border border-[#eaddc4] hover:border-coral-200">
                         <div :class="['from-coral-500 to-coral-600', 'from-teal-500 to-teal-700', 'from-emerald-400 to-emerald-500', 'from-teal-600 to-coral-500'][n-1]"
                             class="h-14 w-14 rounded-2xl bg-gradient-to-br flex items-center justify-center text-2xl mx-auto mb-4 shadow-lg">
                             {{ ['📊','🎯','🔒','📄'][n-1] }}
@@ -276,11 +276,11 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
         </section>
 
         <!-- AVAL RABÍNICO -->
-        <section class="bg-[#faf6ee] py-16">
+        <section class="bg-white py-16">
             <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
                 <span class="font-accent text-2xl text-coral-600">Con la bendición de la Torá</span>
                 <h2 class="mt-1 font-serif text-3xl sm:text-4xl font-bold text-teal-900">Una labor avalada por nuestros jajamim</h2>
-                <div class="mt-8 rounded-2xl border border-[#eaddc4] bg-white px-6 sm:px-10 py-9 shadow-sm">
+                <div class="mt-8 rounded-2xl border border-[#eaddc4] bg-[#faf6ee] px-6 sm:px-10 py-9 shadow-sm">
                     <p class="text-lg leading-relaxed text-teal-900/90">
                         Esta gran mitzvá de apoyo a viudas y huérfanos cuenta con el aval y la bendición del
                         <strong class="text-teal-900">Jajam Shemuel Peretz</strong> <span dir="rtl">שליט״א</span>.
