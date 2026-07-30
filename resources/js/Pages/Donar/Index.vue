@@ -22,7 +22,7 @@ const form = useForm({
     apellido: '',
     email: '',
     monto: props.monto_preseleccionado ?? '',
-    frecuencia: props.frecuencia_preseleccionada ?? 'unica',
+    frecuencia: props.frecuencia_preseleccionada ?? 'mensual',
     causa_id: props.causa_preseleccionada?.id ?? '',
     plan_id: '',
     firma_nombre: '',
@@ -109,7 +109,8 @@ const submit = () => {
 
 const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n ?? 0)
 const pct = (rec, meta) => meta > 0 ? Math.min(100, Math.round((rec / meta) * 100)) : 0
-const frecuenciaLabel = computed(() => t(`plans.frequency.${form.frecuencia}`).toLowerCase())
+const freqLabels = { unica: 'única vez', mensual: 'mensual', trimestral: 'cada 3 meses', anual: 'anual' }
+const frecuenciaLabel = computed(() => freqLabels[form.frecuencia] ?? form.frecuencia)
 const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en' ? 'en-US' : 'es-MX', { year: 'numeric', month: 'long', day: 'numeric' }))
 </script>
 
@@ -174,12 +175,16 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.frequency') }}</label>
                     <select v-model="form.frecuencia" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none">
+                        <option value="mensual">Mensual (lo ideal)</option>
+                        <option value="trimestral">Cada 3 meses</option>
                         <option value="unica">Única vez</option>
-                        <option value="mensual">Mensual</option>
-                        <option value="anual">Anual</option>
                     </select>
                 </div>
             </div>
+            <p class="-mt-2 flex items-start gap-1.5 text-xs text-teal-700">
+                <span>💡</span>
+                <span>Lo ideal es una <strong>ayuda mensual fija</strong>: sostiene a las familias todo el año. También puedes elegir cada 3 meses o una sola vez.</span>
+            </p>
 
             <!-- CARTA DE AUTORIZACIÓN DE CARGO A TARJETA -->
             <div class="rounded-2xl border-2 border-teal-100 bg-gradient-to-b from-teal-50/60 to-white p-5 sm:p-6 space-y-5">

@@ -31,6 +31,8 @@ class PublicPagesController extends Controller
                 'causas_completadas' => 80,
                 'beneficiarios' => '+80',
             ],
+            'roshHashana' => Causa::where('activa', true)->where('jag', 'Rosh Hashaná')
+                ->first(['recaudado', 'meta_recaudacion']),
         ]);
     }
 

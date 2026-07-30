@@ -9,6 +9,7 @@ const props = defineProps({
     planes: Array,
     testimonios: Array,
     stats: Object,
+    roshHashana: Object,
 })
 
 const { t } = useI18n()
@@ -203,9 +204,18 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                         <p class="text-lg text-teal-50/90 leading-relaxed mb-4">
                             Mientras muchas familias se sientan a la mesa con manzana y miel, hay viudas y huérfanos de la comunidad que no saben si tendrán qué servir.
                         </p>
-                        <p class="text-base text-teal-100/80 leading-relaxed mb-8">
+                        <p class="text-base text-teal-100/80 leading-relaxed mb-7">
                             Antes de que suene el shofar, endulcemos su año: con tu donativo llevamos despensa y alegría a sus hogares para recibir Rosh Hashaná con dignidad. Tu tzedaká es un mérito para todo el año.
                         </p>
+                        <div v-if="roshHashana?.meta_recaudacion > 0" class="mb-8 max-w-md">
+                            <div class="mb-1.5 flex items-center justify-between text-sm">
+                                <span class="font-bold text-emerald-200">{{ fmt(roshHashana.recaudado) }} recaudado</span>
+                                <span class="text-teal-100/70">Meta: {{ fmt(roshHashana.meta_recaudacion) }}</span>
+                            </div>
+                            <div class="h-2.5 w-full overflow-hidden rounded-full bg-white/15">
+                                <div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-coral-400" :style="{ width: pct(roshHashana.recaudado, roshHashana.meta_recaudacion) + '%' }"></div>
+                            </div>
+                        </div>
                         <div class="flex flex-wrap items-center gap-4">
                             <Link href="/donar?causa=6"
                                 class="btn-pop inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral-500 to-coral-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-coral-900/30 hover:shadow-2xl transition">

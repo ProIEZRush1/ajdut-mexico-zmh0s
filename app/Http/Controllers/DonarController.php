@@ -26,7 +26,7 @@ class DonarController extends Controller
             'monto_preseleccionado' => $request->filled('monto') && is_numeric($request->monto)
                 ? (int) $request->monto
                 : null,
-            'frecuencia_preseleccionada' => in_array($request->freq, ['unica', 'mensual', 'anual'], true)
+            'frecuencia_preseleccionada' => in_array($request->freq, ['unica', 'mensual', 'trimestral', 'anual'], true)
                 ? $request->freq
                 : null,
             'trial_locked' => config('trial.locked'),
@@ -44,7 +44,7 @@ class DonarController extends Controller
             'apellido' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email'],
             'monto' => ['required', 'numeric', 'min:10'],
-            'frecuencia' => ['required', 'in:unica,mensual,anual'],
+            'frecuencia' => ['required', 'in:unica,mensual,trimestral,anual'],
             'causa_id' => ['nullable', 'exists:causas,id'],
             'plan_id' => ['nullable', 'exists:planes_donacion,id'],
             'firma_electronica' => ['required', 'string'],
@@ -104,7 +104,7 @@ class DonarController extends Controller
     {
         $donacion = Donacion::with('donador')->where('folio', $folio)->firstOrFail();
 
-        $frecuencias = ['unica' => 'única vez', 'mensual' => 'mensual', 'anual' => 'anual'];
+        $frecuencias = ['unica' => 'única vez', 'mensual' => 'mensual', 'trimestral' => 'cada 3 meses', 'anual' => 'anual'];
         $fechaBase = $donacion->firma_fecha ?? $donacion->fecha_pago ?? $donacion->created_at ?? now();
 
         $logoPath = public_path('logo-ajdut.jpg');
