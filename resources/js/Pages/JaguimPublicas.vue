@@ -21,16 +21,16 @@ const grupos = computed(() => {
 </script>
 
 <template>
-    <Head title="Jaguim — Campañas por festividad · AJDUT México" />
+    <Head title="Festividades — AJDUT México" />
     <PublicLayout>
         <!-- Hero -->
         <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-coral-700 text-white py-16">
             <div class="pointer-events-none absolute -top-16 -right-10 h-64 w-64 rounded-full bg-coral-400/20 blur-3xl animate-float-slow"></div>
             <div class="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-emerald-300/20 blur-3xl animate-float-slow" style="animation-delay:2s"></div>
             <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                <span class="font-accent text-2xl text-coral-200">Jaguim · Festividades</span>
+                <span class="font-accent text-2xl text-coral-200">Festividades</span>
                 <h1 class="font-serif text-4xl sm:text-5xl font-extrabold mt-1 mb-4">Campañas por festividad</h1>
-                <p class="text-lg text-teal-50/90 max-w-2xl mx-auto">Acompaña a nuestra comunidad en cada jag. Elige una festividad y haz tu donativo con propósito. 🙌</p>
+                <p class="text-lg text-teal-50/90 max-w-2xl mx-auto">Acompaña a nuestra comunidad en cada festividad. Elige una festividad y haz tu donativo con propósito. 🙌</p>
             </div>
         </section>
 

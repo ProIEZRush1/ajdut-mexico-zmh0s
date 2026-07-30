@@ -33,6 +33,8 @@ class PublicPagesController extends Controller
             ],
             'roshHashana' => Causa::where('activa', true)->where('jag', 'Rosh Hashaná')
                 ->first(['recaudado', 'meta_recaudacion']),
+            'pesaj' => Causa::where('activa', true)->where('jag', 'Pesaj')
+                ->first(['recaudado', 'meta_recaudacion']),
         ]);
     }
 

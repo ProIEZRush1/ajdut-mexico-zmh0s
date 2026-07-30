@@ -10,6 +10,7 @@ const props = defineProps({
     testimonios: Array,
     stats: Object,
     roshHashana: Object,
+    pesaj: Object,
 })
 
 const { t } = useI18n()
@@ -222,6 +223,54 @@ const displayPlanes = computed(() => props.planes?.length ? props.planes.slice(0
                                 ❤️ Donar para Rosh Hashaná
                             </Link>
                             <span class="text-sm text-teal-200/70">Recíbelos con una mesa digna 🍯</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESAJ -->
+        <section id="pesaj" class="scroll-mt-24 relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-900 to-teal-900 text-white">
+            <div class="pointer-events-none absolute inset-0">
+                <div class="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-coral-500/12 blur-3xl"></div>
+                <div class="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-emerald-500/12 blur-3xl"></div>
+            </div>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                    <!-- Copy -->
+                    <div>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-coral-400/15 border border-coral-300/40 px-4 py-1.5 text-sm font-semibold text-coral-100 mb-6">
+                            🫓🍷 Pesaj
+                        </span>
+                        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5">
+                            Que ninguna familia se quede sin su Seder
+                        </h2>
+                        <p class="text-lg text-teal-50/90 leading-relaxed mb-7">
+                            Ayuda a las familias de la comunidad a celebrar Pesaj con dignidad: alimentos kasher, matzá y todo lo necesario para el Seder.
+                        </p>
+                        <div v-if="pesaj?.meta_recaudacion > 0" class="mb-8 max-w-md">
+                            <div class="mb-1.5 flex items-center justify-between text-sm">
+                                <span class="font-bold text-emerald-200">{{ fmt(pesaj.recaudado) }} recaudado</span>
+                                <span class="text-teal-100/70">Meta: {{ fmt(pesaj.meta_recaudacion) }}</span>
+                            </div>
+                            <div class="h-2.5 w-full overflow-hidden rounded-full bg-white/15">
+                                <div class="h-full rounded-full bg-gradient-to-r from-coral-400 to-emerald-400" :style="{ width: pct(pesaj.recaudado, pesaj.meta_recaudacion) + '%' }"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <Link href="/donar?causa=5"
+                                class="btn-pop inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral-500 to-coral-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-coral-900/30 hover:shadow-2xl transition">
+                                ❤️ Donar para Pesaj
+                            </Link>
+                            <span class="text-sm text-teal-200/70">Alegría y matzá en cada hogar 🫓</span>
+                        </div>
+                    </div>
+                    <!-- Visual -->
+                    <div>
+                        <div class="rounded-3xl ring-2 ring-emerald-300/25 bg-white/[0.06] backdrop-blur-sm p-10 sm:p-14 text-center shadow-2xl">
+                            <div class="text-6xl mb-4">🫓🍷</div>
+                            <span class="block text-3xl font-bold" dir="rtl">פסח כשר ושמח</span>
+                            <p class="mt-4 font-accent text-2xl text-emerald-200/90">Un Pesaj con dignidad para todos</p>
                         </div>
                     </div>
                 </div>
