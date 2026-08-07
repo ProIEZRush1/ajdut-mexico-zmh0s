@@ -43,6 +43,7 @@ Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.s
 
 Route::get('/donar', [DonarController::class, 'index'])->name('donar.index');
 Route::post('/donar/checkout', [DonarController::class, 'checkout'])->name('donar.checkout');
+Route::post('/donar/stripe/webhook', [DonarController::class, 'webhook'])->name('donar.webhook');
 Route::get('/donar/exito', [DonarController::class, 'exito'])->name('donar.exito');
 Route::get('/donar/carta/{folio}', [DonarController::class, 'carta'])->name('donar.carta');
 
