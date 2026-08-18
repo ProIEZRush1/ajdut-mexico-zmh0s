@@ -67,14 +67,10 @@ const navLinks = computed(() => [
                                 class="px-2.5 py-1 rounded-full text-xs font-bold transition">🇺🇸 EN</button>
                         </div>
 
-                        <!-- Portal / login -->
+                        <!-- Portal (solo para usuarios con sesión iniciada) -->
                         <Link v-if="$page.props.auth?.user" href="/portal"
                             class="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800 px-3 py-2 rounded-full hover:bg-teal-50 transition">
                             {{ t('nav.portal') }}
-                        </Link>
-                        <Link v-else href="/login"
-                            class="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-teal-700 px-3 py-2 rounded-full hover:bg-teal-50 transition">
-                            {{ t('nav.login') }}
                         </Link>
 
                         <!-- Donate CTA -->
@@ -108,7 +104,6 @@ const navLinks = computed(() => [
                             <button @click="setLang('en')" :class="lang === 'en' ? 'bg-teal-600 text-white' : 'text-slate-500'" class="px-2.5 py-1 rounded-md text-xs font-bold border border-slate-200 transition">EN</button>
                         </div>
                         <Link v-if="$page.props.auth?.user" href="/portal" class="text-sm font-semibold text-teal-700">{{ t('nav.portal') }}</Link>
-                        <Link v-else href="/login" class="text-sm font-semibold text-slate-600">{{ t('nav.login') }}</Link>
                     </div>
                 </div>
             </div>
