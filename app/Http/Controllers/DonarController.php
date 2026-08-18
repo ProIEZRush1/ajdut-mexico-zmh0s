@@ -44,6 +44,7 @@ class DonarController extends Controller
             'nombre' => ['required', 'string', 'max:100'],
             'apellido' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email'],
+            'telefono' => ['required', 'string', 'max:30'],
             'monto' => ['required', 'numeric', 'min:10'],
             'frecuencia' => ['required', 'in:unica,mensual,trimestral,anual'],
             'causa_id' => ['nullable', 'exists:causas,id'],
@@ -58,9 +59,16 @@ class DonarController extends Controller
             [
                 'nombre' => $data['nombre'],
                 'apellido' => $data['apellido'],
+                'telefono' => $data['telefono'],
                 'estado' => 'activo',
             ]
         );
+
+        // Si el donador ya existía sin teléfono, lo completamos con el que dejó ahora.
+        if (empty($donador->telefono) && ! empty($data['telefono'])) {
+            $donador->telefono = $data['telefono'];
+            $donador->save();
+        }
 
         // Sin llave de Stripe no podemos cobrar de verdad: no fingimos el cobro.
         if (! config('pagos.secret')) {

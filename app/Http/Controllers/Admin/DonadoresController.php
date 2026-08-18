@@ -20,7 +20,8 @@ class DonadoresController extends Controller
             $query->where(function ($q) use ($request) {
                 $q->where('nombre', 'like', '%' . $request->q . '%')
                   ->orWhere('apellido', 'like', '%' . $request->q . '%')
-                  ->orWhere('email', 'like', '%' . $request->q . '%');
+                  ->orWhere('email', 'like', '%' . $request->q . '%')
+                  ->orWhere('telefono', 'like', '%' . $request->q . '%');
             });
         }
         if ($request->filled('estado')) {

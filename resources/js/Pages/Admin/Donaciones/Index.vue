@@ -19,6 +19,11 @@ const doSearch = () => {
 
 const fmt = (n) => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(n ?? 0);
 const fmtDate = (d) => d ? new Date(d).toLocaleDateString('es-MX') : '—';
+const waLink = (tel) => {
+    let n = String(tel ?? '').replace(/\D/g, '');
+    if (n.length === 10) n = '52' + n;
+    return `https://wa.me/${n}`;
+};
 
 const deleteForm = useForm({});
 const reciboForm = useForm({});
@@ -91,6 +96,7 @@ const frecLabel = { unica: 'Única', mensual: 'Mensual', anual: 'Anual' };
                             </td>
                             <td class="px-5 py-4 hidden md:table-cell">
                                 <span class="text-sm text-slate-700">{{ d.donador ? `${d.donador.nombre} ${d.donador.apellido}` : 'Anónimo' }}</span>
+                                <a v-if="d.donador?.telefono" :href="waLink(d.donador.telefono)" target="_blank" class="block text-xs text-teal-600 hover:underline">📱 {{ d.donador.telefono }}</a>
                             </td>
                             <td class="px-5 py-4 hidden lg:table-cell">
                                 <span class="text-sm text-slate-600">{{ d.causa?.titulo ?? 'General' }}</span>

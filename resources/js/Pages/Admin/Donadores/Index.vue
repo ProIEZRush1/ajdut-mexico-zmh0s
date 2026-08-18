@@ -20,6 +20,12 @@ const eliminar = (id) => {
 };
 
 const estadoColor = { activo: 'bg-teal-100 text-teal-700', inactivo: 'bg-slate-100 text-slate-500', cancelado: 'bg-red-100 text-red-700' };
+
+const waLink = (tel) => {
+    let d = String(tel ?? '').replace(/\D/g, '');
+    if (d.length === 10) d = '52' + d;
+    return `https://wa.me/${d}`;
+};
 </script>
 
 <template>
@@ -32,7 +38,7 @@ const estadoColor = { activo: 'bg-teal-100 text-teal-700', inactivo: 'bg-slate-1
 
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex gap-2 flex-wrap">
-                    <input v-model="search" @keyup.enter="doSearch" type="text" placeholder="Nombre, email..."
+                    <input v-model="search" @keyup.enter="doSearch" type="text" placeholder="Nombre, teléfono, email..."
                         class="rounded-xl border border-slate-200 px-4 py-2 text-sm focus:border-teal-400 focus:outline-none" />
                     <select v-model="filterEstado" @change="doSearch"
                         class="rounded-xl border border-slate-200 px-3 py-2 text-sm focus:border-teal-400 focus:outline-none">
@@ -64,6 +70,9 @@ const estadoColor = { activo: 'bg-teal-100 text-teal-700', inactivo: 'bg-slate-1
                         <tr v-for="d in donadores.data" :key="d.id" class="hover:bg-slate-50 transition">
                             <td class="px-5 py-4">
                                 <p class="font-semibold text-slate-800">{{ d.nombre }} {{ d.apellido }}</p>
+                                <p v-if="d.telefono" class="text-xs">
+                                    <a :href="waLink(d.telefono)" target="_blank" class="text-teal-600 hover:underline">📱 {{ d.telefono }}</a>
+                                </p>
                                 <p class="text-xs text-slate-400">{{ d.email }}</p>
                             </td>
                             <td class="px-5 py-4 hidden md:table-cell">

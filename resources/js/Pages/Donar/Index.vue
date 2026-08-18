@@ -21,6 +21,7 @@ const form = useForm({
     nombre: '',
     apellido: '',
     email: '',
+    telefono: '',
     monto: props.monto_preseleccionado ?? '',
     frecuencia: props.frecuencia_preseleccionada ?? 'mensual',
     causa_id: props.causa_preseleccionada?.id ?? '',
@@ -154,6 +155,10 @@ const hoyTexto = computed(() => new Date().toLocaleDateString(lang.value === 'en
             <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.email') }} *</label>
                 <input v-model="form.email" type="email" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">{{ t('donate.phone') }} *</label>
+                <input v-model="form.telefono" type="tel" inputmode="tel" placeholder="55 1234 5678" class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm focus:border-coral-400 focus:outline-none" required />
             </div>
 
             <!-- Montos sugeridos -->
